@@ -1,2 +1,51 @@
 <%= render "shared/header" %>
-<p>トップページ</p>
+<div class='main'>
+  <div class='three-questions-area'>
+
+    <%# 左の問題作成エリア %>
+    <div class='question-create-area'>
+      <div class='quistion-create-word'>問題を作成</div>
+      <%# 画面幅599px以下で表示 %>
+      <div class='question-tab'>
+        <div class='question-tab-create'>問題を作成</div>
+        <div class='question-tab-review'>問題を復習</div>
+        <div class='question-tab-management'>問題を管理</div>
+      </div>
+      <%# //画面幅599px以下で表示 %>
+      <div class='group-panel-area'>
+      <% 10.times do %>
+        <div class='group-panel'>テスト
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <%# //左の問題作成エリア %>
+
+    <%# 中央の問題復習エリア %>
+    <div class='question-review-area'>
+      <div class='quistion-review-word'>問題を復習</div>
+      <div class='group-panel-area'>
+      <% 10.times do %>
+        <div class='group-panel'>テスト
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <%# //中央の問題復習エリア %>
+
+    <%# 右の問題管理エリア %>
+    <div class='question-management-area'>
+      <div class='quistion-management-word'>問題を管理</div>
+      <div class='group-panel-area'>
+      <% 10.times do %>
+        <div class='group-panel'>テスト
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <%# //右の問題管理エリア %>
+  </div>
+  
+  <div class='record'>記録
+  </div>
+</div>
