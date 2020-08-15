@@ -1,0 +1,7 @@
+.top-page-header {
+  width: 100vw;
+  height: 50px;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  position: fixed;
+}

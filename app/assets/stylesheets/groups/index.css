@@ -1,0 +1,148 @@
+/* question-create-areaとか3つのCSSもう一度見直す。設定これで良いか？ */
+.main {
+  background-color: white;
+}
+
+.three-questions-area {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 500px;
+  padding: 80px 30px 30px;
+  border: 1px solid gray;
+}
+
+.question-review-area {
+  width: calc((100% - 50px) / 3);
+  height: 100%;
+  border: 1px solid gray;
+}
+
+.question-create-area {
+  width: calc((100% - 50px) / 3);
+  border: 1px solid gray;
+}
+
+.question-management-area {
+  width: calc((100% - 50px) / 3);
+  border: 1px solid gray;
+}
+
+.quistion-review-word {
+  width: 90%;
+  height: 30px;
+  text-align: center;
+}
+
+.quistion-create-word {
+  width: 90%;
+  height: 30px;
+  text-align: center;
+}
+
+.quistion-management-word {
+  width: 90%;
+  height: 30px;
+  text-align: center;
+}
+
+.group-panel-area {
+  height: calc(100% - 30px);
+  overflow: scroll;
+}
+
+.group-panel {
+  width: 90%;
+  height: 50px;
+  margin: 0 5% 10px;
+  border: 1px solid gray;
+}
+
+.top-question-tab {
+  display: none;
+}
+
+.record {
+  width: 100vw;
+  height: 300px;
+  border: 1px solid gray;
+}
+
+@media (max-width: 599px) {
+  .three-questions-area {
+    display: block;
+    /* 消しても良い？ */
+    width: 100vw;
+    height: 500px;
+    padding: 80px 30px 30px;
+    border: 1px solid gray;
+    /* //消しても良い？ */
+  }
+
+  /* 初期状態では問題復習エリア以外を非表示 */
+  .question-review-area {
+    width: 100%;
+    /* 消しても良い？ */
+    height: 100%;
+    border: 1px solid gray;
+    /* //消しても良い？ */
+  }
+
+  .question-create-area {
+    display: none;
+    width: 100%;
+    /* 消しても良い？ */
+    height: 100%;
+    border: 1px solid gray;
+    /* //消しても良い？ */
+  }
+
+  .question-management-area {
+    display: none;
+    width: 100%;
+    /* 消しても良い？ */
+    height: 100%;
+    border: 1px solid gray;
+    /* //消しても良い？ */
+  }
+  /* //初期状態では問題復習エリア以外を非表示 */
+
+  .quistion-review-word {
+    display: none;
+  }
+
+  .quistion-create-word {
+    display: none;
+  }
+
+  .quistion-management-word {
+    display: none;
+  }
+
+  .top-question-tab {
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+  }
+
+  /* 初期状態では問題復習のタブのみ太文字 */
+  .question-tab-review {
+    width: calc(100% / 3);
+    border: 1px solid gray;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .question-tab-create {
+    width: calc(100% / 3);
+    border: 1px solid gray;
+    text-align: center;
+  }
+
+  .question-tab-management {
+    width: calc(100% / 3);
+    border: 1px solid gray;
+    text-align: center;
+  }
+  /* //初期状態では問題復習のタブのみ太文字 */
+}
