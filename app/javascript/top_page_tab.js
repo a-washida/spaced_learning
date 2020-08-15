@@ -25,5 +25,33 @@ function changeTab(){
   }
 }
 
+// 画面幅が599px(ブレイクポイント)を通過した際に、JavaScriptで付与されたインラインスタイルを削除して初期状態のレイアウトに戻す関数
+const checkBreakPoint = (mql) => {
+  const question_areas = document.querySelectorAll(".question-area");
+  const top_page_tabs = document.querySelectorAll(".top-page-tab");
+  // インラインスタイルを削除する関数
+  const remove_inline_style = () => {
+    for(let i = 0; i < question_areas.length; i++) {
+      question_areas[i].removeAttribute("style")
+      top_page_tabs[i].removeAttribute("style")
+    }
+  }
+  if (mql.matches) {
+    // 画面幅が599px以下の場合
+    remove_inline_style()
+  } else {
+    // 画面幅が599pxより大きい場合
+    remove_inline_style()
+  }
+}
+
+// MediaQueryListオブジェクトを変数mqlに代入
+const mql = window.matchMedia('(max-width: 599px)');
+// ブレイクポイントの瞬間に発火
+mql.addListener(checkBreakPoint);
+
+// 初回チェック必要なさそうなので、とりあえずコメントアウト
+// check_break_point(mql);
+
 window.addEventListener("load", changeTab);
 // window.addEventListener("load", meronmaron);
