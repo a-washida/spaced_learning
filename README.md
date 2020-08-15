@@ -28,10 +28,10 @@ Things you may want to cover:
 
 ## groups テーブル
 
-| Column | Type       | Options           |
-| ------ | ---------- | ----------------- |
-| name   | string     | null: false       |
-| user   | references | foreign_key: true |
+| Column | Type       | Options                   |
+| ------ | ---------- | ------------------------- |
+| name   | string     | null: false, unique: true |
+| user   | references | foreign_key: true         |
 
 ### Association
 - belongs_to :user
