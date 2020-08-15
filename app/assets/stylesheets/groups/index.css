@@ -1,3 +1,4 @@
+/* question-create-areaとか3つのCSSもう一度見直す。設定これで良いか？ */
 .main {
   background-color: white;
 }
@@ -11,13 +12,13 @@
   border: 1px solid gray;
 }
 
-.question-create-area {
+.question-review-area {
   width: calc((100% - 50px) / 3);
   height: 100%;
   border: 1px solid gray;
 }
 
-.question-review-area {
+.question-create-area {
   width: calc((100% - 50px) / 3);
   border: 1px solid gray;
 }
@@ -27,13 +28,13 @@
   border: 1px solid gray;
 }
 
-.quistion-create-word {
+.quistion-review-word {
   width: 90%;
   height: 30px;
   text-align: center;
 }
 
-.quistion-review-word {
+.quistion-create-word {
   width: 90%;
   height: 30px;
   text-align: center;
@@ -57,7 +58,7 @@
   border: 1px solid gray;
 }
 
-.question-tab {
+.top-question-tab {
   display: none;
 }
 
@@ -78,7 +79,8 @@
     /* //消しても良い？ */
   }
 
-  .question-create-area {
+  /* 初期状態では問題復習エリア以外を非表示 */
+  .question-review-area {
     width: 100%;
     /* 消しても良い？ */
     height: 100%;
@@ -86,7 +88,7 @@
     /* //消しても良い？ */
   }
 
-  .question-review-area {
+  .question-create-area {
     display: none;
     width: 100%;
     /* 消しても良い？ */
@@ -103,12 +105,13 @@
     border: 1px solid gray;
     /* //消しても良い？ */
   }
+  /* //初期状態では問題復習エリア以外を非表示 */
 
-  .quistion-create-word {
+  .quistion-review-word {
     display: none;
   }
 
-  .quistion-review-word {
+  .quistion-create-word {
     display: none;
   }
 
@@ -116,19 +119,21 @@
     display: none;
   }
 
-  .question-tab {
+  .top-question-tab {
     display: flex;
     justify-content: space-around;
     height: 30px;
   }
 
-  .question-tab-create {
+  /* 初期状態では問題復習のタブのみ太文字 */
+  .question-tab-review {
     width: calc(100% / 3);
     border: 1px solid gray;
+    font-weight: bold;
     text-align: center;
   }
 
-  .question-tab-review {
+  .question-tab-create {
     width: calc(100% / 3);
     border: 1px solid gray;
     text-align: center;
@@ -139,4 +144,5 @@
     border: 1px solid gray;
     text-align: center;
   }
+  /* //初期状態では問題復習のタブのみ太文字 */
 }
