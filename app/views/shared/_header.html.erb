@@ -1,1 +1,9 @@
-<header class='top-page-header'>ヘッダー</header>
+<header class='top-page-header'>
+  <div class="header-left">
+    ヘッダー
+  </div>
+  <ul class="header-right">
+    <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
+    <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
+  </ul>
+</header>
