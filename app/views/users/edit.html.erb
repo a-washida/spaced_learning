@@ -1,0 +1,14 @@
+<%= render "shared/header" %>
+<%= form_with model: current_user, class: 'registration-main', local: true do |f| %>
+<div class="form-wrap">
+  <div class="form-group">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class:"input-default", placeholder:"nicknameを入力してください", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class:"input-default", placeholder:"PC・携帯どちらでも可" %>
+  </div>
+  <%= f.submit "編集" ,class:"register-btn" %>
+</div>
+<% end %>
