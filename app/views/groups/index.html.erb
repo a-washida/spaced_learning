@@ -15,7 +15,7 @@
       <div class='quistion-review-word'>問題を復習</div>
       
       <div class='group-panel-area'>
-      <% 10.times do %>
+      <% 2.times do %>
         <div class='group-panel'>問題復習
         </div>
       <% end %>
@@ -27,9 +27,15 @@
     <div class='question-create-area question-area' id='question-area-1'>
       <div class='quistion-create-word'>問題を作成</div>
       <div class='group-panel-area'>
-      <% 10.times do %>
+      <% 2.times do %>
         <div class='group-panel'>問題作成
         </div>
+      <% end %>
+      <div class="create-group">+グループを作成
+      </div>
+      <%= form_with model: @group, class: 'create-group-form', local: true do |f| %>
+        <%= f.text_area :name, class:"input-default", placeholder:"グループ名を入力してください。" %>
+        <%= f.submit "作成", class:"group-submit-button" %>
       <% end %>
       </div>
     </div>
@@ -39,7 +45,7 @@
     <div class='question-management-area question-area' id='question-area-2'>
       <div class='quistion-management-word'>問題を管理</div>
       <div class='group-panel-area'>
-      <% 10.times do %>
+      <% 2.times do %>
         <div class='group-panel'>問題管理
         </div>
       <% end %>

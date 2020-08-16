@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../top_page_tab.js")
+require("../group_form.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

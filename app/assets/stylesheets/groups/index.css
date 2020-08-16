@@ -62,6 +62,29 @@
   display: none;
 }
 
+.create-group {
+  width: 90%;
+  height: 50px;
+  margin: 0 5% 10px;
+  border: 1px solid gray;
+}
+
+.create-group-form {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+  margin: 0 5% 10px;
+}
+
+.create-group-form .input-default {
+  height: auto;
+}
+
+.group-submit-button {
+  width: 30%;
+}
+
 .record {
   width: 100vw;
   height: 300px;
