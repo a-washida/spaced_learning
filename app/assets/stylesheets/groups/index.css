@@ -81,8 +81,19 @@
   height: auto;
 }
 
+.lower-group-form {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .group-submit-button {
   width: 30%;
+}
+
+.close-group-form {
+  width: 10%;
+  margin-left: 10px;
 }
 
 .record {

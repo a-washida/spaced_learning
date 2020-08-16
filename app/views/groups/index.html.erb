@@ -33,7 +33,10 @@
       </div>
       <%= form_with model: @group, class: 'create-group-form', local: true do |f| %>
         <%= f.text_area :name, class:"input-default", placeholder:"グループ名を入力してください。" %>
-        <%= f.submit "作成", class:"group-submit-button" %>
+        <div class="lower-group-form">
+          <%= f.submit "作成", class:"group-submit-button" %>
+          <div class="close-group-form">×</div>
+        </div>
       <% end %>
       </div>
     </div>
