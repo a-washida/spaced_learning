@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    # よく分からないけど、これでエラーメッセージ表示される
     if current_user.update(user_params)
       redirect_to root_path
     else
