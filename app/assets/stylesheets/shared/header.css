@@ -1,7 +1,32 @@
 .top-page-header {
+  display: flex;
+  justify-content: space-between;
   width: 100vw;
   height: 50px;
-  background-color: white;
+  padding: 0 30px;
   border-bottom: 1px solid gray;
+  background-color: white;
   position: fixed;
+}
+
+.header-left {
+  border: 1px solid gray;
+}
+
+.header-right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid gray;
+}
+
+.login,
+.user-nickname  {
+  margin-right: 10px;
+  border: 1px solid gray;
+}
+
+.sign-up,
+.logout {
+  border: 1px solid gray;
 }
