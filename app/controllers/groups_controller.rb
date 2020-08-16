@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   def index
+    @groups = Group.all
     @group = Group.new
   end
 
@@ -8,7 +9,7 @@ class GroupsController < ApplicationController
     if @group.save
       redirect_to root_path
     else
-      render "root"
+      render "index"
     end
   end
 

@@ -15,9 +15,8 @@
       <div class='quistion-review-word'>問題を復習</div>
       
       <div class='group-panel-area'>
-      <% 2.times do %>
-        <div class='group-panel'>問題復習
-        </div>
+      <% @groups.each do |group| %>
+        <div class='group-panel'><%= group.name %></div>
       <% end %>
       </div>
     </div>
@@ -27,9 +26,8 @@
     <div class='question-create-area question-area' id='question-area-1'>
       <div class='quistion-create-word'>問題を作成</div>
       <div class='group-panel-area'>
-      <% 2.times do %>
-        <div class='group-panel'>問題作成
-        </div>
+      <% @groups.each do |group| %>
+        <div class='group-panel'><%= group.name %></div>
       <% end %>
       <div class="create-group">+グループを作成
       </div>
@@ -45,9 +43,8 @@
     <div class='question-management-area question-area' id='question-area-2'>
       <div class='quistion-management-word'>問題を管理</div>
       <div class='group-panel-area'>
-      <% 2.times do %>
-        <div class='group-panel'>問題管理
-        </div>
+      <% @groups.each do |group| %>
+        <div class='group-panel'><%= group.name %></div>
       <% end %>
       </div>
     </div>
