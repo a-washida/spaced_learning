@@ -20,11 +20,13 @@
   border: 1px solid gray;
 }
 
-.login {
+.login,
+.user-nickname  {
   margin-right: 10px;
   border: 1px solid gray;
 }
 
-.sign-up {
+.sign-up,
+.logout {
   border: 1px solid gray;
 }
