@@ -16,8 +16,11 @@ class GroupsController < ApplicationController
 
   def update
     group = Group.find(params[:id])
-    group.update(group_params)
-    render json: { post: group }
+    if group.update(group_params)
+      render json: { post: group }
+    else
+      render "index"
+    end
   end
 
   private
