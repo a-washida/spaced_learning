@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
-  # あとでグループを作成したユーザーしかそのグループを見れないように変更する
   def index
-    @groups = Group.includes(:user)
+    @groups = current_user.groups
     @group = Group.new
   end
 
