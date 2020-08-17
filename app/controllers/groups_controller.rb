@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  # before_action追加する
   def index
     @groups = current_user.groups
     @group = Group.new
@@ -7,7 +8,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to root_path
+      render json: { post: @group }
     else
       render "index"
     end

@@ -28,6 +28,7 @@
           </div>
         <% end %>
       <% end %>
+      <div class="insert-group-panel"></div>
       </div>
     </div>
     <%# //左の問題復習エリア %>
@@ -41,7 +42,6 @@
           <div class="group-name-1"><%= group.name %></div>
           <div class="js-edit-group-1">?</div>
         </div>
-        <div class="insert-edit-group-name-1"></div>
         <%= form_with model: group, class: 'edit-group-form-1', local: true do |f| %>
           <%= f.text_area :name, class:"input-default" %>
           <div class="lower-group-form">
@@ -50,6 +50,7 @@
           </div>
         <% end %>
       <% end %>
+      <div class="insert-group-panel"></div>
       <div class="js-create-group">+グループを作成
       </div>
       <%= form_with model: @group, class: 'create-group-form', local: true do |f| %>
@@ -72,7 +73,6 @@
           <div class="group-name-2"><%= group.name %></div>
           <div class="js-edit-group-2">?</div>
         </div>
-        <div class="insert-edit-group-name-2" group-id=<%= group.id %>></div>
         <%= form_with model: group, class: 'edit-group-form-2', local: true do |f| %>
           <%= f.text_area :name, class:"input-default" %>
           <div class="lower-group-form">
@@ -81,6 +81,7 @@
           </div>
         <% end %>
       <% end %>
+      <div class="insert-group-panel"></div>
       </div>
     </div>
     <%# //右の問題管理エリア %>
