@@ -16,14 +16,14 @@
       
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
-        <div class='group-panel js-group-panel-0'>
-          <div class="group-name"><%= group.name %></div>
+        <div class='group-panel js-group-panel-0' group-id=<%= group.id %>>
+          <div class="group-name-0"><%= group.name %></div>
           <div class="js-edit-group-0">?</div>
         </div>
         <%= form_with model: group, class: 'edit-group-form-0', local: true do |f| %>
           <%= f.text_area :name, class:"input-default" %>
           <div class="lower-group-form">
-            <%= f.submit "編集", class:"group-submit-button" %>
+            <%= f.submit "編集", class:"group-submit-button-0" %>
             <div class="close-edit-form-0">×</div>
           </div>
         <% end %>
@@ -37,14 +37,15 @@
       <div class='quistion-create-word'>問題を作成</div>
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
-        <div class='group-panel js-group-panel-1'>
-          <div class="group-name"><%= group.name %></div>
+        <div class='group-panel js-group-panel-1' group-id=<%= group.id %>>
+          <div class="group-name-1"><%= group.name %></div>
           <div class="js-edit-group-1">?</div>
         </div>
+        <div class="insert-edit-group-name-1"></div>
         <%= form_with model: group, class: 'edit-group-form-1', local: true do |f| %>
           <%= f.text_area :name, class:"input-default" %>
           <div class="lower-group-form">
-            <%= f.submit "編集", class:"group-submit-button" %>
+            <%= f.submit "編集", class:"group-submit-button-1" %>
             <div class="close-edit-form-1">×</div>
           </div>
         <% end %>
@@ -67,14 +68,15 @@
       <div class='quistion-management-word'>問題を管理</div>
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
-        <div class='group-panel js-group-panel-2'>
-          <div class="group-name"><%= group.name %></div>
+        <div class='group-panel js-group-panel-2' group-id=<%= group.id %>>
+          <div class="group-name-2"><%= group.name %></div>
           <div class="js-edit-group-2">?</div>
         </div>
+        <div class="insert-edit-group-name-2" group-id=<%= group.id %>></div>
         <%= form_with model: group, class: 'edit-group-form-2', local: true do |f| %>
           <%= f.text_area :name, class:"input-default" %>
           <div class="lower-group-form">
-            <%= f.submit "編集", class:"group-submit-button" %>
+            <%= f.submit "編集", class:"group-submit-button-2" %>
             <div class="close-edit-form-2">×</div>
           </div>
         <% end %>

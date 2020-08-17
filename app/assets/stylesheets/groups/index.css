@@ -93,7 +93,10 @@
   width: 100%;
 }
 
-.group-submit-button {
+.group-submit-button,
+.group-submit-button-0
+.group-submit-button-1
+.group-submit-button-2 {
   width: 30%;
 }
 

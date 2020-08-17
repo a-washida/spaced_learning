@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  # あとでグループを作成したユーザーしかそのグループを見れないように変更する
   def index
     @groups = Group.includes(:user)
     @group = Group.new
@@ -11,6 +12,12 @@ class GroupsController < ApplicationController
     else
       render "index"
     end
+  end
+
+  def update
+    group = Group.find(params[:id])
+    group.update(group_params)
+    render json: { post: group }
   end
 
   private
