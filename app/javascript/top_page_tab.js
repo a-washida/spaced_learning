@@ -1,4 +1,4 @@
-if (window.location.pathname === '/' || '/groups') {
+if (window.location.pathname === '/' || window.location.pathname === '/groups') {
   // @media (max-width: 599px)の際に有効で、3つあるタブの内1つをクリックするとタブが切り替わる。
   function changeTab(){
     const topPageTabs = document.querySelectorAll(".top-page-tab");
