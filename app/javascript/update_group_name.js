@@ -15,15 +15,20 @@ function updateGroupName(){
         XHR.send(formData);
         XHR.onload = () => {
           const item = XHR.response.post;
-          // グループ編集フォームを隠す
-          editGroupForms[j].removeAttribute("style", "display: flex;");
-          // グループのパネルを表示させる
-          groupPanels[j].removeAttribute("style", "display: none;");
-           // 問題復習・作成・管理の3つのエリアのグループ名を更新後の名前に変更
-          for(let k = 0; k < 3; k++){
-            const groupNames = document.querySelectorAll(`.group-name-${k}`);
-            groupNames[j].innerHTML = item.name
-          }
+          // グループ名を空白で更新しようとした場合にalertを出す
+          if (item.name == ""){
+            alert("グループ名を入力して下さい")
+          } else {
+            // グループ編集フォームを隠す
+            editGroupForms[j].removeAttribute("style", "display: flex;");
+            // グループのパネルを表示させる
+            groupPanels[j].removeAttribute("style", "display: none;");
+            // 問題復習・作成・管理の3つのエリアのグループ名を更新後の名前に変更
+            for(let k = 0; k < 3; k++){
+              const groupNames = document.querySelectorAll(`.group-name-${k}`);
+              groupNames[j].innerHTML = item.name
+            }
+          } 
 
           if (XHR.status != 200) {
             alert(`Error ${XHR.status}: ${XHR.statusText}`);
