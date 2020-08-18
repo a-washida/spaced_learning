@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_085011) do
+ActiveRecord::Schema.define(version: 2020_08_18_063951) do
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(version: 2020_08_16_085011) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "question_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "question", null: false
+    t.text "answer", null: false
+    t.integer "display_date", null: false
+    t.integer "memory_level", null: false
+    t.integer "repeat_count", null: false
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_question_answers_on_group_id"
+    t.index ["user_id"], name: "index_question_answers_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -34,4 +48,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_085011) do
   end
 
   add_foreign_key "groups", "users"
+  add_foreign_key "question_answers", "groups"
+  add_foreign_key "question_answers", "users"
 end
