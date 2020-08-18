@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
       redirect_to root_path
     else
       @groups = current_user.groups
-      render "index"
+      render 'index'
     end
   end
 
