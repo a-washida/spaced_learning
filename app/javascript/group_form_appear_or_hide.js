@@ -27,6 +27,7 @@ if (window.location.pathname === '/' || '/groups') {
       for(let j = 0; j < editGroups.length; j++){
         // クリックするとフォームが現れる
         editGroups[j].addEventListener("click", (e) => {
+          e.preventDefault();
           groupPanels[j].setAttribute("style", "display: none;");
           editGroupForms[j].setAttribute("style", "display: flex;");
           // クリックするとフォームが隠れる
