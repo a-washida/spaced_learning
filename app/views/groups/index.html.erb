@@ -16,6 +16,8 @@
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
         <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
+        <%# formはcssでdisplay: none;されているので最初は非表示 %>
+        <%= render partial: 'edit_form', locals: { group: group, num: 0 } %>
       <% end %>
       <%# <div class="insert-group-panel"></div> %>
       </div>
@@ -30,6 +32,8 @@
         <%= link_to new_group_question_answer_path(group), class: 'link-create-question' do %>
           <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
         <% end %>
+        <%# formはcssでdisplay: none;されているので最初は非表示 %>
+        <%= render partial: 'edit_form', locals: { group: group, num: 1 } %>
       <% end %>
       <%# <div class="insert-group-panel"></div> %>
       <div class="js-create-group">+グループを作成
@@ -51,6 +55,8 @@
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
         <%= render partial: 'group_panel', locals: { group: group, num: 2 } %>
+        <%# formはcssでdisplay: none;されているので最初は非表示 %>
+        <%= render partial: 'edit_form', locals: { group: group, num: 2 } %>
       <% end %>
       <%# <div class="insert-group-panel"></div> %>
       </div>
