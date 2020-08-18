@@ -1,8 +1,14 @@
 <%= render 'shared/header' %>
 <div class="create-question-main">
   <%= form_with model: [@group, @question_answer], class: 'form-question-answer', local: true do |f| %>
-    <%= f.text_field :question %>
-    <%= f.text_field :answer %>
-    <%= f.submit '作成' %>
+    <div class="question-answer-area">
+      <%= f.text_area :question, class:"question-input-area" %>
+      <div class="answer-area">
+        <%= f.text_area :answer, class:"answer-input-area" %>
+        <%= f.label :image, "画像", class:"image-button" %>
+        <%= f.file_field :image, class:"hidden" %>
+      </div>
+    </div>
+    <%= f.submit '作成', class:"question-submit-button" %>
   <% end %>
 </div>
