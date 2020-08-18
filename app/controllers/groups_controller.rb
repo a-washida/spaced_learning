@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      render json: { post: @group }
+      redirect_to root_path
     else
       render "index"
     end

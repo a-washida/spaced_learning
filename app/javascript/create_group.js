@@ -1,3 +1,5 @@
+// このファイルは保留、余裕があった場合に追加実装する
+
 // 作成ボタンをクリックするとグループが作成し、問題復習・作成・管理エリアに作成したグループを追加する関数
 function createGroup(){
   const submit = document.querySelector(".group-submit-button");
