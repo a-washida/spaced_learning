@@ -1,1 +1,8 @@
-問題作成
+<%= render 'shared/header' %>
+<div class="create-question-main">
+  <%= form_with model: [@group, @question_answer], class: 'form-question-answer', local: true do |f| %>
+    <%= f.text_field :question %>
+    <%= f.text_field :answer %>
+    <%= f.submit '作成' %>
+  <% end %>
+</div>
