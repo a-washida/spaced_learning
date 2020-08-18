@@ -27,7 +27,9 @@
       <div class='quistion-create-word'>問題を作成</div>
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
-        <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
+        <%= link_to new_group_question_answer_path(group), class: 'link-create-question' do %>
+          <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
+        <% end %>
       <% end %>
       <%# <div class="insert-group-panel"></div> %>
       <div class="js-create-group">+グループを作成
