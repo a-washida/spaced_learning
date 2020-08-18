@@ -52,14 +52,61 @@
 }
 
 .group-panel {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 50px;
+  margin: 0 5% 10px;
+  padding: 0 2%;
+  border: 1px solid gray;
+}
+
+.top-question-tab {
+  display: none;
+}
+
+.js-create-group {
   width: 90%;
   height: 50px;
   margin: 0 5% 10px;
   border: 1px solid gray;
 }
 
-.top-question-tab {
+.create-group-form,
+.edit-group-form-0,
+.edit-group-form-1,
+.edit-group-form-2 {
   display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+  margin: 0 5% 10px;
+}
+
+.group-form .input-default {
+  height: auto;
+}
+
+.lower-group-form {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.group-submit-button,
+.group-submit-button-0
+.group-submit-button-1
+.group-submit-button-2 {
+  width: 30%;
+}
+
+.close-create-form,
+.close-edit-form-0,
+.close-edit-form-1,
+.close-edit-form-2 {
+  width: 10%;
+  margin-left: 10px;
+  border: 1px solid gray;
 }
 
 .record {

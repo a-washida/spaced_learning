@@ -1,0 +1,12 @@
+<div class='group-panel js-group-panel-<%=num%>' group-id=<%= group.id %>>
+  <div class="group-name-<%=num%>"><%= group.name %></div>
+  <div class="js-edit-group-<%=num%>">?</div>
+</div>
+<%# formはcssでdisplay: none;されているので最初は非表示 %>
+<%= form_with model: group, class: "edit-group-form-#{num}", local: true do |f| %>
+  <%= f.text_area :name, class:"input-default" %>
+  <div class="lower-group-form">
+    <%= f.submit "編集", class:"group-submit-button-#{num}" %>
+    <div class="close-edit-form-<%=num%>">×</div>
+  </div>
+<% end %>

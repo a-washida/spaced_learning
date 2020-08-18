@@ -13,12 +13,11 @@
     <%# 左の問題復習エリア %>
     <div class='question-review-area question-area' id='question-area-0'> 
       <div class='quistion-review-word'>問題を復習</div>
-      
       <div class='group-panel-area'>
-      <% 10.times do %>
-        <div class='group-panel'>問題復習
-        </div>
+      <% @groups.each do |group| %>
+        <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
       <% end %>
+      <%# <div class="insert-group-panel"></div> %>
       </div>
     </div>
     <%# //左の問題復習エリア %>
@@ -27,8 +26,17 @@
     <div class='question-create-area question-area' id='question-area-1'>
       <div class='quistion-create-word'>問題を作成</div>
       <div class='group-panel-area'>
-      <% 10.times do %>
-        <div class='group-panel'>問題作成
+      <% @groups.each do |group| %>
+        <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
+      <% end %>
+      <%# <div class="insert-group-panel"></div> %>
+      <div class="js-create-group">+グループを作成
+      </div>
+      <%= form_with model: @group, class: 'create-group-form', local: true do |f| %>
+        <%= f.text_area :name, class:"input-default", placeholder:"グループ名を入力してください。" %>
+        <div class="lower-group-form">
+          <%= f.submit "作成", class:"group-submit-button" %>
+          <div class="close-create-form">×</div>
         </div>
       <% end %>
       </div>
@@ -39,10 +47,10 @@
     <div class='question-management-area question-area' id='question-area-2'>
       <div class='quistion-management-word'>問題を管理</div>
       <div class='group-panel-area'>
-      <% 10.times do %>
-        <div class='group-panel'>問題管理
-        </div>
+      <% @groups.each do |group| %>
+        <%= render partial: 'group_panel', locals: { group: group, num: 2 } %>
       <% end %>
+      <%# <div class="insert-group-panel"></div> %>
       </div>
     </div>
     <%# //右の問題管理エリア %>
