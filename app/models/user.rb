@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   has_many :groups
+  has_many :question_answers
 end
