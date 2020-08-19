@@ -1,4 +1,8 @@
 .create-question-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
   padding-top: 50px;
   border: 1px solid gray;
 }
@@ -6,7 +10,8 @@
 .form-question-answer {
   display: flex;
   flex-direction: column;
-  margin: 30px;
+  width: 600px;
+  padding: 50px 10px;
   border: 1px solid gray;
 }
 
@@ -17,13 +22,15 @@
 }
 
 .question-input-area {
-  width: 49%;
+  width: 290px;
   height: 200px;
+  padding: 10px;
+  resize: none;
 }
 
 .answer-area {
   position: relative;
-  width: 49%;
+  width: 290px;
   height: 200px;
   
 }
@@ -31,7 +38,10 @@
 .answer-input-area {
   width: 100%;
   height: 100%;
+  padding: 10px;
+  resize: none;
 }
+
 
 .image-button {
   position: absolute;
@@ -50,4 +60,31 @@
 
 .question-submit-button {
   width: 100px;
+}
+
+.preview-overall-area {
+  display: flex;
+  justify-content: space-between;
+  height: 200px;
+  padding: 50px 10px;
+}
+
+.img-preview {
+  width: 200px;
+  height: 150px;
+}
+
+.answer-preview,
+.question-preview {
+  width: 290px;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid gray;
+  overflow: visible;
+  overflow-y: scroll;
+  word-break : break-all;
+}
+
+#preview-textarea-input {
+  white-space: pre-wrap;
 }
