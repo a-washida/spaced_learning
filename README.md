@@ -53,8 +53,40 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - belongs_to :group
+- has_one :question_option
+- has_one :answer_option
 - has_one :repetition_algorithm
+
+## question_options テーブル
+
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| question_answer | references | foreign_key: true |
+| font_size_id    | integer    | null: false       |
+| image_size_id   | integer    | null: false       |
+
+
+### Association
+- belongs_to :question_answer
 - has_one_attached :image
+- belongs_to_active_hash :font_size
+- belongs_to_active_hash :image_size
+
+## answer_options テーブル
+
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| question_answer | references | foreign_key: true |
+| font_size_id    | integer    | null: false       |
+| image_size_id   | integer    | null: false       |
+
+
+### Association
+- belongs_to :question_answer
+- has_one_attached :image
+- belongs_to_active_hash :font_size
+- belongs_to_active_hash :image_size
+
 
 ## repetition_algorithms テーブル
 
