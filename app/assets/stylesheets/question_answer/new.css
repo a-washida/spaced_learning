@@ -28,7 +28,8 @@
   resize: none;
 }
 
-.answer-area {
+.form-question-area, 
+.form-answer-area {
   position: relative;
   width: 290px;
   height: 200px;

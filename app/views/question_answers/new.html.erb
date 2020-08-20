@@ -1,15 +1,23 @@
 <%= render 'shared/header' %>
 <div class="create-question-main">
-  <%= form_with model: [@group, @question_answer], class: 'form-question-answer', local: true do |f| %>
+  <%= form_with model: @question_answer_with_option, url: new_group_question_answer_path, class: 'form-question-answer', local: true do |f| %>
     <div class="question-answer-area">
-      <%= f.text_area :question, class:"question-input-area" %>
-      <div class="answer-area">
+      <div class="form-question-area">
+        <%= f.text_area :question, class:"question-input-area" %>
+        <%= f.label :question_image, "画像", class:"image-button" %>
+        <%= f.file_field :question_image, class:"hidden" %>
+      </div>
+      <div class="form-answer-area">
         <%= f.text_area :answer, class:"answer-input-area" %>
-        <%= f.label :image, "画像", class:"image-button" %>
-        <%= f.file_field :image, class:"hidden" %>
+        <%= f.label :answer_image, "画像", class:"image-button" %>
+        <%= f.file_field :answer_image, class:"hidden" %>
       </div>
     </div>
     <%= f.submit '作成', class:"question-submit-button" %>
+    <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
+    <%= f.collection_select(:question_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
+    <%= f.collection_select(:answer_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
+    <%= f.collection_select(:answer_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
   <% end %>
   <div class="preview-overall-area">
     <div class="question-preview">
