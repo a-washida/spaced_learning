@@ -14,19 +14,26 @@
       </div>
     </div>
     <%= f.submit '作成', class:"question-submit-button" %>
-    <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
-    <%= f.collection_select(:question_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
-    <%= f.collection_select(:answer_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
-    <%= f.collection_select(:answer_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
+
+    <div class="preview-two-area">
+      <div class="question-preview">
+        <div id="insert-preview-question-textarea"></div>
+        <div id="insert-preview-image-question"></div>
+      </div>
+      <div class="answer-preview">
+        <div id="insert-preview-answer-textarea"></div>
+        <div id="insert-preview-image-answer"></div>
+      </div>
+    </div>
+    <div class="active-hash-pulldown">
+      <div class="question-pulldown">
+        <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
+        <%= f.collection_select(:question_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
+      </div>
+      <div class="answer-pulldown">
+        <%= f.collection_select(:answer_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
+        <%= f.collection_select(:answer_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
+      </div>
+    </div>
   <% end %>
-  <div class="preview-two-area">
-    <div class="question-preview">
-      <div id="insert-preview-question-textarea"></div>
-      <div id="insert-preview-image-question"></div>
-    </div>
-    <div class="answer-preview">
-      <div id="insert-preview-answer-textarea"></div>
-      <div id="insert-preview-image-answer"></div>
-    </div>
-  </div>
 </div>
