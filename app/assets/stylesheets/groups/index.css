@@ -109,7 +109,8 @@
   border: 1px solid gray;
 }
 
-.link-create-question {
+.link-create-question,
+.link-management-question {
   text-decoration: none;
 }
 
