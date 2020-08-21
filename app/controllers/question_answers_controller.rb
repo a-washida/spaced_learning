@@ -1,6 +1,11 @@
 class QuestionAnswersController < ApplicationController
   before_action :question_answer_with_option_params, only: :create
 
+  def show
+    @group = Group.find(params[:group_id])
+    @question_answer = QuestionAnswer.find(params[:id])
+  end
+
   def new
     @question_answer_with_option = QuestionAnswerWithOption.new
   end
