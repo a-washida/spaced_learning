@@ -50,7 +50,7 @@ function textareaPreview(){
       // 以下3行で、入力したテキストエリアの値を要素内に持つ<div>要素を生成
       const valueElement = document.createElement("div")
       valueElement.setAttribute("id", `data-${questionOrAnswer}-id`)
-      valueElement.innerHTML = InputTextareas[i].value
+      valueElement.textContent = InputTextareas[i].value
       const previewTextareaInput = document.getElementById(`insert-preview-${questionOrAnswer}-textarea`)
       // answerテキストエリアに入力した値のプレビューが表示されている場合のみ、すでに存在しているプレビューを削除する
       const dataId = document.getElementById(`data-${questionOrAnswer}-id`)
