@@ -27,7 +27,7 @@
     </div>
     <div class="active-hash-pulldown">
       <div class="question-pulldown">
-        <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {}, {class:"genre-select"}) %>
+        <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {selected: 3}, {class:"genre-select"}) %>
         <%= f.collection_select(:question_image_size_id, ImageSize.all, :id, :name, {}, {class:"genre-select"}) %>
       </div>
       <div class="answer-pulldown">

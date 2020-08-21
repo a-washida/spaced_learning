@@ -11,7 +11,7 @@ require("../top_page_tab.js")
 require("../group_form_appear_or_hide.js")
 require("../update_group_name.js")
 require("../preview")
-// require("../textarea_preview")
+require("../pulldown_font_image.js")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

@@ -67,7 +67,7 @@
 .img-preview-question,
 .img-preview-answer {
   width: 200px;
-  height: 150px;
+  height: auto;
 }
 
 .answer-preview,
