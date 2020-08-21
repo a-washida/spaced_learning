@@ -1,0 +1,130 @@
+.create-question-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  border: 1px solid gray;
+}
+
+.form-question-answer {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  padding: 50px 10px;
+  border: 1px solid gray;
+}
+
+.question-answer-area {
+  display: flex;
+  justify-content: space-between;
+  height: 200px;
+}
+
+
+.form-question-area, 
+.form-answer-area {
+  position: relative;
+  width: 290px;
+  height: 200px;
+  
+}
+
+.input-textarea {
+  width: 290px;
+  height: 200px;
+  padding: 10px;
+  resize: none;
+}
+
+
+.image-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 30px;
+  border: 1px solid gray;
+  background-color: lightblue;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.question-submit-button {
+  width: 100px;
+  margin-left: auto;
+}
+
+.preview-two-area {
+  display: flex;
+  justify-content: space-between;
+  height: 250px;
+  margin: 10px 0;
+}
+
+.question-preview-and-pulldown,
+.answer-preview-and-pulldown {
+  width: 290px;
+  /* border: 1px solid gray; */
+}
+
+.answer-preview,
+.question-preview {
+  /* width: 290px; */
+  height: 200px;
+  padding: 10px;
+  border: 1px solid gray;
+  overflow: visible;
+  overflow-y: scroll;
+  word-break : break-all;
+}
+
+#insert-preview-question-textarea,
+#insert-preview-answer-textarea {
+  white-space: pre-wrap;
+}
+
+.img-preview-question,
+.img-preview-answer {
+  width: 200px;
+  height: auto;
+}
+
+.question-pulldown,
+.answer-pulldown {
+  display: flex;
+  border: 1px solid gray;
+}
+
+.pulldown-explanation {
+  width: 145px;
+  font-size: 75%;
+}
+
+.pulldown-select {
+  width: 100px;
+  height: 30px;
+  margin-right: 30px;
+}
+
+@media (max-width: 599px) {
+
+  .form-question-answer {
+    width: 310px;
+    padding: 50px 10px;
+    border: 1px solid gray;
+  }
+
+  .question-answer-area {
+    display: block;
+    height: 400px;
+  }
+
+  .preview-two-area {
+    display: block;
+    height: 500px;
+    margin: 10px 0;
+  }
+}

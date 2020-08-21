@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :group_params, only: [:create, :update]
   # before_action追加する
   # DRYも解消するべきかも
   # エラーハンドリング見直した方が良さそう(create, update両方)

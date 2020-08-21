@@ -109,6 +109,10 @@
   border: 1px solid gray;
 }
 
+.link-create-question {
+  text-decoration: none;
+}
+
 .record {
   width: 100vw;
   height: 300px;

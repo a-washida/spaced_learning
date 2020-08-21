@@ -1,0 +1,64 @@
+<%= render 'shared/header' %>
+<div class="create-question-main">
+  <%# form_withはここから開始して、一番下から二行目の時点でend %>
+  <%= form_with model: @question_answer_with_option, url: new_group_question_answer_path, class: 'form-question-answer', local: true do |f| %>
+    <%# 問題と解答を入力するエリア %>
+    <div class="question-answer-area">
+      <div class="form-question-area">
+        <%= f.text_area :question, class:"input-textarea", placeholder:"問題を入力してください" %>
+        <%= f.label :question_image, "画像", class:"image-button" %>
+        <%= f.file_field :question_image, class:"hidden" %>
+      </div>
+      <div class="form-answer-area">
+        <%= f.text_area :answer, class:"input-textarea", placeholder:"解答を入力してください" %>
+        <%= f.label :answer_image, "画像", class:"image-button" %>
+        <%= f.file_field :answer_image, class:"hidden" %>
+      </div>
+    </div>
+    <%# //問題と解答を入力するエリア %>
+    <%= f.submit '作成', class:"question-submit-button" %>
+
+    <div class="preview-two-area">
+      <div class="question-preview-and-pulldown">問題のプレビュー
+        <%# 入力した問題をプレビュー表示するエリア %>
+        <div class="question-preview">
+          <div id="insert-preview-question-textarea"></div>
+          <div id="insert-preview-image-question"></div>
+        </div>
+        <%# //入力した問題をプレビュー表示するエリア %>
+        <%# 問題のプレビューの表示を変更するプルダウンを記述したエリア %>
+        <div class="question-pulldown">
+          <div class="question-font-pulldown-wrap">
+            <div class="pulldown-explanation">文字サイズを変更(倍)</div>
+            <%= f.collection_select(:question_font_size_id, FontSize.all, :id, :name, {selected: 6}, {class:"pulldown-select"}) %>
+          </div>
+          <div class="question-image-pulldown-wrap">
+            <div class="pulldown-explanation">画像サイズを変更(倍)</div>
+            <%= f.collection_select(:question_image_size_id, ImageSize.all, :id, :name, {selected: 4}, {class:"pulldown-select"}) %>
+          </div>
+        </div>
+        <%# //問題のプレビューの表示を変更するプルダウンを記述したエリア %>
+      </div>
+      <div class="answer-preview-and-pulldown">解答のプレビュー
+        <%# 入力した解答をプレビュー表示するエリア %>
+        <div class="answer-preview">
+          <div id="insert-preview-answer-textarea"></div>
+          <div id="insert-preview-image-answer"></div>
+        </div>
+        <%# //入力した解答をプレビュー表示するエリア %>
+        <%# 解答のプレビューの表示を変更するプルダウンを記述したエリア %>
+        <div class="answer-pulldown">
+          <div class="answer-font-pulldown-wrap">
+            <div class="pulldown-explanation">文字サイズを変更(倍)</div>
+             <%= f.collection_select(:answer_font_size_id, FontSize.all, :id, :name, {selected: 6}, {class:"pulldown-select"}) %>
+          </div>
+          <div class="answer-image-pulldown-wrap">
+            <div class="pulldown-explanation">画像サイズを変更(倍)</div>
+            <%= f.collection_select(:answer_image_size_id, ImageSize.all, :id, :name, {selected: 4}, {class:"pulldown-select"}) %>
+          </div>
+        </div>
+        <%# //解答のプレビューの表示を変更するプルダウンを記述したエリア %>
+      </div>
+    </div> 
+  <% end %>
+</div>

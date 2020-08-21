@@ -1,4 +1,4 @@
-if (window.location.pathname === '/' || '/groups') {
+if (window.location.pathname === '/' || window.location.pathname === '/groups') {
   // グループ作成フォームを画面上に出現させたり画面上から隠したりする関数
   function appearOrHideCreateForm(){
     const createGroup = document.querySelector(".js-create-group");
@@ -27,6 +27,7 @@ if (window.location.pathname === '/' || '/groups') {
       for(let j = 0; j < editGroups.length; j++){
         // クリックするとフォームが現れる
         editGroups[j].addEventListener("click", (e) => {
+          e.preventDefault();
           groupPanels[j].setAttribute("style", "display: none;");
           editGroupForms[j].setAttribute("style", "display: flex;");
           // クリックするとフォームが隠れる

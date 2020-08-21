@@ -1,4 +1,4 @@
-if (window.location.pathname === '/' || '/groups') {
+if (window.location.pathname === '/' || window.location.pathname === '/groups') {
   // 編集ボタンを押すとgroupsテーブルのnameを更新し、問題復習・作成・管理エリアのグループ名も更新後の名前に置き換える関数
   function updateGroupName(){
     for(let i = 0; i < 3; i++){
