@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2020_08_19_103253) do
   end
 
   create_table "question_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "question", null: false
-    t.text "answer", null: false
+    t.text "question"
+    t.text "answer"
     t.integer "display_date", null: false
     t.integer "memory_level", null: false
     t.integer "repeat_count", null: false

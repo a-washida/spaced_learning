@@ -41,8 +41,8 @@ Things you may want to cover:
 
 | Column       | Type       | Options           |
 | ------------ | ---------- | ----------------- |
-| question     | text       | null: false       |
-| answer       | text       | null: false       |
+| question     | text       | 
+| answer       | text       | 
 | display_date | integer    | null: false       |
 | memory_level | integer    | null: false       |
 | repeat_count | integer    | null: false       |
