@@ -1,6 +1,9 @@
 class QuestionAnswersController < ApplicationController
   before_action :question_answer_with_option_params, only: :create
 
+  def show
+  end
+
   def new
     @question_answer_with_option = QuestionAnswerWithOption.new
   end
