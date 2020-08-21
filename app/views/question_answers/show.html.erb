@@ -1,1 +1,31 @@
-問題詳細表示ページ
+<%= render 'shared/header' %>
+<div class="show-main">
+  <div class="show-question-answer">
+    <%# 問題を表示するエリア %>
+    <div class="show-question">
+      <div class="show-textarea" style="font-size: <%=100 * @question_answer.question_option.font_size.name.to_f%>%;"><%=@question_answer.question%></div>
+      <div id="insert-preview-image-question">
+        <%= image_tag @question_answer.question_option.image, class: 'img-preview-question', style: "width: #{200 * @question_answer.question_option.image_size.name.to_f}px;" if @question_answer.question_option.image.attached? %>
+      </div>
+    </div>
+    <%# //問題を表示するエリア %>
+    <%# 解答を表示するエリア %>
+    <div class="show-answer">
+      <div class="show-textarea" style="font-size: <%=100 * @question_answer.answer_option.font_size.name.to_f%>%;"><%= @question_answer.answer %></div>
+      <div id="insert-preview-image-answer">
+        <%= image_tag @question_answer.answer_option.image, class: 'img-preview-answer', style: "width: #{200 * @question_answer.answer_option.image_size.name.to_f}px;" if @question_answer.answer_option.image.attached? %>
+      </div>
+    </div>
+    <%# //解答を表示するエリア %>
+  </div>
+  <div>
+    次表示されるまでの日数：<%= @question_answer.display_date - Date.today.yday %>
+  </div>
+  <div>
+    記憶度：<%= @question_answer.memory_level %>
+  </div>
+  <div>
+    復習回数：<%= @question_answer.repeat_count %>
+  <div>
+
+</div>
