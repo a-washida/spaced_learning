@@ -9,7 +9,7 @@ class QuestionAnswersController < ApplicationController
     @question_answer_with_option = QuestionAnswerWithOption.new(question_answer_with_option_params)
     if @question_answer_with_option.valid?
       @question_answer_with_option.save
-      redirect_to root_path
+      redirect_to new_group_question_answer_path(Group.find(params[:group_id]))
     else
       render 'new'
     end
