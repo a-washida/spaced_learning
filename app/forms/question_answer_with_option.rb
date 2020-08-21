@@ -1,5 +1,4 @@
 class QuestionAnswerWithOption
-
   include ActiveModel::Model
   # user_id必要？
   attr_accessor :question, :question_image, :answer, :answer_image, :question_font_size_id, :question_image_size_id, :answer_font_size_id, :answer_image_size_id, :user_id, :group_id
@@ -18,13 +17,15 @@ class QuestionAnswerWithOption
   # 問題エリアのテキストか画像両方空欄だとerrorが出るカスタムバリデーション
   def question_text_or_image_indispensable
     return if question.present? || question_image.present?
-    errors.add(:question, "text or image is indispensable")
+
+    errors.add(:question, 'text or image is indispensable')
   end
 
   # 解答エリアのテキストか画像両方空欄だとerrorが出るカスタムバリデーション
   def answer_text_or_image_indispensable
     return if answer.present? || answer_image.present?
-    errors.add(:answer, "text or image is indispensable")
+
+    errors.add(:answer, 'text or image is indispensable')
   end
 
   def save
