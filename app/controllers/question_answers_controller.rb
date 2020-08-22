@@ -26,10 +26,10 @@ class QuestionAnswersController < ApplicationController
   end
 
   private
+
   def set_group
     @group = Group.find(params[:group_id])
   end
-
 
   def question_answer_with_option_params
     params.require(:question_answer_with_option).permit(:question, :question_image, :answer, :answer_image, :question_font_size_id, :question_image_size_id, :answer_font_size_id, :answer_image_size_id).merge(user_id: current_user.id, group_id: params[:group_id])
