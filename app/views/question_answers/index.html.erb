@@ -2,6 +2,7 @@
 <div class="qa-index-main">
   <div class="qa-index-questions-wrap">
     <% @question_answers.each do |question_answer| %>
+      <%# 問題エリアとその付属情報を表示 %>
       <div class="qa-index-question-individual">
         <div class="qa-index-question-individual__question">
           <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
@@ -10,6 +11,7 @@
           <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
         </div>
       </div>
+      <%# //問題エリアとその付属情報を表示 %>
     <% end %>
     <%= paginate @question_answers %>
   </div>
