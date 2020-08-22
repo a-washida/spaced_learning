@@ -1,6 +1,4 @@
-<div class="show-question">
-  <div class="show-textarea" style="font-size: <%=100 * question_answer.question_option.font_size.name.to_f%>%;"><%=question_answer.question%></div>
-  <div id="insert-preview-image-question">
-    <%= image_tag question_answer.question_option.image, class: 'img-preview-question', style: "width: #{200 * question_answer.question_option.image_size.name.to_f}px;" if question_answer.question_option.image.attached? %>
-  </div>
+<div class="display-question-content">
+  <div class="display-question-content__textarea" style="font-size: <%=100 * question_answer.question_option.font_size.name.to_f%>%;"><%=question_answer.question%></div>
+  <%= image_tag question_answer.question_option.image, class: 'display-question-content__image', style: "width: #{200 * question_answer.question_option.image_size.name.to_f}px;" if question_answer.question_option.image.attached? %>
 </div>
