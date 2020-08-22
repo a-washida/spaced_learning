@@ -3,7 +3,7 @@ class QuestionAnswersController < ApplicationController
   before_action :question_answer_with_option_params, only: :create
 
   def index
-    @question_answers = @group.question_answers
+    @question_answers = @group.question_answers.page(params[:page]).per(12)
   end
 
   def show
