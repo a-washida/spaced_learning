@@ -1,23 +1,43 @@
-.index-main {
+.qa-index-main {
+  padding-top: 50px;
+  border: 1px solid gray;
+}
+
+.qa-index-questions-wrap {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   width: 922px;
-  padding: 50px 10px;
+  padding: 0 10px;
   margin: 0 auto;
   border: 1px solid gray;
 }
 
-.wrap-wrap {
+.qa-index-question-individual {
   display: flex;
   flex-direction: column;
+  height: 300px;
 }
 
-.index-question-wrap {
+.qa-index-question-individual__question {
   margin: 25px 5px;
 }
 
-.index-question-explanation {
+.qa-index-question-individual__description {
   width: 290px;
+  margin: 0 5px;
+}
+
+
+@media (max-width: 1024px) {
+  .qa-index-questions-wrap {
+    width: 622px;
+  }
+}
+
+@media (max-width: 599px) {
+  .qa-index-questions-wrap {
+    width: 322px;
+  }
 }
