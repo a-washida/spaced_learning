@@ -1,0 +1,23 @@
+.index-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 922px;
+  padding: 50px 10px;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+
+.wrap-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.index-question-wrap {
+  margin: 25px 5px;
+}
+
+.index-question-explanation {
+  width: 290px;
+}
