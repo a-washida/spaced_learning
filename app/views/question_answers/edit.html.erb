@@ -35,11 +35,11 @@
           <div class="question-pulldown">
             <div class="question-pulldown__font-size">
               <div class="pulldown-description">文字サイズを変更(倍)</div>
-              <%= qo.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: 6}, {class:"pulldown-select"}) %>
+              <%= qo.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: @question_answer.question_option.font_size.id}, {class:"pulldown-select"}) %>
             </div>
             <div class="question-pulldown__answer-size">
               <div class="pulldown-description">画像サイズを変更(倍)</div>
-              <%= qo.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: 4}, {class:"pulldown-select"}) %>
+              <%= qo.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: @question_answer.question_option.image_size.id}, {class:"pulldown-select"}) %>
             </div>
           </div>
           <%= qo.hidden_field :id %>
@@ -58,11 +58,11 @@
           <div class="answer-pulldown">
             <div class="answer-pulldown__font-size">
               <div class="pulldown-description">文字サイズを変更(倍)</div>
-              <%= ao.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: 6}, {class:"pulldown-select"}) %>
+              <%= ao.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: @question_answer.answer_option.font_size.id }, {class:"pulldown-select"}) %>
             </div>
             <div class="answer-pulldown__image-size">
               <div class="pulldown-description">画像サイズを変更(倍)</div>
-              <%= ao.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: 4}, {class:"pulldown-select"}) %>
+              <%= ao.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: @question_answer.answer_option.image_size.id}, {class:"pulldown-select"}) %>
             </div>
           </div>
           <%= ao.hidden_field :id %>
