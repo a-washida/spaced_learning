@@ -8,7 +8,7 @@ class QuestionAnswer < ApplicationRecord
       validates :repeat_count
     end
   end
-  
+
   belongs_to :user
   belongs_to :group
   has_one :question_option
@@ -21,11 +21,13 @@ class QuestionAnswer < ApplicationRecord
 
   def question_text_or_image_indispensable
     return if question.present? || question_option.image.present?
+
     errors.add(:question, 'text or image is indispensable')
   end
 
   def answer_text_or_image_indispensable
     return if answer.present? || answer_option.image.present?
+
     errors.add(:answer, 'text or image is indispensable')
   end
 end
