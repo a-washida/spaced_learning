@@ -48,9 +48,8 @@ class QuestionAnswersController < ApplicationController
   end
 
   def nest_params
-    params.require(:question_answer).permit(:question, :answer, 
-                                            question_option_attributes: [:image, :font_size_id, :image_size_id, :id], 
-                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id]
-                                            ).merge(display_date: Date.today.yday, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+    params.require(:question_answer).permit(:question, :answer,
+                                            question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
+                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id]).merge(display_date: Date.today.yday, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
   end
 end

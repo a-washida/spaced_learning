@@ -78,8 +78,8 @@
   white-space: pre-wrap;
 }
 
-.question-preview__img,
-.answer-preview__img {
+.img-preview-question,
+.img-preview-answer {
   width: 200px;
   height: auto;
 }
@@ -109,7 +109,7 @@
     border: 1px solid gray;
   }
 
-  .qa-form__textarea {
+  .qa-form__input-qa-wrap {
     display: block;
     height: 400px;
   }

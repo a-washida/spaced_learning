@@ -1,0 +1,18 @@
+<%# 問題と解答を入力するエリア %>
+<div class="qa-form__input-qa-wrap">
+  <div class="qa-form__input-question-wrap">
+    <%= f.text_area :question, class:"qa-form__textarea js-question", placeholder:"問題を入力してください" %>
+    <%= f.fields_for :question_option do |qo| %>
+      <%= qo.label :image, "画像", class:"qa-form__image-btn" %>
+      <%= qo.file_field :image, class:"hidden" %>
+    <% end %>
+  </div>
+  <div class="qa-form__input-answer-wrap">
+    <%= f.text_area :answer, class:"qa-form__textarea js-answer", placeholder:"解答を入力してください" %>
+    <%= f.fields_for :answer_option do |ao| %>
+      <%= ao.label :image, "画像", class:"qa-form__image-btn" %>
+      <%= ao.file_field :image, class:"hidden" %>
+    <% end %>
+  </div>
+</div>
+<%# //問題と解答を入力するエリア %>
