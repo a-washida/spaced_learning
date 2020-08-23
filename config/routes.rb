@@ -4,7 +4,5 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
   resources :groups, only: [:index, :create, :update] do
     resources :question_answers, only: [:index, :show, :new, :create, :edit, :update]
-    post '/question_answers/new', to: 'question_answers#create'
-    
   end
 end
