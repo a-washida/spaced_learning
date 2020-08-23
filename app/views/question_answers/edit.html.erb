@@ -14,3 +14,26 @@
     </div> 
   <% end %>
 </div>
+
+<%# 以下はJavaScriptで取得用に記述したコードで、ページ上には表示されない %>
+<div class="hidden">
+  <%# フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+  <div class="font-size-question"><%= @question_answer.question_option.font_size.name %></div>
+  <div class="font-size-answer"><%= @question_answer.answer_option.font_size.name %></div>
+  <%# //フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+
+  <%# 画像サイズのデフォルト(width: 200px;)に対する倍率を記述 %>
+  <div class="img-size-question "><%= @question_answer.question_option.image_size.name %></div>
+  <div class="img-size-answer "><%= @question_answer.answer_option.image_size.name %></div>
+  <%# //画像サイズのデフォルト(width: 200px;)に対する倍率を記述 %>
+
+  <%= image_tag @question_answer.question_option.image, class: 'img-preview-question' if @question_answer.question_option.image.attached? %>
+  <%= image_tag @question_answer.answer_option.image, class: "img-preview-answer" if @question_answer.answer_option.image.attached? %>
+  
+  <%# ページを開いた時にプルダウンのselected属性が何番目のoptionについているかを記述 %>
+  <div class="question-font-selected-position"><%= @question_answer.question_option.font_size.id %></div>
+  <div class="question-image-selected-position"><%= @question_answer.question_option.image_size.id %></div>
+  <div class="answer-font-selected-position"><%= @question_answer.answer_option.font_size.id %></div>
+  <div class="answer-image-selected-position"><%= @question_answer.answer_option.image_size.id %></div>
+  <%# //ページを開いた時にプルダウンのselected属性が何番目のoptionについているかを記述 %>
+</div>
