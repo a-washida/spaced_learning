@@ -1,5 +1,4 @@
 // 画像がある状態で、画像ボタンをクリックした後にキャンセルするとエラーが出るのなんとかしたい
-
 // 問題欄もしくは解答欄で画像を取り込んだ場合に、その画像をプレビュー表示する関数
 function imagePreview(){
   const hiddenFileFields = document.querySelectorAll('.hidden')
@@ -30,7 +29,7 @@ function imagePreview(){
           blobImage.setAttribute("style", `${imageElement}`)
         }
 
-        const previewImage = document.getElementById(`insert-preview-image-${questionOrAnswer}`)
+        const previewImage = document.getElementById(`${questionOrAnswer}-preview__img`)
         previewImage.appendChild(blobImage)
       }
 
@@ -40,7 +39,7 @@ function imagePreview(){
 }
 
 function textareaPreview(){
-  const InputTextareas = document.querySelectorAll(".input-textarea");
+  const InputTextareas = document.querySelectorAll(".qa-form__textarea");
   const arrays = ["question", "answer"] 
   for(let i = 0; i < 2; i++){
     InputTextareas[i].addEventListener("input", (e) => {
@@ -51,7 +50,7 @@ function textareaPreview(){
       const valueElement = document.createElement("div")
       valueElement.setAttribute("id", `data-${questionOrAnswer}-id`)
       valueElement.textContent = InputTextareas[i].value
-      const previewTextareaInput = document.getElementById(`insert-preview-${questionOrAnswer}-textarea`)
+      const previewTextareaInput = document.getElementById(`${questionOrAnswer}-preview__textarea`)
       // answerテキストエリアに入力した値のプレビューが表示されている場合のみ、すでに存在しているプレビューを削除する
       const dataId = document.getElementById(`data-${questionOrAnswer}-id`)
       if (dataId){
