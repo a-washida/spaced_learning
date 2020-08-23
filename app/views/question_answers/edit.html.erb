@@ -1,46 +1,44 @@
 <%= render 'shared/header' %>
 <div class="create-question-main">
   <%# form_withはここから開始して、一番下から二行目の時点でend %>
-  <%= form_with model: [@group, @question_answer], class: 'form-question-answer', local: true do |f| %>
+  <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
     <%# 問題と解答を入力するエリア %>
-    <div class="question-answer-area">
-      <div class="form-question-area">
-        <%= f.text_area :question, class:"input-textarea", placeholder:"問題を入力してください" %>
+    <div class="qa-form__input-qa-wrap">
+      <div class="qa-form__input-question-wrap">
+        <%= f.text_area :question, class:"qa-form__textarea", placeholder:"問題を入力してください" %>
         <%= f.fields_for :question_option do |qo| %>
-          <%= qo.label :image, "画像", class:"image-button" %>
+          <%= qo.label :image, "画像", class:"qa-form__image-btn" %>
           <%= qo.file_field :image, class:"hidden" %>
         <% end %>
       </div>
-      <div class="form-answer-area">
-        <%= f.text_area :answer, class:"input-textarea", placeholder:"解答を入力してください" %>
+      <div class="qa-form__input-answer-wrap">
+        <%= f.text_area :answer, class:"qa-form__textarea", placeholder:"解答を入力してください" %>
         <%= f.fields_for :answer_option do |ao| %>
-          <%= ao.label :image, "画像", class:"image-button" %>
+          <%= ao.label :image, "画像", class:"qa-form__image-btn" %>
           <%= ao.file_field :image, class:"hidden" %>
         <% end %>
       </div>
     </div>
     <%# //問題と解答を入力するエリア %>
-    <%= f.submit '作成', class:"question-submit-button" %>
+    <%= f.submit '作成', class:"qa-form__submit-btn" %>
 
-    <div class="preview-two-area">
+    <div class="qa-form__preview-and-pulldown">
       <div class="question-preview-and-pulldown">問題のプレビュー
         <%# 入力した問題をプレビュー表示するエリア %>
         <div class="question-preview">
-          <div id="insert-preview-question-textarea"></div>
-          <div id="insert-preview-image-question">
-            
-          </div>
+          <div id="question-preview__textarea"></div>
+          <div id="question-preview__img"></div>
         </div>
         <%# //入力した問題をプレビュー表示するエリア %>
         <%# 問題のプレビューの表示を変更するプルダウンを記述したエリア %>
         <%= f.fields_for :question_option do |qo| %>
           <div class="question-pulldown">
-            <div class="question-font-pulldown-wrap">
-              <div class="pulldown-explanation">文字サイズを変更(倍)</div>
+            <div class="question-pulldown__font-size">
+              <div class="pulldown-description">文字サイズを変更(倍)</div>
               <%= qo.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: @question_answer.question_option.font_size.id}, {class:"pulldown-select"}) %>
             </div>
-            <div class="question-image-pulldown-wrap">
-              <div class="pulldown-explanation">画像サイズを変更(倍)</div>
+            <div class="question-pulldown__answer-size">
+              <div class="pulldown-description">画像サイズを変更(倍)</div>
               <%= qo.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: @question_answer.question_option.image_size.id}, {class:"pulldown-select"}) %>
             </div>
           </div>
@@ -51,21 +49,19 @@
       <div class="answer-preview-and-pulldown">解答のプレビュー
         <%# 入力した解答をプレビュー表示するエリア %>
         <div class="answer-preview">
-          <div id="insert-preview-answer-textarea"></div>
-          <div id="insert-preview-image-answer">
-            
-          </div>
+          <div id="answer-preview__textarea"></div>
+          <div id="answer-preview__img"></div>
         </div>
         <%# //入力した解答をプレビュー表示するエリア %>
         <%# 解答のプレビューの表示を変更するプルダウンを記述したエリア %>
         <%= f.fields_for :answer_option do |ao| %>
           <div class="answer-pulldown">
-            <div class="answer-font-pulldown-wrap">
-              <div class="pulldown-explanation">文字サイズを変更(倍)</div>
+            <div class="answer-pulldown__font-size">
+              <div class="pulldown-description">文字サイズを変更(倍)</div>
               <%= ao.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: @question_answer.answer_option.font_size.id }, {class:"pulldown-select"}) %>
             </div>
-            <div class="answer-image-pulldown-wrap">
-              <div class="pulldown-explanation">画像サイズを変更(倍)</div>
+            <div class="answer-pulldown__image-size">
+              <div class="pulldown-description">画像サイズを変更(倍)</div>
               <%= ao.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: @question_answer.answer_option.image_size.id}, {class:"pulldown-select"}) %>
             </div>
           </div>
