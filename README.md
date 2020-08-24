@@ -44,6 +44,7 @@ Things you may want to cover:
 | question     | text       | 
 | answer       | text       | 
 | display_date | integer    | null: false       |
+| display_year | integer    | null: false       |
 | memory_level | integer    | null: false       |
 | repeat_count | integer    | null: false       |
 | user         | references | foreign_key: true |
