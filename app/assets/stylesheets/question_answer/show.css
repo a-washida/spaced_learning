@@ -12,14 +12,3 @@
   padding: 50px 10px 50px;
   border: 1px solid gray;
 }
-
-.show-answer {
-  width: 290px;
-  height: 200px;
-  padding: 10px;
-  border: 1px solid gray;
-}
-
-.show-textarea {
-  white-space: pre-wrap;
-}
