@@ -1,0 +1,2 @@
+class RepetitionAlgorithm < ApplicationRecord
+end
