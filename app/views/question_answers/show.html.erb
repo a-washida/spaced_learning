@@ -1,12 +1,8 @@
 <%= render 'shared/header' %>
 <div class="show-main">
   <div class="show-question-answer">
-    <%# 問題を表示するエリア %>
-      <%= render partial: 'display_question_content', locals: {question_answer: @question_answer} %>
-    <%# //問題を表示するエリア %>
-    <%# 解答を表示するエリア %>
-      <%= render partial: 'display_answer_content', locals: {question_answer: @question_answer} %>
-    <%# //解答を表示するエリア %>
+    <%= render partial: 'display_question_content', locals: {question_answer: @question_answer} %>
+    <%= render partial: 'display_answer_content', locals: {question_answer: @question_answer} %>
   </div>
   <div>
     次表示されるまでの日数：<%= @question_answer.display_date - Date.today.yday %>

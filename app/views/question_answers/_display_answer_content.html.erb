@@ -1,6 +1,8 @@
+<%# 解答を表示するエリア %>
 <div class="show-answer">
   <div class="show-textarea" style="font-size: <%=100 * @question_answer.answer_option.font_size.name.to_f%>%;"><%= @question_answer.answer %></div>
   <div id="insert-preview-image-answer">
     <%= image_tag @question_answer.answer_option.image, class: 'img-preview-answer', style: "width: #{200 * @question_answer.answer_option.image_size.name.to_f}px;" if @question_answer.answer_option.image.attached? %>
   </div>
 </div>
+<%# //解答を表示するエリア %>
