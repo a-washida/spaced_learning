@@ -1,14 +1,12 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  before_action :set_question_answer, only: [:edit, :update, :destroy]
+  before_action :set_question_answer, only: [:show, :edit, :update, :destroy]
 
   def index
     @question_answers = @group.question_answers.page(params[:page]).per(12)
   end
 
   def show
-    # 恐らくここ要変更
-    @question_answer = QuestionAnswer.find(params[:id])
   end
 
   def new
