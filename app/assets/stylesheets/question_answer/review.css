@@ -1,0 +1,45 @@
+.review-main {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.all-reviews-wrap {
+  width: 700px;
+  border: 1px solid gray;
+}
+
+.review-individual-wrap {
+  width: 580px;
+  margin: 0 auto;
+}
+
+.review-question-answer {
+  display: flex;
+  border: 1px solid gray;
+}
+
+.review-main .display-answer-content {
+  display: none;
+}
+
+.review-click {
+  width: 290px;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+@media (max-width: 599px) {
+  .all-reviews-wrap {
+    width: 350px;
+  }
+
+  .review-individual-wrap {
+    width: 290px;
+  }
+
+  .review-question-answer {
+    display: block;
+  }
+}

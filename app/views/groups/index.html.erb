@@ -15,7 +15,9 @@
       <div class='quistion-review-word'>問題を復習</div>
       <div class='group-panel-area'>
       <% @groups.each do |group| %>
-        <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
+        <%= link_to review_group_question_answers_path(group), class: 'link-review-question' do %>
+         <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
+        <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 0 } %>
       <% end %>

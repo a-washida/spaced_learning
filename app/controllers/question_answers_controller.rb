@@ -1,5 +1,5 @@
 class QuestionAnswersController < ApplicationController
-  before_action :set_group, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :set_group, only: [:index, :show, :new, :create, :edit, :update, :destroy, :review]
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -41,6 +41,11 @@ class QuestionAnswersController < ApplicationController
     else
       reder 'show'
     end
+  end
+
+  def review
+    # display_yearカラムも必要になりそう
+    @question_answers = @group.question_answers.where("display_date <= #{Date.today.yday}").page(params[:page]).per(12)
   end
 
   private

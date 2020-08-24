@@ -1,0 +1,16 @@
+<%= render "shared/header" %>
+<div class="review-main">
+  <div class="all-reviews-wrap">
+  <% @question_answers.each do |question_answer| %>
+    <div class="review-individual-wrap">
+      <div class="review-question-answer">
+        <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
+        <%= render partial: 'display_answer_content', locals: {question_answer: question_answer} %>
+        <div class="review-click">クリックすると解答を表示</div>
+      </div>
+      <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
+    </div>
+  <% end %>
+  <%= paginate @question_answers %>
+  </div>
+</div>
