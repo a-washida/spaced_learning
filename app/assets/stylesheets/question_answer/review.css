@@ -9,8 +9,6 @@
   border: 1px solid gray;
 }
 
-
-
 .review-individual-wrap {
   width: 580px;
   margin: 0 auto;
@@ -19,4 +17,8 @@
 .review-question-answer {
   display: flex;
   border: 1px solid gray;
+}
+
+.review-main .display-answer-content {
+  display: none;
 }
