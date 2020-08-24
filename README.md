@@ -95,7 +95,7 @@ Things you may want to cover:
 | --------------- | ---------- | ----------------- |
 | interval        | float      | null: false       |
 | easiness_factor | integer    | null: false       |
-| question        | references | foreign_key: true |
+| question_answer | references | foreign_key: true |
 
 ### Association
 - belongs_to :question_answers
