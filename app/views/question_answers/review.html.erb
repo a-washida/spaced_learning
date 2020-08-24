@@ -17,10 +17,12 @@
           </div>
           <div class="review-option__btn-wrap">
             <div class="review-option__memory-level-low">低</div>
-            <div class="review-option__btn">1</div>
-            <div class="review-option__btn">2</div>
-            <div class="review-option__btn">3</div>
-            <div class="review-option__btn">4</div>
+            <% qa = question_answer %>
+            <% ra = question_answer.repetition_algorithm %>
+            <div class="review-option__btn js-0" data-interval=<%=ra.interval%> data-ef=<%=ra.easiness_factor%> data-qa-id=<%=qa.id%> data-rc=<%=qa.repeat_count%>>1</div>
+            <div class="review-option__btn js-1" data-interval=<%=ra.interval%> data-ef=<%=ra.easiness_factor%> data-qa-id=<%=qa.id%> data-rc=<%=qa.repeat_count%>>2</div>
+            <div class="review-option__btn js-2" data-interval=<%=ra.interval%> data-ef=<%=ra.easiness_factor%> data-qa-id=<%=qa.id%> data-rc=<%=qa.repeat_count%>>3</div>
+            <div class="review-option__btn js-3" data-interval=<%=ra.interval%> data-ef=<%=ra.easiness_factor%> data-qa-id=<%=qa.id%> data-rc=<%=qa.repeat_count%>>4</div>
             <div class="review-option__memory-level-high">高</div>
           </div>
         </div>
