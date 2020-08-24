@@ -1,0 +1,2 @@
+class RepetitionAlgorithmsController < ApplicationController
+end
