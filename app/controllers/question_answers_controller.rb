@@ -17,11 +17,13 @@ class QuestionAnswersController < ApplicationController
 
   def create
     @question_answer = QuestionAnswer.new(nest_params)
-    if @question_answer.save
+    ActiveRecord::Base.transaction do
+      @question_answer.save!
+      RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
       redirect_to new_group_question_answer_path(@group)
-    else
-      render 'new'
     end
+    rescue => e
+      render 'new'
   end
 
   def edit
