@@ -30,6 +30,52 @@
   border: 1px solid gray;
 }
 
+.review-option {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-option__memory-level-wrap {
+  width: 200px;
+}
+
+.review-option__memory-level-description {
+  display: flex;
+  /* justify-content: flex-start; */
+  width: 200px;
+  border: 1px solid gray;
+}
+
+.review-option__memory-level-text {
+  margin-right: 10px;
+  border: 1px solid gray;
+}
+
+.review-option__btn-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.review-option__memory-level-low {
+  width: 30px;
+  border: 1px solid gray;
+  color: blue;
+  text-align: center;
+}
+
+.review-option__btn {
+  width: 30px;
+  border: 1px solid gray;
+  text-align: center;
+}
+
+.review-option__memory-level-high {
+  width: 30px;
+  color: red;
+  border: 1px solid gray;
+  text-align: center;
+}
+
 @media (max-width: 599px) {
   .all-reviews-wrap {
     width: 350px;
