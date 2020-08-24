@@ -44,8 +44,8 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    # ここDRY
-    @question_answers = @group.question_answers.page(params[:page]).per(12)
+    # display_yearカラムも必要になりそう
+    @question_answers = @group.question_answers.where("display_date <= #{Date.today.yday}").page(params[:page]).per(12)
   end
 
   private

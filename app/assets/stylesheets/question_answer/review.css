@@ -1,0 +1,22 @@
+.review-main {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.all-reviews-wrap {
+  width: 700px;
+  border: 1px solid gray;
+}
+
+
+
+.review-individual-wrap {
+  width: 580px;
+  margin: 0 auto;
+}
+
+.review-question-answer {
+  display: flex;
+  border: 1px solid gray;
+}
