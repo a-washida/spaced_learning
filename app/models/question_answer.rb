@@ -11,8 +11,8 @@ class QuestionAnswer < ApplicationRecord
 
   belongs_to :user
   belongs_to :group
-  has_one :question_option
-  has_one :answer_option
+  has_one :question_option, dependent: :destroy
+  has_one :answer_option, dependent: :destroy
 
   accepts_nested_attributes_for :question_option
   accepts_nested_attributes_for :answer_option
