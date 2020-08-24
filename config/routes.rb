@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  post '/repetition_algorithms', to: 'repetition_algorithms#create'
 end
