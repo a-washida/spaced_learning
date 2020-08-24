@@ -1,14 +1,12 @@
 class QuestionAnswersController < ApplicationController
-  before_action :set_group, only: [:index, :show, :new, :create, :edit, :update]
-  before_action :set_question_answer, only: [:edit, :update]
+  before_action :set_group, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :set_question_answer, only: [:show, :edit, :update, :destroy]
 
   def index
     @question_answers = @group.question_answers.page(params[:page]).per(12)
   end
 
   def show
-    # 恐らくここ要変更
-    @question_answer = QuestionAnswer.find(params[:id])
   end
 
   def new
@@ -34,6 +32,14 @@ class QuestionAnswersController < ApplicationController
       redirect_to group_question_answer_path(@group, @question_answer)
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    if @question_answer.destroy
+      redirect_to group_question_answers_path(@group)
+    else
+      reder 'show'
     end
   end
 
