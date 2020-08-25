@@ -54,7 +54,7 @@ class RepetitionAlgorithmService
       @repetition_algorithm.update!(interval: @review_params[:interval].round(4), easiness_factor: @review_params[:easiness_factor] )
       @question_answer.update!(display_date: next_display_date, memory_level: @review_params[:memory_level], repeat_count: @review_params[:repeat_count].to_i + 1)
     end
-    return "次は#{@repetition_algorithm.interval}日後です"
+    return "次は#{@repetition_algorithm.interval.floor}日後です"
     rescue => e
       return "エラーが発生しました"
   end
