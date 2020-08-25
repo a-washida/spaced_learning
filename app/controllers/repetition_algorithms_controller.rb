@@ -4,11 +4,8 @@ class RepetitionAlgorithmsController < ApplicationController
   def create
     question_answer = QuestionAnswer.find(params[:question_answer_id])
     repetition_algorithm = question_answer.repetition_algorithm
-
     repetition_service = RepetitionAlgorithmService.new(review_params, question_answer, repetition_algorithm)
-    repetition_service.execute_repetition_algorithm_considering_conditional_branch(params[:repeat_count], params[:memory_level])
-    post = "次は#{repetition_algorithm.interval}日後です"
-
+    post = repetition_service.execute_repetition_algorithm_considering_conditional_branch(params[:repeat_count], params[:memory_level])
     render json: { post: post }
   end
 
