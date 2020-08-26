@@ -47,8 +47,10 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    # display_yearカラムも必要になりそう
-    @question_answers = @group.question_answers.where("display_date <= #{Date.today.yday}").page(params[:page]).per(12)
+    # where内の条件：display_yearが今年かつdisplay_dateが今日までの場合、またはdisplay_yearが今年よりも以前の場合
+    @question_answers = @group.question_answers.where("display_year = ? AND display_date <= ?", Date.today.year, Date.today.yday).
+                                                or(@group.question_answers.where("display_year < ?", Date.today.year)).
+                                                page(params[:page]).per(12)
   end
 
   private
@@ -64,6 +66,7 @@ class QuestionAnswersController < ApplicationController
   def nest_params
     params.require(:question_answer).permit(:question, :answer,
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
-                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id]).merge(display_date: Date.today.yday, display_year: Date.today.year, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id]).
+                                            merge(display_date: Date.today.yday, display_year: Date.today.year, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
   end
 end
