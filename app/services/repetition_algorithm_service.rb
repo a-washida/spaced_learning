@@ -37,22 +37,34 @@ class RepetitionAlgorithmService
 
   def repetition_algorithm_if_repeat_count_equal_0(next_interval, difference_of_easiness_factor)
     @review_params[:interval] = next_interval
-    common_part_of_repetition_algorithm(difference_of_easiness_factor)
+    is_common_part_of_repetition_algorithm(difference_of_easiness_factor)
   end
 
   def repetition_algorithm_if_repeat_count_greater_than_0(memory_level, difference_of_easiness_factor, num)
     modified_easiness_factor = @review_params[:easiness_factor].to_i - 80 + 28 * memory_level - 2 * memory_level ** 2
     @review_params[:interval] = @review_params[:interval].to_f * modified_easiness_factor/100 + num
     limit_interval_range_1_to_100()
-    common_part_of_repetition_algorithm(difference_of_easiness_factor)
+    is_common_part_of_repetition_algorithm(difference_of_easiness_factor)
   end
 
-  def common_part_of_repetition_algorithm(difference_of_easiness_factor)
+  def is_common_part_of_repetition_algorithm(difference_of_easiness_factor)
     @review_params[:easiness_factor] = @review_params[:easiness_factor].to_i + difference_of_easiness_factor
     next_display_date = Date.today.yday + @review_params[:interval].to_i
+    next_display_year = Date.today.year
+    if Date.new(Date.today.year).leap?
+      if next_display_date > 366
+        next_display_date -= 366
+        next_display_year += 1
+      end
+    else
+      if next_display_date > 365
+        next_display_date -= 365
+        next_display_year += 1
+      end
+    end
     ActiveRecord::Base.transaction do
       @repetition_algorithm.update!(interval: @review_params[:interval].round(4), easiness_factor: @review_params[:easiness_factor] )
-      @question_answer.update!(display_date: next_display_date, memory_level: @review_params[:memory_level], repeat_count: @review_params[:repeat_count].to_i + 1)
+      @question_answer.update!(display_date: next_display_date, display_year: next_display_year, memory_level: @review_params[:memory_level], repeat_count: @review_params[:repeat_count].to_i + 1)
     end
     return "次は#{@repetition_algorithm.interval.floor}日後です"
     rescue => e
