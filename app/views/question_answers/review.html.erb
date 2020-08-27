@@ -4,11 +4,35 @@
   <% @question_answers.each do |question_answer| %>
     <div class="review-individual-wrap">
       <div class="review-question-answer">
+        <%# 問題と解答の内容が記述されている部分テンプレートをrender %>
         <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
         <%= render partial: 'display_answer_content', locals: {question_answer: question_answer} %>
         <div class="review-click">クリックすると解答を表示</div>
       </div>
-      <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
+      <%# 問題と解答の下に位置するエリア %>
+      <div class="review-option">
+        <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
+        <div class="review-option__memory-level-wrap">
+          <div class="review-option__memory-level-description">
+            <div class="review-option__memory-level-text">記憶度</div>
+            <div class="hoge">?</div>
+            <div class="review-option__notice-display-date"></div>
+          </div>
+          <div class="review-option__btn-wrap">
+            <div class="review-option__memory-level-low">低</div>
+            <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が4つ付与されている %>
+            <% 4.times do |i| %>
+              <div class="review-option__btn js-<%=i%>"
+                   data-interval=<%=question_answer.repetition_algorithm.interval%> 
+                   data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
+                   data-qa-id=<%=question_answer.id%> 
+                   data-repeat-count=<%=question_answer.repeat_count%>><%= i + 1 %></div>
+            <% end %>
+            <div class="review-option__memory-level-high">高</div>
+          </div>
+        </div>
+      </div>
+      <%# //問題と解答の下に位置するエリア %>
     </div>
   <% end %>
   <%= paginate @question_answers %>

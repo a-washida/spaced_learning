@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_103253) do
+ActiveRecord::Schema.define(version: 2020_08_24_070709) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_103253) do
     t.text "question"
     t.text "answer"
     t.integer "display_date", null: false
+    t.integer "display_year", null: false
     t.integer "memory_level", null: false
     t.integer "repeat_count", null: false
     t.bigint "user_id"
@@ -71,6 +72,15 @@ ActiveRecord::Schema.define(version: 2020_08_19_103253) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_answer_id"], name: "index_question_options_on_question_answer_id"
+  end
+
+  create_table "repetition_algorithms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.float "interval", null: false
+    t.integer "easiness_factor", null: false
+    t.bigint "question_answer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_answer_id"], name: "index_repetition_algorithms_on_question_answer_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,4 +102,5 @@ ActiveRecord::Schema.define(version: 2020_08_19_103253) do
   add_foreign_key "question_answers", "groups"
   add_foreign_key "question_answers", "users"
   add_foreign_key "question_options", "question_answers"
+  add_foreign_key "repetition_algorithms", "question_answers"
 end
