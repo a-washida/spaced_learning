@@ -57,6 +57,7 @@ class RepetitionAlgorithmService
   def is_common_part_of_repetition_algorithm(difference_of_easiness_factor)
     # easiness_factorの値を変化させる(memory_levelによってdifference_of_easiness_factorが決まる)
     @review_params[:easiness_factor] = @review_params[:easiness_factor].to_i + difference_of_easiness_factor
+    limit_easiness_factor_range_130_to_250()
     next_display_date = Date.today.yday + @review_params[:interval].to_i
     next_display_year = Date.today.year
     if Date.new(Date.today.year).leap?
@@ -83,13 +84,16 @@ class RepetitionAlgorithmService
       return "エラーが発生しました"
   end
 
+  # easiness_factorの範囲を下限値(130)と上限値(250)に制限するメソッド
+  def limit_easiness_factor_range_130_to_250()
+    @review_params[:easiness_factor] = 130 if @review_params[:easiness_factor] < 130
+    @review_params[:easiness_factor] = 250 if @review_params[:easiness_factor] > 250
+  end
+      
+
   # インターバルの範囲を下限値(1)と上限値(100)に制限するメソッド
   def limit_interval_range_1_to_100()
-    if @review_params[:interval].to_f > 100
-      @review_params[:interval] = 100
-    end
-    if @review_params[:interval].to_f < 1
-      @review_params[:interval] = 1
-    end
+    @review_params[:interval] = 1 if @review_params[:interval].to_f < 1
+    @review_params[:interval] = 100 if @review_params[:interval].to_f > 100
   end
 end
