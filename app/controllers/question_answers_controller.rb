@@ -20,10 +20,10 @@ class QuestionAnswersController < ApplicationController
     ActiveRecord::Base.transaction do
       @question_answer.save!
       RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
-      redirect_to new_group_question_answer_path(@group)
     end
-    rescue => e
-      render 'new'
+    redirect_to new_group_question_answer_path(@group)
+  rescue StandardError => e
+    render 'new'
   end
 
   def edit
@@ -47,9 +47,9 @@ class QuestionAnswersController < ApplicationController
 
   def review
     # where内の条件：display_yearが今年かつdisplay_dateが今日までの場合、またはdisplay_yearが今年よりも以前の場合
-    @question_answers = @group.question_answers.where("display_year = ? AND display_date <= ?", Date.today.year, Date.today.yday).
-                                                or(@group.question_answers.where("display_year < ?", Date.today.year)).
-                                                page(params[:page]).per(12)
+    @question_answers = @group.question_answers.where('display_year = ? AND display_date <= ?', Date.today.year, Date.today.yday)
+                              .or(@group.question_answers.where('display_year < ?', Date.today.year))
+                              .page(params[:page]).per(12)
   end
 
   private
@@ -65,7 +65,7 @@ class QuestionAnswersController < ApplicationController
   def nested_form_params
     params.require(:question_answer).permit(:question, :answer,
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
-                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id]).
-                                            merge(display_date: Date.today.yday, display_year: Date.today.year, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+                                            answer_option_attributes: [:image, :font_size_id, :image_size_id, :id])
+          .merge(display_date: Date.today.yday, display_year: Date.today.year, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
   end
 end

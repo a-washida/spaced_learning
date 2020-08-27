@@ -23,12 +23,14 @@ class QuestionAnswer < ApplicationRecord
   # 問題の、テキストまたは画像どちらかが必須という制限をつけるカスタムバリデーション
   def question_text_or_image_indispensable
     return if question.present? || question_option.image.present?
+
     errors.add(:question, 'text or image is indispensable')
   end
 
   # 解答の、テキストまたは画像どちらかが必須という制限をつけるカスタムバリデーション
   def answer_text_or_image_indispensable
     return if answer.present? || answer_option.image.present?
+
     errors.add(:answer, 'text or image is indispensable')
   end
 end
