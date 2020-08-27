@@ -7,9 +7,9 @@ if (window.location.pathname.includes("question_answers/review")){
       for(let j = 0; j < clicks.length; j++ ){
         // 以下4行はHTMLタグに付与したカスタムデータ属性の値を取得
         const interval = clicks[j].getAttribute("data-interval");
-        const easinessFactor = clicks[j].getAttribute("data-ef");
+        const easinessFactor = clicks[j].getAttribute("data-easiness-factor");
         const questionAnswerId = clicks[j].getAttribute("data-qa-id");
-        const repeatCount = clicks[j].getAttribute("data-rc");
+        const repeatCount = clicks[j].getAttribute("data-repeat-count");
         const memoryLevel = clicks[j].innerHTML
         clicks[j].addEventListener("click", (e) => {
           const XHR = new XMLHttpRequest();
