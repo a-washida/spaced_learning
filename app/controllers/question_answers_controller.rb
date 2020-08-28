@@ -27,6 +27,7 @@ class QuestionAnswersController < ApplicationController
     end
     redirect_to new_group_question_answer_path(@group)
   rescue StandardError => e
+    @question_answer = e.record
     render 'new'
   end
 
