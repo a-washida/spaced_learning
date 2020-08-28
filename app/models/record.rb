@@ -16,4 +16,14 @@ class Record < ApplicationRecord
       Record.create!(create_count: 1, review_count: 0, date: Date.today, user_id: current_user.id)
     end
   end
+
+  # dateカラムが今日の日付と一致しているレコードがあれば、updateを行いreview_countを1ふやす。無ければcreateを行い新しくレコードを作成する。
+  def self.record_review_count(user_id, num)
+    record = Record.find_by(date: Date.today)
+    if record.present?
+      record.update!(review_count: record.review_count + num)
+    else
+      Record.create!(create_count: 0, review_count: 1, date: Date.today, user_id: user_id)
+    end
+  end
 end
