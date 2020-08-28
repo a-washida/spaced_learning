@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_many :groups
   has_many :question_answers
+  has_many :records
 end
