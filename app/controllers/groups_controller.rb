@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :group_params, only: [:create, :update]
+  before_action :set_group, only: [:update, :destroy]
   # before_action追加する
   # DRYも解消するべきかも
   # エラーハンドリング見直した方が良さそう(create, update両方)
@@ -20,14 +20,26 @@ class GroupsController < ApplicationController
   end
 
   def update
-    group = Group.find(params[:id])
-    group.update(group_params)
+    @group.update(group_params)
     render json: { post: group }
+  end
+
+  def destroy
+    if @group.destroy
+      redirect_to root_path
+    else
+      # renderで書くべき？
+      redirect_to group_question_answers_path(@group)
+    end
   end
 
   private
 
   def group_params
     params.require(:group).permit(:name).merge(user_id: current_user.id)
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
   end
 end
