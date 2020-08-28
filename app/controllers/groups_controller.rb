@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def index
     @groups = current_user.groups
     @group = Group.new
+    @date_and_records = Record.get_weekly_date_and_record
   end
 
   def create
@@ -21,7 +22,7 @@ class GroupsController < ApplicationController
 
   def update
     @group.update(group_params)
-    render json: { post: group }
+    render json: { post: @group }
   end
 
   def destroy

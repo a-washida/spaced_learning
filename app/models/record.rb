@@ -26,4 +26,22 @@ class Record < ApplicationRecord
       Record.create!(create_count: 0, review_count: 1, date: Date.today, user_id: user_id)
     end
   end
+
+  # キーとしてmonth、date、week_day、create_count、review_countの5つを持ったハッシュを作る。そのハッシュ直近一週間分を配列に格納して返すメソッド
+  def self.get_weekly_date_and_record
+    week_days = ['(日)','(月)','(火)','(水)','(木)','(金)','(土)']
+    one_week_ago = Date.today - 6
+    date_and_records = []
+    records = Record.where(date: one_week_ago..Date.today)
+
+    7.times do |i|
+      record_array = []
+      records.each do |record|
+        record_array.push(record.create_count, record.review_count) if record.date == one_week_ago + i
+      end
+      date_and_record = { month: (one_week_ago + i).month, date: (one_week_ago + i).day, week_day: week_days[(one_week_ago + i).wday], create_count: record_array[0], review_count: record_array[1]}
+      date_and_records.push(date_and_record)
+    end
+    return date_and_records
+  end
 end

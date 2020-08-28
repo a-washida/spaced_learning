@@ -69,5 +69,10 @@
   </div>
 
   <div class='record'>記録
+    <% @date_and_records.each do |record| %>
+    <div>
+      <%=record[:month]%><%=record[:date]%><%=record[:week_day]%><%=record[:create_count]%>
+    </div>
+    <% end %>
   </div>
 </div>
