@@ -23,7 +23,7 @@ class QuestionAnswersController < ApplicationController
       # repetition_algorithmsテーブルに保存
       RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
       # recordsテーブルに保存or更新
-      Record.record_create_count
+      Record.record_create_count(current_user.id)
     end
     redirect_to new_group_question_answer_path(@group)
   rescue StandardError => e
