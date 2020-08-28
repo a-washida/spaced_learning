@@ -1,5 +1,6 @@
 <%= render 'shared/header' %>
 <div class="qa-index-main">
+  <%= link_to 'グループを削除', group_path(@group), method: :delete, data: { confirm: "グループ内の問題も全て削除されます。\n本当に削除しますか？" } %>
   <div class="qa-index-questions-wrap">
     <% @question_answers.each do |question_answer| %>
       <%# 問題エリアとその付属情報を表示 %>
