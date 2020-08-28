@@ -25,6 +25,7 @@ Things you may want to cover:
 ### Association
 - has_many :groups
 - has_many :question_answers
+- has_many :records
 
 ## groups テーブル
 
@@ -98,7 +99,19 @@ Things you may want to cover:
 | question_answer | references | foreign_key: true |
 
 ### Association
-- belongs_to :question_answers
+- belongs_to :question_answer
+
+## records テーブル
+
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| create_count | integer    | null: false       |
+| review_count | integer    | null: false       |
+| date         | date       | null: false       |
+| user         | references | foreign_key: true |
+
+### Association
+- belongs_to :user
 
 * Database initialization
 
