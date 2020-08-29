@@ -7,9 +7,9 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
         // クリックしたタブが太字になり、他2つのタブは太字解除
         topTabs.forEach(function(topTab){
           if (topTab.getAttribute("id") == `top-page-tab-${i}`) {
-            topTab.setAttribute("style", "font-weight: bold;")
+            topTab.setAttribute("style", "font-weight: bold; background-color: #f5f5f5; border-bottom: none;")
           } else {
-            topTab.setAttribute("style", "font-weight: normal;")
+            topTab.setAttribute("style", "font-weight: normal; background-color: #ffffff; border-bottom: 1px solid gray;")
           }
         })
         // 問題(作成or復習or管理)タブを押すと問題(作成or復習or管理)エリアが表示され、他2つのエリアは非表示。
