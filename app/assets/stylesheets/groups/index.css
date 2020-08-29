@@ -116,8 +116,23 @@
 }
 
 .record {
-  width: 100vw;
+  width: 600px;
   height: 300px;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+
+.record__create-count-wrap,
+.record__review-count-wrap {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.record__create-count,
+.record__review-count {
+  width: 50px;
+  height: 100px;
   border: 1px solid gray;
 }
 
