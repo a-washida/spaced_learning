@@ -68,6 +68,14 @@
     <%# //右の問題管理エリア %>
   </div>
 
-  <div class='record'>記録
+  <div class='record'>
+    <div clss="record__description">一週間の問題作成数</div>
+    <div class="record__create-count-wrap">
+      <%= render partial: 'create_or_review_count', locals: {date_and_records: @date_and_records, create_or_review: "create"} %>
+    </div>
+    <div clss="record__description">一週間の問題復習数</div>
+    <div class="record__review-count-wrap">
+      <%= render partial: 'create_or_review_count', locals: {date_and_records: @date_and_records, create_or_review: "review"} %>
+    </div>
   </div>
 </div>

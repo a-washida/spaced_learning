@@ -18,11 +18,16 @@ class QuestionAnswersController < ApplicationController
   def create
     @question_answer = QuestionAnswer.new(nested_form_params)
     ActiveRecord::Base.transaction do
+      # 次の一行で3つのテーブル: question_answers, question_options, answer_optionsに同時保存
       @question_answer.save!
+      # repetition_algorithmsテーブルに保存
       RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
+      # recordsテーブルに保存or更新
+      Record.record_create_count(current_user.id)
     end
     redirect_to new_group_question_answer_path(@group)
   rescue StandardError => e
+    @question_answer = e.record
     render 'new'
   end
 

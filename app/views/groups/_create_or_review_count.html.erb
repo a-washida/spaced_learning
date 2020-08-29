@@ -1,0 +1,8 @@
+<%# 一週間分の問題作成数or問題復習数を表示する部分テンプレート %>
+<% date_and_records.each do |record| %>
+  <div class="record__<%=create_or_review%>-count">
+    <div><%=record[:month]%>/<%=record[:date]%></div>
+    <div class="record__week-day"><%=record[:week_day]%></div>
+    <div><%=record[:"#{create_or_review}_count"]%></div>
+  </div>
+<% end %>

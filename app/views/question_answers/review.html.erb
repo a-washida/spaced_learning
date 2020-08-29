@@ -20,13 +20,14 @@
           </div>
           <div class="review-option__btn-wrap">
             <div class="review-option__memory-level-low">低</div>
-            <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が4つ付与されている %>
+            <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が5つ付与されている %>
             <% 4.times do |i| %>
               <div class="review-option__btn js-<%=i%>"
                    data-interval=<%=question_answer.repetition_algorithm.interval%> 
                    data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
                    data-qa-id=<%=question_answer.id%> 
-                   data-repeat-count=<%=question_answer.repeat_count%>><%= i + 1 %></div>
+                   data-repeat-count=<%=question_answer.repeat_count%>
+                   data-review-count="1"><%= i + 1 %></div>
             <% end %>
             <div class="review-option__memory-level-high">高</div>
           </div>

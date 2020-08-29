@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_070709) do
+ActiveRecord::Schema.define(version: 2020_08_28_030407) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 2020_08_24_070709) do
     t.index ["question_answer_id"], name: "index_question_options_on_question_answer_id"
   end
 
+  create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "create_count", null: false
+    t.integer "review_count", null: false
+    t.date "date", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_records_on_user_id"
+  end
+
   create_table "repetition_algorithms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.float "interval", null: false
     t.integer "easiness_factor", null: false
@@ -102,5 +112,6 @@ ActiveRecord::Schema.define(version: 2020_08_24_070709) do
   add_foreign_key "question_answers", "groups"
   add_foreign_key "question_answers", "users"
   add_foreign_key "question_options", "question_answers"
+  add_foreign_key "records", "users"
   add_foreign_key "repetition_algorithms", "question_answers"
 end
