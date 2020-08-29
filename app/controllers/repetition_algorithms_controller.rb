@@ -7,7 +7,7 @@ class RepetitionAlgorithmsController < ApplicationController
 
     repetition_service = RepetitionAlgorithmService.new(review_params, question_answer, repetition_algorithm)
     post = repetition_service.execute_repetition_algorithm_considering_conditional_branch(params[:repeat_count], params[:memory_level])
-    
+
     render json: { post: post }
   end
 

@@ -78,8 +78,8 @@ class RepetitionAlgorithmService
     ActiveRecord::Base.transaction do
       @repetition_algorithm.update!(interval: @review_params[:interval].round(4), easiness_factor: @review_params[:easiness_factor])
       @question_answer.update!(display_date: next_display_date,
-                               display_year: next_display_year, 
-                               memory_level: @review_params[:memory_level], 
+                               display_year: next_display_year,
+                               memory_level: @review_params[:memory_level],
                                repeat_count: @review_params[:repeat_count].to_i + 1)
       Record.record_review_count(@question_answer.user_id, @review_params[:review_count].to_i)
     end
