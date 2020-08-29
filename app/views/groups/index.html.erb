@@ -17,7 +17,9 @@
       <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
         <%= link_to review_group_question_answers_path(group), class: 'group-panel-link' do %>
-         <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
+          <%# ローカル変数countには、その日に復習できる問題の数が代入される %>
+          <%= render partial: 'group_panel', locals: { group: group, num: 0, count: group.question_answers.where('display_year = ? AND display_date <= ?', Date.today.year, Date.today.yday)
+                                                                                                          .or(group.question_answers.where('display_year < ?', Date.today.year)).count } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 0 } %>
@@ -33,7 +35,7 @@
       <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
         <%= link_to new_group_question_answer_path(group), class: 'group-panel-link' do %>
-          <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
+          <%= render partial: 'group_panel', locals: { group: group, num: 1, count: "" } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 1 } %>
@@ -58,7 +60,8 @@
       <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
         <%= link_to group_question_answers_path(group), class: 'group-panel-link' do %>
-          <%= render partial: 'group_panel', locals: { group: group, num: 2 } %>
+          <%# ローカル変数countには、作成した問題の数が代入される %>
+          <%= render partial: 'group_panel', locals: { group: group, num: 2, count: group.question_answers.count } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 2 } %>
@@ -79,5 +82,6 @@
         <%= render partial: 'create_or_review_count', locals: {date_and_records: @date_and_records, create_or_review: "review"} %>
       </div>
     </div>
-  </div>
+  </div
+>
 </div>

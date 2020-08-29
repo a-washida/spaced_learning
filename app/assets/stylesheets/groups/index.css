@@ -27,7 +27,8 @@
 
 .top-question-area__title {
   width: 100%;
-  height: 50px;
+  height: 40px;
+  line-height: 20px;
   padding: 10px 0;
   background-color: #ffffff;
   /* background-color: #282c2f;
@@ -39,31 +40,39 @@
 }
 
 .group-panel-wrap {
-  /* ここ変える */
-  height: calc(100% - 50px);
+  height: calc(100% - 40px);
   padding-top: 10px;
   overflow: scroll;
+}
+
+.group-panel-link {
+  text-decoration: none;
 }
 
 .group-panel {
   display: flex;
   justify-content: space-between;
-  width: 96%;
+  position: relative;
+  width: 92%;
   height: 50px;
-  margin: 0 2% 5px;
+  margin: 0 4% 5px;
   padding: 0 2%;
   border: 1px solid gray;
   border-radius: 5px;
   background-color: #ffffff;
-  /* overflow: visible;
+}
+
+.group-panel__name {
+  width: 80%;
+  /* outline: 1px solid black; */
+  overflow: visible;
   overflow-y: scroll;
-  word-break : break-all; */
+  word-break : break-all;
 }
 
 .group-panel__edit {
   width: 30px;
   height: 30px;
-
 }
 
 .group-panel__edit img {
@@ -72,14 +81,31 @@
   margin: 5px auto 0;
 }
 
+.group-panel__count {
+  position: absolute;
+  right: 5px;
+  bottom: 0px;
+  font-size: 80%;
+  font-weight: bold;
+  text-align: right;
+}
+
+.group-panel__count.count-0 {
+  color: green;
+}
+
+.group-panel__count.count-2 {
+  color: purple;
+}
+
 .top-tab {
   display: none;
 }
 
 .open-create-form {
-  width: 96%;
+  width: 92%;
   height: 50px;
-  margin: 0 2% 5px;
+  margin: 0 4% 5px;
   border: 1px solid gray;
   border-radius: 5px;
   color: gray;
@@ -96,8 +122,8 @@
   display: none;
   flex-direction: column;
   align-items: flex-start;
-  width: 96%;
-  margin: 0 2% 5px;
+  width: 92%;
+  margin: 0 4% 5px;
 }
 
 .top-form-create__input,
@@ -134,10 +160,6 @@
 .top-form-create__close-btn img,
 .top-form-edit__close-btn img {
   width: 15px;
-}
-
-.group-panel-link {
-  text-decoration: none;
 }
 
 .top-lower-area {
@@ -187,7 +209,6 @@
     height: calc(100% - 30px);
     border-top: none; 
   }
-
   /* //初期状態では問題復習エリア以外を非表示 */
 
   .top-question-area__title {
@@ -200,7 +221,7 @@
     height: 30px;
   }
 
-  /* 初期状態では問題復習のタブのみ太文字 */
+  /* 初期状態では問題復習のタブのみ太文字, 背景色あり, border-bottomなし */
   .top-tab__item.review {
     width: calc(100% / 3);
     border: 1px solid gray;
@@ -221,7 +242,7 @@
     border: 1px solid gray;
     text-align: center;
   }
-  /* //初期状態では問題復習のタブのみ太文字 */
+  /* //初期状態では問題復習のタブのみ太文字, 背景色あり, border-bottomなし */
 
   .group-panel-wrap {
     height: 100%;
