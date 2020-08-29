@@ -1,21 +1,21 @@
 <%= render "shared/header" %>
-<div class='main'>
+<div class='top-main'>
   <div class='three-questions-area'>
 
     <%# 画面幅599px以下の場合に表示 %>
-    <div class='top-question-tab'>
-      <div class='question-tab-review top-page-tab' id='top-page-tab-0'>問題を復習</div>
-      <div class='question-tab-create top-page-tab' id='top-page-tab-1'>問題を作成</div>
-      <div class='question-tab-management top-page-tab' id='top-page-tab-2'>問題を管理</div>
+    <div class='top-tab'>
+      <div class='top-tab__item review' id='top-page-tab-0'>問題を復習</div>
+      <div class='top-tab__item create' id='top-page-tab-1'>問題を作成</div>
+      <div class='top-tab__item management' id='top-page-tab-2'>問題を管理</div>
     </div>
     <%# //画面幅599px以下の場合に表示 %>
 
     <%# 左の問題復習エリア %>
-    <div class='question-review-area question-area' id='question-area-0'> 
-      <div class='quistion-review-word'>問題を復習</div>
-      <div class='group-panel-area'>
+    <div class='top-question-area review' id='question-area-0'> 
+      <div class='top-question-area__title'>問題を復習</div>
+      <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
-        <%= link_to review_group_question_answers_path(group), class: 'link-review-question' do %>
+        <%= link_to review_group_question_answers_path(group), class: 'group-panel-link' do %>
          <%= render partial: 'group_panel', locals: { group: group, num: 0 } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
@@ -27,11 +27,11 @@
     <%# //左の問題復習エリア %>
 
     <%# 中央の問題作成エリア %>
-    <div class='question-create-area question-area' id='question-area-1'>
-      <div class='quistion-create-word'>問題を作成</div>
-      <div class='group-panel-area'>
+    <div class='top-question-area create' id='question-area-1'>
+      <div class='top-question-area__title'>問題を作成</div>
+      <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
-        <%= link_to new_group_question_answer_path(group), class: 'link-create-question' do %>
+        <%= link_to new_group_question_answer_path(group), class: 'group-panel-link' do %>
           <%= render partial: 'group_panel', locals: { group: group, num: 1 } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
@@ -40,11 +40,11 @@
       <%# <div class="insert-group-panel"></div> %>
       <div class="js-create-group">+グループを作成
       </div>
-      <%= form_with model: @group, class: 'create-group-form', local: true do |f| %>
+      <%= form_with model: @group, class: 'top-form-create', local: true do |f| %>
         <%= f.text_area :name, class:"input-default", placeholder:"グループ名を入力してください。" %>
-        <div class="lower-group-form">
-          <%= f.submit "作成", class:"group-submit-button" %>
-          <div class="close-create-form">×</div>
+        <div class="top-form-create__lower">
+          <%= f.submit "作成", class:"top-form-create__submit-btn" %>
+          <div class="top-form-create__close-btn">×</div>
         </div>
       <% end %>
       </div>
@@ -52,11 +52,11 @@
     <%# //中央の問題作成エリア %>
 
     <%# 右の問題管理エリア %>
-    <div class='question-management-area question-area' id='question-area-2'>
-      <div class='quistion-management-word'>問題を管理</div>
-      <div class='group-panel-area'>
+    <div class='top-question-area management' id='question-area-2'>
+      <div class='top-question-area__title'>問題を管理</div>
+      <div class='group-panel-wrap'>
       <% @groups.each do |group| %>
-        <%= link_to group_question_answers_path(group), class: 'link-management-question' do %>
+        <%= link_to group_question_answers_path(group), class: 'group-panel-link' do %>
           <%= render partial: 'group_panel', locals: { group: group, num: 2 } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>

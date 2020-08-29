@@ -1,7 +1,7 @@
-<%= form_with model: group, class: "edit-group-form-#{num}", local: true do |f| %>
+<%= form_with model: group, class: "top-form-edit js-#{num}", local: true do |f| %>
   <%= f.text_area :name, class:"input-default" %>
-  <div class="lower-group-form">
-    <%= f.submit "編集", class:"group-submit-button-#{num}" %>
-    <div class="close-edit-form-<%=num%>">×</div>
+  <div class="top-form-edit__lower">
+    <%= f.submit "編集", class:"top-form-edit__sumbit-btn js-#{num}" %>
+    <div class="top-form-edit__close-btn js-<%=num%>">×</div>
   </div>
 <% end %>
