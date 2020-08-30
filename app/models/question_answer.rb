@@ -2,8 +2,8 @@ class QuestionAnswer < ApplicationRecord
   validate :question_text_or_image_indispensable
   validate :answer_text_or_image_indispensable
   with_options presence: true do
+    validates :display_date
     with_options numericality: true do
-      validates :display_date
       validates :memory_level
       validates :repeat_count
     end
