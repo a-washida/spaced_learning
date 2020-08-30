@@ -35,7 +35,7 @@ class QuestionAnswersController < ApplicationController
   end
 
   def update
-    if @question_answer.update(nested_form_params.except(:display_date, :display_year, :memory_level, :repeat_count))
+    if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
       redirect_to group_question_answer_path(@group, @question_answer)
     else
       render 'edit'

@@ -5,7 +5,7 @@
     <%= render partial: 'display_answer_content', locals: {question_answer: @question_answer} %>
   </div>
   <div>
-    次表示されるまでの日数：<%= @question_answer.display_date - Date.today.yday %>
+    次表示されるまでの日数：<%= (@question_answer.display_date - Date.today).to_i %>
   </div>
   <div>
     記憶度：<%= @question_answer.memory_level %>
