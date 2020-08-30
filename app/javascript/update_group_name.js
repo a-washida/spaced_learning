@@ -2,9 +2,9 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
   // 編集ボタンを押すとgroupsテーブルのnameを更新し、問題復習・作成・管理エリアのグループ名も更新後の名前に置き換える関数
   function updateGroupName(){
     for(let i = 0; i < 3; i++){
-      const submits = document.querySelectorAll(`.group-submit-button-${i}`);
-      const editGroupForms= document.querySelectorAll(`.edit-group-form-${i}`);
-      const groupPanels = document.querySelectorAll(`.js-group-panel-${i}`)
+      const submits = document.querySelectorAll(`.top-form-edit__sumbit-btn.js-${i}`);
+      const editGroupForms= document.querySelectorAll(`.top-form-edit.js-${i}`);
+      const groupPanels = document.querySelectorAll(`.group-panel.js-${i}`)
       for(let j = 0; j < submits.length; j++){
         submits[j].addEventListener("click", (e) => {
           e.preventDefault();
@@ -26,7 +26,7 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
               groupPanels[j].removeAttribute("style", "display: none;");
               // 問題復習・作成・管理の3つのエリアのグループ名を更新後の名前に変更
               for(let k = 0; k < 3; k++){
-                const groupNames = document.querySelectorAll(`.group-name-${k}`);
+                const groupNames = document.querySelectorAll(`.group-panel__name.js-${k}`);
                 groupNames[j].innerHTML = item.name
               }
             } 

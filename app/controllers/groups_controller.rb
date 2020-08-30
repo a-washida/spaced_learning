@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
       redirect_to root_path
     else
       @groups = current_user.groups
+      @date_and_records = Record.get_weekly_date_and_record
       render 'index'
     end
   end

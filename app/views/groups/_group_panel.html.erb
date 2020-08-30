@@ -1,4 +1,8 @@
-<div class='group-panel js-group-panel-<%=num%>' group-id=<%= group.id %>>
-  <div class="group-name-<%=num%>"><%= group.name %></div>
-  <div class="js-edit-group-<%=num%>">?</div>
+<%# グループのパネル一つ分を表示する部分テンプレート %>
+<div class='group-panel js-<%=num%>' group-id=<%= group.id %>>
+  <div class="group-panel__name js-<%=num%>"><%= group.name %></div>
+  <div class="group-panel__edit js-<%=num%>">
+    <%= image_tag 'top_panel_edit.png' %>
+  </div>
+  <div class="group-panel__count count-<%=num%>"><%=count%></div>
 </div>
