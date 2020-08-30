@@ -1,6 +1,5 @@
 <%= render "shared/header" %>
 <div class='top-main'>
-
   <div class='three-questions-area'>
 
     <%# 画面幅599px以下の場合に表示 %>
@@ -73,15 +72,14 @@
   </div>
   <div class="top-lower-area">
     <div class='record'>
-      <div clss="record__description">一週間の問題作成数</div>
+      <div class="record__description">一週間の問題作成数</div>
       <div class="record__create-count-wrap">
         <%= render partial: 'create_or_review_count', locals: {date_and_records: @date_and_records, create_or_review: "create"} %>
       </div>
-      <div clss="record__description">一週間の復習数</div>
+      <div class="record__description">一週間の問題復習数</div>
       <div class="record__review-count-wrap">
         <%= render partial: 'create_or_review_count', locals: {date_and_records: @date_and_records, create_or_review: "review"} %>
       </div>
     </div>
-  </div
->
+  </div>
 </div>

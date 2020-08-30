@@ -1,4 +1,3 @@
-/* question-create-areaとか3つのCSSもう一度見直す。設定これで良いか？ */
 .top-main {
   padding-top: 50px;
 }
@@ -13,7 +12,7 @@
 }
 
 .top-question-area {
-  width: calc((100% - 50px) / 3);
+  width: calc((100% - 30px) / 3);
   min-width: 200px;
   height: 100%;
   margin-right: 15px;
@@ -31,8 +30,6 @@
   line-height: 20px;
   padding: 10px 0;
   background-color: #ffffff;
-  /* background-color: #282c2f;
-  color: #ffffff; */
   font-size: 120%;
   font-weight: bold;
   text-align: center;
@@ -57,6 +54,7 @@
   height: 50px;
   margin: 0 4% 5px;
   padding: 0 2%;
+  color: #000088;
   border: 1px solid gray;
   border-radius: 5px;
   background-color: #ffffff;
@@ -64,7 +62,6 @@
 
 .group-panel__name {
   width: 80%;
-  /* outline: 1px solid black; */
   overflow: visible;
   overflow-y: scroll;
   word-break : break-all;
@@ -163,30 +160,56 @@
 }
 
 .top-lower-area {
-  padding-top: 30px;
-  border-top: 1px solid gray;
+  width: 100vw;
+  padding: 10px;
+  border-top: 1px solid lightgray;
 }
 
 .record {
-  width: 600px;
+  max-width: 900px;
   height: 300px;
   margin: 0 auto;
-  border: 1px solid gray;
+  padding: 0 10px;
+}
+
+.record__description {
+  width: 200px;
+  margin: 10px 0;
+  padding-left: 5px;
+  font-size: 120%;
+  font-weight: bold;
+  border-left: 5px solid #282c2f;
+  border-bottom: 1px solid #282c2f;
 }
 
 .record__create-count-wrap,
 .record__review-count-wrap {
   display: flex;
   justify-content: space-around;
+  width: 580px;
   text-align: center;
 }
 
 .record__create-count,
 .record__review-count {
-  width: 50px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
+  padding: 5px;
+  background-color: #f5f5f5;
   border: 1px solid gray;
+  border-radius: 10px;
 }
+
+.record__create-count-lower,
+.record__review-count-lower {
+  width: 30px;
+  height: 30px;
+  margin: 5px auto;
+  color: blue;
+  font-size: 120%;
+  font-weight: bold;
+}
+
 
 @media (max-width: 599px) {
   .three-questions-area {
@@ -249,8 +272,36 @@
   }
 
   .record {
-    /* 要修正 */
-    width: 380px;
+    width: 350px;
     max-width: 100vw;
+    padding: 0;
+  }
+
+  .record__description {
+    width: 160px;
+    font-size: 100%;
+  }
+
+  .record__create-count-wrap,
+  .record__review-count-wrap {
+    width: 350px;
+  }
+
+  .record__create-count,
+  .record__review-count {
+    width: 45px;
+    height: 80px;
+  }
+
+  .record__date-wrap {
+    font-size: 80%;
+  }
+
+  .record__create-count-lower,
+  .record__review-count-lower {
+    font-size: 100%;
+  }
+  .record__week-day {
+    display: block;
   }
 }
