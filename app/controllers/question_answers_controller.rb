@@ -51,7 +51,6 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    # where内の条件：display_yearが今年かつdisplay_dateが今日までの場合、またはdisplay_yearが今年よりも以前の場合
     @question_answers = @group.question_answers.where('display_date <= ?', Date.today).page(params[:page]).per(12)
   end
 
