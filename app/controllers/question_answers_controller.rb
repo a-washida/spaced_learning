@@ -35,7 +35,7 @@ class QuestionAnswersController < ApplicationController
   end
 
   def update
-    if @question_answer.update(nested_form_params.except(:display_date, :display_year, :memory_level, :repeat_count))
+    if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
       redirect_to group_question_answer_path(@group, @question_answer)
     else
       render 'edit'
@@ -51,10 +51,7 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    # where内の条件：display_yearが今年かつdisplay_dateが今日までの場合、またはdisplay_yearが今年よりも以前の場合
-    @question_answers = @group.question_answers.where('display_year = ? AND display_date <= ?', Date.today.year, Date.today.yday)
-                              .or(@group.question_answers.where('display_year < ?', Date.today.year))
-                              .page(params[:page]).per(12)
+    @question_answers = @group.question_answers.where('display_date <= ?', Date.today).page(params[:page]).per(12)
   end
 
   private
@@ -71,6 +68,6 @@ class QuestionAnswersController < ApplicationController
     params.require(:question_answer).permit(:question, :answer,
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
                                             answer_option_attributes: [:image, :font_size_id, :image_size_id, :id])
-          .merge(display_date: Date.today.yday, display_year: Date.today.year, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+          .merge(display_date: Date.today, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
   end
 end

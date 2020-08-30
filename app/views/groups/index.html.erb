@@ -17,8 +17,7 @@
       <% @groups.each do |group| %>
         <%= link_to review_group_question_answers_path(group), class: 'group-panel-link' do %>
           <%# ローカル変数countには、その日に復習できる問題の数が代入される %>
-          <%= render partial: 'group_panel', locals: { group: group, num: 0, count: group.question_answers.where('display_year = ? AND display_date <= ?', Date.today.year, Date.today.yday)
-                                                                                                          .or(group.question_answers.where('display_year < ?', Date.today.year)).count } %>
+          <%= render partial: 'group_panel', locals: { group: group, num: 0, count: group.question_answers.where('display_date <= ?', Date.today).count } %>
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 0 } %>

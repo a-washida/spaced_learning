@@ -58,27 +58,10 @@ class RepetitionAlgorithmService
     # easiness_factorの値を変化させる(memory_levelによってdifference_of_easiness_factorが決まる)
     @review_params[:easiness_factor] = @review_params[:easiness_factor].to_i + difference_of_easiness_factor
     limit_easiness_factor_range_130_to_250
-    next_display_date = Date.today.yday + @review_params[:interval].to_i
-    next_display_year = Date.today.year
-    if Date.new(Date.today.year).leap?
-      # 閏年の場合がtrueの場合の条件分岐(一年は366日)
-      if next_display_date > 366
-        # next_display_dateが366を超えてしまったら、自身から366を引き、next_display_yearに1を加算する
-        next_display_date -= 366
-        next_display_year += 1
-      end
-    else
-      # 閏年の場合がfalseの場合の条件分岐(一年は365日)
-      if next_display_date > 365
-        # next_display_dateが365を超えてしまったら、自身から365を引き、next_display_yearに1を加算する
-        next_display_date -= 365
-        next_display_year += 1
-      end
-    end
+    next_display_date = Date.today + @review_params[:interval].to_i
     ActiveRecord::Base.transaction do
       @repetition_algorithm.update!(interval: @review_params[:interval].round(4), easiness_factor: @review_params[:easiness_factor])
       @question_answer.update!(display_date: next_display_date,
-                               display_year: next_display_year,
                                memory_level: @review_params[:memory_level],
                                repeat_count: @review_params[:repeat_count].to_i + 1)
       Record.record_review_count(@question_answer.user_id, @review_params[:review_count].to_i)
