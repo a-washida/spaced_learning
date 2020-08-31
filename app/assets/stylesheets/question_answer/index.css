@@ -45,15 +45,39 @@
   white-space: nowrap;
 }
 
-.qa-index-item__vertical-three-point {
+.qa-index-item__img-three-point {
   position: absolute;
   right: 0px;
   width: 20px;
   cursor: pointer;
 }
 
-.hoge {
+.qa-intex-item__img-close {
+  width: 20px;
+}
+
+.qa-index-item__check-close {
   display: none;
+}
+
+.qa-index-item__management-list {
+  display: none;
+}
+
+.qa-index-item__management-list li {
+  margin: 5px 10px;
+  color: #000088;
+  cursor: pointer;
+}
+
+.qa-index-item__management-list li:hover {
+  font-weight: bold;
+}
+
+.qa-index-item__management-list li a {
+  display: block;
+  color: #000088;
+  text-decoration: none;
 }
 
 input[type="checkbox"] {
@@ -61,13 +85,22 @@ input[type="checkbox"] {
   left: -100vh;
 }
 
-input[type="checkbox"]:checked ~ .hoge{
+input[type="checkbox"]:checked ~ .qa-index-item__management-list{
   display: block;
   position: absolute;
   right: 0px;
   bottom: 25px;
   background-color: #ffffff;
-  outline: 1px solid gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+input[type="checkbox"]:checked ~ .qa-index-item__check-close {
+  display: block;
+  position: absolute;
+  right: -20px;
+  bottom: 120px;
+  cursor: pointer;
 }
 
 .destroy-group {
