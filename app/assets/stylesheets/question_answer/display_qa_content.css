@@ -4,6 +4,7 @@
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
+  overflow-y: scroll;
 }
 
 .display-question-content__textarea,
