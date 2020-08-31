@@ -39,7 +39,7 @@
 }
 
 .qa-index-item__record span {
-  color: blue;
+  color: #0000DD;
   font-weight: bold;
 }
 
@@ -117,6 +117,7 @@ input[type="checkbox"]:checked ~ .qa-index-item__check-close {
   text-decoration: none;
   text-align: center;
 }
+
 
 @media (max-width: 599px) {
   .qa-index-question-and-answer-area {
