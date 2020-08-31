@@ -11,7 +11,7 @@
       </div>
       <%# 問題と解答の下に位置するエリア %>
       <div class="review-option">
-        <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
+        <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/12 + 1}#link-#{question_answer.id}" %>
         <div class="review-option__memory-level-wrap">
           <div class="review-option__memory-level-description">
             <div class="review-option__memory-level-text">記憶度</div>

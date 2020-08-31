@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.prev {
+  margin-right: 30px;
+}
+
+.prev a {
+  color: #0000DD;
+}
+
+.page {
+  margin: 0 5px;
+}
+
+.page a {
+  color: #0000DD;
+  text-decoration: none;
+}
+
+.next {
+  margin-left: 30px;
+}
+
+.next a {
+  color: #0000DD;
+}

@@ -68,9 +68,7 @@
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
-  overflow: visible;
   overflow-y: scroll;
-  word-break : break-all;
 }
 
 #question-preview__textarea,

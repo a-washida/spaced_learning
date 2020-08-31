@@ -60,6 +60,10 @@
   background-color: #ffffff;
 }
 
+.group-panel:hover {
+  font-weight: bold;
+}
+
 .group-panel__name {
   width: 80%;
   overflow: visible;
