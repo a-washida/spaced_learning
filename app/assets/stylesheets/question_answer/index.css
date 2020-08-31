@@ -5,10 +5,6 @@
 }
 
 .qa-index-question-and-answer-area {
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; */
-  align-items: center;
   width: 620px;
   padding: 20px;
   margin: 30px auto;
@@ -16,9 +12,15 @@
 }
 
 .qa-index-item {
+  position: relative;
   width: 580px;
   height: 250px;
   margin: 0 auto;
+}
+
+.qa-index-link-target {
+  position: absolute;
+  top: -50px;
 }
 
 .qa-index-item__qa {
