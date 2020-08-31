@@ -1,20 +1,41 @@
 <%= render 'shared/header' %>
 <div class="qa-index-main">
-  <%= link_to 'グループを削除', group_path(@group), method: :delete, data: { confirm: "グループ内の問題も全て削除されます。\n本当に削除しますか？" } %>
-  <div class="qa-index-questions-wrap">
-    <% @question_answers.each do |question_answer| %>
+  <div class="qa-index-question-and-answer-area">
+    <% @question_answers.each_with_index do |question_answer, i| %>
       <%# 問題エリアとその付属情報を表示 %>
-      <div class="qa-index-question-individual">
-        <div class="qa-index-question-individual__question">
+      <div class="qa-index-item" id="link-<%=question_answer.id%>">
+        <div class="qa-index-item__qa">
           <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
+          <%= render partial: 'display_answer_content', locals: {question_answer: question_answer} %>
         </div>
-        <div class="qa-index-question-individual__description">
-          <%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %>
+        <div class="qa-index-item__description">
+          <div class="qa-index-item__record">
+            復習までの日数：
+            <span>
+              <% if (question_answer.display_date - Date.today).to_i >= 0 %>
+                <%= (question_answer.display_date - Date.today).to_i %>
+              <% else %>
+                0
+              <% end %>
+            </span>
+            記憶度：<span><%= question_answer.memory_level %></span>
+            復習回数：<span><%= question_answer.repeat_count %></span>
+          </div>
+          <input type="checkbox" id="qa-index__check-<%=i%>">
+          <label for="qa-index__check-<%=i%>"><%= image_tag 'vertical_three_point_reader.png', class: 'qa-index-item__vertical-three-point' %></label>
+          <ul class="hoge">
+            <li><%= link_to '問題詳細ページ', group_question_answer_path(@group, question_answer) %></li>
+            <li><%= link_to '問題編集ページ', edit_group_question_answer_path(@group, question_answer) %></li>
+            <li>復習周期から外す</li>
+            <li>初期状態にリセット</li>
+            <li><%= link_to '削除', group_question_answer_path(@group, question_answer), method: :delete %></li>
+          </ul>
         </div>
       </div>
       <%# //問題エリアとその付属情報を表示 %>
     <% end %>
     <%= paginate @question_answers %>
+    <%= link_to 'グループを削除', group_path(@group), method: :delete, class: 'destroy-group', data: { confirm: "グループ内の問題も全て削除されます。\n本当に削除しますか？" } %>
   </div>
 </div>
 

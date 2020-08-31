@@ -44,7 +44,8 @@ class QuestionAnswersController < ApplicationController
 
   def destroy
     if @question_answer.destroy
-      redirect_to group_question_answers_path(@group)
+      # redirect_to group_question_answers_path(@group)
+      redirect_back(fallback_location: root_path)
     else
       reder 'show'
     end
