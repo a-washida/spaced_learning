@@ -19,9 +19,12 @@
         <div class="review-option__memory-level-wrap">
           <div class="review-option__memory-level-description">
             <div class="review-option__memory-level-text">記憶度</div>
+            <%# このチェックボックスは画面上に表示されない。下のlabel要素2つと紐づいている %>
             <input type="checkbox" id="review-option__check-<%=i%>">
             <label for="review-option__check-<%=i%>" class="review-option__question"><%= image_tag 'review_question.png', class: "review-option__question-img" %></label>
+            <%# 以下のlabel要素は?アイコンを押さない限り非表示 %>
             <label for="review-option__check-<%=i%>" class="review-option__close"></label>
+            <%# 記憶度の数字の説明。?アイコンを押さない限り非表示 %>
             <p class="memory-level-detail">
               記憶度1: 思い出せず、見覚えもない<br>
               記憶度2: 思い出せなかったが、見覚えはある<br>
