@@ -2,6 +2,7 @@
 <div class="create-question-main">
   <%# form_withはここから開始して、一番下から二行目の時点でend %>
   <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
+    <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
     <%= render partial: 'qa_form_input', locals: {f: f} %>
     <%= f.submit '編集', class:"qa-form__submit-btn" %>
     <div class="qa-form__preview-and-pulldown">
