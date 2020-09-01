@@ -35,6 +35,7 @@
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
+  color: #000088;
   cursor: pointer;
 }
 
@@ -50,10 +51,51 @@
 
 .review-option__memory-level-description {
   display: flex;
+  position: relative;
 }
 
-.review-option__memory-level-text {
-  margin: 0 10px;
+.review-option__question {
+  width: 25px;
+  padding: 2px 0 0 3px;
+  cursor: pointer;
+}
+
+.review-option__question-img {
+  width: 18px;
+}
+
+.review-option__close {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.4);
+  z-index: 1;
+}
+
+.memory-level-detail {
+  display: none;
+  position: absolute;
+  top: -118px;
+  left: 0px;
+  width: 249px;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: normal;
+  z-index: 2;
+}
+
+input[type="checkbox"]:checked ~ .memory-level-detail {
+  display: block;
+}
+
+input[type="checkbox"]:checked ~ .review-option__close {
+  display: block;
 }
 
 .review-option__notice-display-date {
