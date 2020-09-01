@@ -25,7 +25,7 @@ class QuestionAnswersController < ApplicationController
       # recordsテーブルに保存or更新
       Record.record_create_count(current_user.id)
     end
-    redirect_to new_group_question_answer_path(@group)
+    redirect_to new_group_question_answer_path(@group), notice: '・問題を一件作成しました'
   rescue StandardError => e
     @question_answer = e.record
     render 'new'
@@ -36,7 +36,8 @@ class QuestionAnswersController < ApplicationController
 
   def update
     if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
-      redirect_to group_question_answer_path(@group, @question_answer)
+      # 問題管理ページの、編集を行った問題の場所にリダイレクト(ページネーションのページ数も考慮)
+      redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
     else
       render 'edit'
     end

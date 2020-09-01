@@ -2,8 +2,9 @@
 <div class="create-question-main">
   <%# form_withはここから開始して、一番下から二行目の時点でend %>
   <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
+    <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
     <%= render partial: 'qa_form_input', locals: {f: f} %>
-    <%= f.submit '作成', class:"qa-form__submit-btn" %>
+    <%= f.submit '編集', class:"qa-form__submit-btn" %>
     <div class="qa-form__preview-and-pulldown">
       <div class="question-preview-and-pulldown">問題のプレビュー
         <%= render partial: 'question_preview_and_pulldown', locals: {f: f} %>
@@ -17,10 +18,10 @@
 
 <%# 以下はJavaScriptで取得用に記述したコードで、ページ上には表示されない %>
 <div class="hidden">
-  <%# フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+  <%# フォントサイズのデフォルト(font-size: 1rem;)に対する倍率を記述 %>
   <div class="font-size-question"><%= @question_answer.question_option.font_size.name %></div>
   <div class="font-size-answer"><%= @question_answer.answer_option.font_size.name %></div>
-  <%# //フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+  <%# //フォントサイズのデフォルト(font-size: 1rem;)に対する倍率を記述 %>
 
   <%# 画像サイズのデフォルト(width: 200px;)に対する倍率を記述 %>
   <div class="img-size-question "><%= @question_answer.question_option.image_size.name %></div>

@@ -2,14 +2,19 @@
 <div class="create-question-main">
   <%# form_withはここから開始して、一番下から二行目の時点でend %>
   <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
+    <% if notice.present? %>
+      <div class="qa-form__notice"><%= notice %></div>
+    <% end %>
     <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
     <%= render partial: 'qa_form_input', locals: {f: f} %>
     <%= f.submit '作成', class:"qa-form__submit-btn" %>
     <div class="qa-form__preview-and-pulldown">
-      <div class="question-preview-and-pulldown">問題のプレビュー
+      <div class="question-preview-and-pulldown">
+        <div class="qa-form__question-preview-text">問題のプレビュー</div>
         <%= render partial: 'question_preview_and_pulldown', locals: {f: f} %>
       </div>
-      <div class="answer-preview-and-pulldown">解答のプレビュー
+      <div class="answer-preview-and-pulldown">
+        <div class="qa-form__answer-preview-text">解答のプレビュー</div>
         <%= render partial: 'answer_preview_and_pulldown', locals: {f: f} %>
       </div>
     </div> 

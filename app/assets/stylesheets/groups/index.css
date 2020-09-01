@@ -30,7 +30,7 @@
   line-height: 20px;
   padding: 10px 0;
   background-color: #ffffff;
-  font-size: 120%;
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
   border-bottom: 1px solid gray;
@@ -86,7 +86,7 @@
   position: absolute;
   right: 5px;
   bottom: 0px;
-  font-size: 80%;
+  font-size: 0.8rem;
   font-weight: bold;
   text-align: right;
 }
@@ -115,7 +115,7 @@
 
 .top-plus {
   margin-left: 10px;
-  font-size: 150%;
+  font-size: 1.5rem;
 }
 
 .top-form-create,
@@ -180,7 +180,7 @@
   width: 200px;
   margin: 10px 0;
   padding-left: 5px;
-  font-size: 120%;
+  font-size: 1.2rem;
   font-weight: bold;
   border-left: 5px solid #282c2f;
   border-bottom: 1px solid #282c2f;
@@ -206,11 +206,11 @@
 
 .record__create-count-lower,
 .record__review-count-lower {
-  width: 30px;
+  width: 50px;
   height: 30px;
   margin: 5px auto;
   color: blue;
-  font-size: 120%;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
@@ -283,7 +283,7 @@
 
   .record__description {
     width: 160px;
-    font-size: 100%;
+    font-size: 1rem;
   }
 
   .record__create-count-wrap,
@@ -298,12 +298,14 @@
   }
 
   .record__date-wrap {
-    font-size: 80%;
+    font-size: 0.8rem;
   }
 
   .record__create-count-lower,
   .record__review-count-lower {
-    font-size: 100%;
+    width: 30px;
+    height: 25px;
+    font-size: 1rem;
   }
   .record__week-day {
     display: block;

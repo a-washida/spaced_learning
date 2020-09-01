@@ -15,6 +15,7 @@
       </div>
       <%# 問題と解答の下に位置するエリア %>
       <div class="review-option">
+        <%# 問題管理ページの、対応する問題の場所にリダイレクト(ページネーションのページ数も考慮) %>
         <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/10 + 1}#link-#{question_answer.id}", class: "link-question-management" %>
         <div class="review-option__memory-level-wrap">
           <div class="review-option__memory-level-description">

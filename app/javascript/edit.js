@@ -6,7 +6,7 @@ if (window.location.pathname.includes("edit")){
       const textarea = document.querySelector(`.qa-form__textarea.js-${questionOrAnswer}`)
       const insertTextarea = document.getElementById(`${questionOrAnswer}-preview__textarea`)
       const fontSize = document.querySelector(`.font-size-${questionOrAnswer}`)
-      insertTextarea.setAttribute("style", `font-size: ${100 * fontSize.innerHTML}%;`)
+      insertTextarea.setAttribute("style", `font-size: ${fontSize.innerHTML}rem;`)
       insertTextarea.textContent = textarea.value
     }
 
