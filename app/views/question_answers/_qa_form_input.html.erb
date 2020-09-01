@@ -1,7 +1,7 @@
 <%# 問題と解答を入力するエリア %>
 <div class="qa-form__input-qa-wrap">
   <div class="qa-form__input-question-wrap">
-    <%= f.text_area :question, class:"qa-form__textarea js-question", placeholder:"問題を入力してください" %>
+    <%= f.text_area :question, class:"qa-form__textarea js-question", placeholder:"問題を入力してください", autofocus: true %>
     <%= f.fields_for :question_option do |qo| %>
       <%= qo.label :image, "画像", class:"qa-form__image-btn" %>
       <%= qo.file_field :image, class:"hidden" %>

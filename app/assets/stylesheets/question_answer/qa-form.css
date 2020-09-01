@@ -7,6 +7,11 @@
   background-color: #ffffff;
 }
 
+.qa-form__notice {
+  margin: 5px;
+  color: #0000DD;
+}
+
 .qa-form__input-qa-wrap {
   display: flex;
   justify-content: space-between;

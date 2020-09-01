@@ -25,7 +25,7 @@ class QuestionAnswersController < ApplicationController
       # recordsテーブルに保存or更新
       Record.record_create_count(current_user.id)
     end
-    redirect_to new_group_question_answer_path(@group)
+    redirect_to new_group_question_answer_path(@group), notice: '・問題を一件作成しました'
   rescue StandardError => e
     @question_answer = e.record
     render 'new'
