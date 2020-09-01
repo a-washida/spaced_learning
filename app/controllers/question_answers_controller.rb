@@ -37,7 +37,7 @@ class QuestionAnswersController < ApplicationController
   def update
     if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
       # 問題管理ページの、編集を行った問題の場所にリダイレクト(ページネーションのページ数も考慮)
-      redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", @question_answer.id).count/10 + 1}#link-#{@question_answer.id}"
+      redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
     else
       render 'edit'
     end
