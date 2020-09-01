@@ -99,23 +99,13 @@ input[type="checkbox"]:checked ~ .review-option__close {
 }
 
 .review-option__notice-display-date {
-  width: 150px;
-}
-
-.review-option__notice-display-date.js-0 {
-  color: blue;
-}
-
-.review-option__notice-display-date.js-1 {
-  color: blueviolet;
-}
-
-.review-option__notice-display-date.js-2 {
-  color: violet;
-}
-
-.review-option__notice-display-date.js-3 {
-  color: red;
+  width: 170px;
+  height: 25px;
+  line-height: 25px;
+  padding-left: 10px;
+  color: #9900ff;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .review-option__btn-wrap {
