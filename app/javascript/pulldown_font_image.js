@@ -13,10 +13,8 @@ if (window.location.pathname.includes("question_answers/new") || window.location
         const pulldownOptions = document.querySelectorAll(`#question_answer_${questionOrAnswer}_option_attributes_font_size_id option`);
         // 現在選択されているプルダウンの項目の要素(<option>)を取得
         const chosenDropdownList = pulldownOptions[value - 1];
-        // フォントサイズのデフォルト(100%)に、プルダウンの選択した項目の値をかける
-        const fontSize = 100 * chosenDropdownList.innerHTML
         const previewTextarea = document.getElementById(`${questionOrAnswer}-preview__textarea`)
-        previewTextarea.setAttribute("style", `font-size: ${fontSize}%;`)
+        previewTextarea.setAttribute("style", `font-size: ${chosenDropdownList.innerHTML}rem;`)
       })
     }
     pulldownFontFunction("question")

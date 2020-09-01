@@ -18,10 +18,10 @@
 
 <%# 以下はJavaScriptで取得用に記述したコードで、ページ上には表示されない %>
 <div class="hidden">
-  <%# フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+  <%# フォントサイズのデフォルト(font-size: 1rem;)に対する倍率を記述 %>
   <div class="font-size-question"><%= @question_answer.question_option.font_size.name %></div>
   <div class="font-size-answer"><%= @question_answer.answer_option.font_size.name %></div>
-  <%# //フォントサイズのデフォルト(font-size: 100%;)に対する倍率を記述 %>
+  <%# //フォントサイズのデフォルト(font-size: 1rem;)に対する倍率を記述 %>
 
   <%# 画像サイズのデフォルト(width: 200px;)に対する倍率を記述 %>
   <div class="img-size-question "><%= @question_answer.question_option.image_size.name %></div>
