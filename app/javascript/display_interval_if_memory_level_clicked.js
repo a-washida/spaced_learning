@@ -26,12 +26,16 @@ if (window.location.pathname.includes("question_answers/review")){
           XHR.onload = () => {
             const item = XHR.response.post;
             noticeDisplayDates[j].innerHTML = item
-            noticeDisplayDates[j].setAttribute("class", `review-option__notice-display-date js-${i}`)
-            // 記憶度ボタンを1回押したら、その問題の押していない他の3つのボタンも含め、4つのボタン全てdata-review-countを0にする
+            noticeDisplayDates[j].setAttribute("class", "review-option__notice-display-date")
+            // 記憶度ボタンを1回押したら、その問題の押していない他の3つのボタンも含め、4つのボタン全てdata-review-countを0にする。加えてインラインスタイルをリセット。
             for(let k = 0; k < 4; k++){
               const fourButtons = document.querySelectorAll(`.review-option__btn.js-${k}`)[j]
               fourButtons.setAttribute("data-review-count", "0")
+              fourButtons.removeAttribute("style")
             }
+            // クリックしたボタンにスタイルを適用して見た目を変更
+            buttons[j].setAttribute("style", "color: #ffffff; font-weight: bold; background-color: #282c2f;")
+
             if (XHR.status != 200) {
               alert(`Error ${XHR.status}: ${XHR.statusText}`);
             } else {

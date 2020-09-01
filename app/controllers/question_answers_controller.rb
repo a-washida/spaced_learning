@@ -3,7 +3,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @question_answers = @group.question_answers.page(params[:page]).per(12)
+    @question_answers = @group.question_answers.page(params[:page]).per(10)
   end
 
   def show
@@ -52,7 +52,7 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    @question_answers = @group.question_answers.where('display_date <= ?', Date.today).page(params[:page]).per(12)
+    @question_answers = @group.question_answers.where('display_date <= ?', Date.today).limit(10)
   end
 
   private
