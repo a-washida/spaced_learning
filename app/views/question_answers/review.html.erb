@@ -1,6 +1,10 @@
 <%= render "shared/header" %>
 <div class="review-main">
   <div class="all-reviews-wrap">
+  <%# 残りの問題が0個なら表示 %>
+  <% if @question_answers.empty? %>
+    <p class="review-message-complete">今日の復習は完了です!<br>お疲れ様でした!</p>
+  <% end %>
   <% @question_answers.each do |question_answer| %>
     <div class="review-individual-wrap">
       <div class="review-question-answer">
@@ -11,7 +15,7 @@
       </div>
       <%# 問題と解答の下に位置するエリア %>
       <div class="review-option">
-        <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/12 + 1}#link-#{question_answer.id}" %>
+        <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/10 + 1}#link-#{question_answer.id}", class: "link-question-management" %>
         <div class="review-option__memory-level-wrap">
           <div class="review-option__memory-level-description">
             <div class="review-option__memory-level-text">記憶度</div>
@@ -22,12 +26,14 @@
             <div class="review-option__memory-level-low">低</div>
             <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が5つ付与されている %>
             <% 4.times do |i| %>
-              <div class="review-option__btn js-<%=i%>"
-                   data-interval=<%=question_answer.repetition_algorithm.interval%> 
-                   data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
-                   data-qa-id=<%=question_answer.id%> 
-                   data-repeat-count=<%=question_answer.repeat_count%>
-                   data-review-count="1"><%= i + 1 %></div>
+              <div class="rebiew-option__btn-outer-line">
+                <div class="review-option__btn js-<%=i%>"
+                    data-interval=<%=question_answer.repetition_algorithm.interval%> 
+                    data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
+                    data-qa-id=<%=question_answer.id%> 
+                    data-repeat-count=<%=question_answer.repeat_count%>
+                    data-review-count="1"><%= i + 1 %></div>
+              </div>
             <% end %>
             <div class="review-option__memory-level-high">高</div>
           </div>
@@ -36,6 +42,11 @@
       <%# //問題と解答の下に位置するエリア %>
     </div>
   <% end %>
-  <%= paginate @question_answers %>
+  <%# 残りの問題が0個の場合には非表示 %>
+  <% if @question_answers.present? %>
+    <div class="review-link-outer-line">
+      <%= link_to '次の問題を表示する', review_group_question_answers_path(@group), class: 'review-display-next-quesiton' %>
+    </div>
+  <% end %>
   </div>
 </div>

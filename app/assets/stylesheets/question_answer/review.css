@@ -1,17 +1,24 @@
 .review-main {
-  display: flex;
-  justify-content: center;
+  min-height: 100vh;
   padding-top: 50px;
+  background-color: #f5f5f5;
+  border: 1px solid #ffffff;
 }
 
 .all-reviews-wrap {
-  width: 700px;
-  border: 1px solid gray;
+  width: 620px;
+  padding: 20px;
+  margin: 30px auto;
+  background-color: #ffffff;
+}
+
+.review-message-complete {
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .review-individual-wrap {
   width: 580px;
-  margin: 0 auto;
 }
 
 .review-question-answer {
@@ -28,6 +35,7 @@
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
+  cursor: pointer;
 }
 
 .review-option {
@@ -36,24 +44,20 @@
 }
 
 .review-option__memory-level-wrap {
-  width: 200px;
+  width: 250px;
+  height: 70px;
 }
 
 .review-option__memory-level-description {
   display: flex;
-  /* justify-content: flex-start; */
-  width: 200px;
-  border: 1px solid gray;
 }
 
 .review-option__memory-level-text {
-  margin-right: 10px;
-  border: 1px solid gray;
+  margin: 0 10px;
 }
 
 .review-option__notice-display-date {
-  width: 120px;
-  border: 1px solid gray;
+  width: 150px;
 }
 
 .review-option__notice-display-date.js-0 {
@@ -75,31 +79,75 @@
 .review-option__btn-wrap {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  margin: 3px 0;
 }
 
 .review-option__memory-level-low {
   width: 30px;
-  border: 1px solid gray;
   color: blue;
   text-align: center;
 }
 
+.rebiew-option__btn-outer-line {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #282c2f;
+}
+
 .review-option__btn {
-  width: 30px;
-  border: 1px solid gray;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 29px;
+  height: 29px;
+  line-height: 29px;
+  border: 1px solid #282c2f;
+  background-color: #ffffff;
   text-align: center;
+  cursor: pointer;
 }
 
 .review-option__memory-level-high {
   width: 30px;
   color: red;
-  border: 1px solid gray;
   text-align: center;
+}
+
+.review-link-outer-line {
+  position: relative;
+  border: 2px solid #282c2f;
+  width: 176px;
+  height: 46px;
+  margin: 20px auto;
+}
+
+.review-display-next-quesiton {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: block;
+  width: 170px;
+  height: 40px;
+  line-height: 20px;
+  /* margin: 20px auto; */
+  padding: 10px;
+  border: 1px solid #282c2f;
+  /* border-radius: 5px; */
+  /* background-color: #269CE9; */
+  color: #282c2f;
+  text-decoration: none;
+}
+
+.review-display-next-quesiton:hover {
+  background-color: #DDDDDD;
+  font-weight: bold;
 }
 
 @media (max-width: 599px) {
   .all-reviews-wrap {
-    width: 350px;
+    width: 330px;
   }
 
   .review-individual-wrap {
@@ -108,5 +156,11 @@
 
   .review-question-answer {
     display: block;
+  }
+
+  .link-question-management {
+    display: flex;
+    align-items: center;
+    width: 40px;
   }
 }
