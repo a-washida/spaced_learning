@@ -1,9 +1,10 @@
 .qa-form {
   display: flex;
   flex-direction: column;
-  width: 600px;
-  padding: 50px 10px;
-  border: 1px solid gray;
+  width: 620px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
 }
 
 .qa-form__input-qa-wrap {
@@ -18,7 +19,6 @@
   position: relative;
   width: 290px;
   height: 200px;
-  
 }
 
 .qa-form__textarea {
@@ -31,13 +31,18 @@
 
 .qa-form__image-btn {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  right: 5px;
+  bottom: 5px;
   width: 60px;
   height: 30px;
-  border: 1px solid gray;
-  background-color: lightblue;
+  line-height: 28px;
+  border: 1px solid #282c2f;
+  border-radius: 5px;
+  background-color: #282c2f;
+  color: #ffffff;
+  font-weight: normal;
   text-align: center;
+  cursor: pointer;
 }
 
 .hidden {
@@ -45,30 +50,31 @@
 }
 
 .qa-form__submit-btn {
-  width: 100px;
+  width: 80px;
   margin-left: auto;
 }
 
 .qa-form__preview-and-pulldown {
   display: flex;
   justify-content: space-between;
-  height: 250px;
-  margin: 10px 0;
 }
 
 .question-preview-and-pulldown,
 .answer-preview-and-pulldown {
-  width: 290px;
-  /* border: 1px solid gray; */
+  width: 290px；
 }
 
 .question-preview,
 .answer-preview {
-  /* width: 290px; */
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
   overflow-y: scroll;
+}
+
+.qa-form__question-preview-text,
+.qa-form__answer-preview-text {
+  font-weight: bold;
 }
 
 #question-preview__textarea,
@@ -85,12 +91,11 @@
 .question-pulldown,
 .answer-pulldown {
   display: flex;
-  border: 1px solid gray;
 }
 
 .pulldown-description {
   width: 145px;
-  font-size: 75%;
+  font-size: 0.75rem;
 }
 
 .pulldown-select {
@@ -100,11 +105,10 @@
 }
 
 @media (max-width: 599px) {
-
   .qa-form {
-    width: 310px;
-    padding: 50px 10px;
-    border: 1px solid gray;
+    width: 330px;
+    padding: 20px;
+    border: 1px solid #ffffff;
   }
 
   .qa-form__input-qa-wrap {
@@ -114,7 +118,5 @@
 
   .qa-form__preview-and-pulldown {
     display: block;
-    height: 500px;
-    margin: 10px 0;
   }
 }
