@@ -13,6 +13,11 @@
   background-color: #ffffff;
 }
 
+.qa-index-message-empty {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
 .qa-index-item {
   position: relative;
   width: 580px;
@@ -51,17 +56,28 @@
 
 .qa-index-item__img-three-point {
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 20px;
   cursor: pointer;
 }
 
-.qa-intex-item__img-close {
-  width: 20px;
+.img-three-point-supplement-text {
+  position: absolute;
+  top: 23px;
+  right: 0;
+  color: #0000DD;
+  font-size: 0.6rem;
 }
 
-.qa-index-item__check-close {
+.qa-index-item__close {
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.3);
+  z-index: 1;
 }
 
 .qa-index-item__management-list {
@@ -97,19 +113,16 @@ input[type="checkbox"]:checked ~ .qa-index-item__management-list{
   background-color: #ffffff;
   border: 1px solid gray;
   border-radius: 5px;
+  z-index: 2;
 }
 
-input[type="checkbox"]:checked ~ .qa-index-item__check-close {
+input[type="checkbox"]:checked ~ .qa-index-item__close {
   display: block;
-  position: absolute;
-  right: -20px;
-  bottom: 120px;
-  cursor: pointer;
 }
 
 .destroy-group {
   display: block;
-  width: 120px;
+  width: 140px;
   height: 40px;
   line-height: 40px;
   margin: 20px 20px 20px auto;

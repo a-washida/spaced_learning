@@ -1,6 +1,10 @@
 <%= render 'shared/header' %>
 <div class="qa-index-main">
   <div class="qa-index-question-and-answer-area">
+    <%# 投稿された問題が0個なら表示 %>
+    <% if @question_answers.empty? %>
+      <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
+    <% end %>
     <% @question_answers.each_with_index do |question_answer, i| %>
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
@@ -29,8 +33,9 @@
           <%# このチェックボックスは画面上には表示されない %>
           <input type="checkbox" id="qa-index__check-<%=i%>">
           <label for="qa-index__check-<%=i%>"><%= image_tag 'vertical_three_point_reader.png', class: 'qa-index-item__img-three-point' %></label>
+          <div class="img-three-point-supplement-text">管理</div>
           <%# 以下のlabelとul要素は初期状態では非表示。上の縦3点リーダーの画像をクリックすることで表示される %>
-          <label for="qa-index__check-<%=i%>" class="qa-index-item__check-close"><%= image_tag 'top_form_close.png', class: 'qa-intex-item__img-close' %></label>
+          <label for="qa-index__check-<%=i%>" class="qa-index-item__close"></label>
           <ul class="qa-index-item__management-list">
             <li><%= link_to '問題編集', edit_group_question_answer_path(@group, question_answer) %></li>
             <li>復習周期から外す</li>
