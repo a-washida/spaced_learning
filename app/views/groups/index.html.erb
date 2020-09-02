@@ -1,5 +1,8 @@
 <%= render "shared/header" %>
 <div class='top-main'>
+  <% if notice.present? %>
+    <div class="top-notice"><%= notice %></div>
+  <% end %>
   <div class='three-questions-area'>
 
     <%# 画面幅599px以下の場合に表示 %>
