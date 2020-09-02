@@ -28,11 +28,11 @@ class Record < ApplicationRecord
   end
 
   # キーとしてmonth、date、week_day、create_count、review_countの5つを持ったハッシュを作る。そのハッシュ直近一週間分を配列に格納して返すメソッド
-  def self.get_weekly_date_and_record
+  def self.get_weekly_date_and_record(current_user)
     week_days = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)']
     one_week_ago = Date.today - 6
     date_and_records = []
-    records = Record.where(date: one_week_ago..Date.today)
+    records = current_user.records.where(date: one_week_ago..Date.today)
 
     7.times do |i|
       record_array = []

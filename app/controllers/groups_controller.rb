@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   def index
     @groups = current_user.groups
     @group = Group.new
-    @date_and_records = Record.get_weekly_date_and_record
+    @date_and_records = Record.get_weekly_date_and_record(current_user)
   end
 
   def create
