@@ -6,6 +6,11 @@
     <% if flash[:alert].present? %>
       <div class="login-failure-message"><%=flash[:alert]%></div>
     <% end %>
+    <p class="test-user">
+      テストユーザーです<br>
+      メールアドレス：test@test<br>
+      パスワード：test1234
+    </p>
     <div class="registration-form__group">
       <%= f.label :email, 'メールアドレス' %>
       <%= f.email_field :email, class:"registration-form__input", placeholder:"PC・携帯どちらでも可" %>

@@ -1,0 +1,11 @@
+.login-failure-message {
+  color: rgb(182, 48, 0);
+  font-size: 0.8rem;
+}
+
+.test-user {
+  width: 70%;
+  margin: 10px auto;
+  color: #808080;
+  font-size: 0.8rem;
+}
