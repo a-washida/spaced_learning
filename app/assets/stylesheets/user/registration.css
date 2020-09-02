@@ -41,7 +41,7 @@
   color: #c0c0c0;
 }
 
-label {
+.registration-form__group label {
   font-weight: bold;
 }
 
