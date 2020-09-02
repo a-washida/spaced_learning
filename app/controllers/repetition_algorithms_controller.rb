@@ -1,7 +1,7 @@
 class RepetitionAlgorithmsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def create
+  def update
     question_answer = QuestionAnswer.find(params[:question_answer_id])
     repetition_algorithm = question_answer.repetition_algorithm
 
