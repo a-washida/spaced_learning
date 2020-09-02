@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px;
+  padding: 5px 20px;
 }
 
 .registration-form__group {
@@ -63,6 +63,10 @@ label {
   margin: 20px 0;
 }
 
+.login-failure-message {
+  color: rgb(182, 48, 0);
+  font-size: 0.8rem;
+}
 
 @media (max-width: 599px) {
   .registration-form-wrap {
