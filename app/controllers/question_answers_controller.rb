@@ -45,7 +45,6 @@ class QuestionAnswersController < ApplicationController
 
   def destroy
     if @question_answer.destroy
-      # redirect_to group_question_answers_path(@group)
       redirect_back(fallback_location: root_path)
     else
       reder 'show'
@@ -54,6 +53,11 @@ class QuestionAnswersController < ApplicationController
 
   def review
     @question_answers = @group.question_answers.where('display_date <= ?', Date.today).limit(10)
+  end
+
+  def change_date
+    @question_answers = @group.question_answers.where('display_date <= ?', params[:date]).limit(10)
+    @date = params[:date]
   end
 
   private

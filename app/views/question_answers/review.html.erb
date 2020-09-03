@@ -1,5 +1,9 @@
 <%= render "shared/header" %>
 <div class="review-main">
+  <%= form_with url: change_date_group_question_answers_path(@group), local: true, method: :get do |f| %>
+    <%= f.date_field :date %>
+    <%= f.submit '送信' %>
+  <% end %>
   <div class="all-reviews-wrap">
   <%# 残りの問題が0個なら表示 %>
   <% if @question_answers.empty? %>

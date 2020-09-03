@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :create, :update, :destroy] do
     resources :question_answers do
       collection do
-        get 'review'
+        get 'review', 'change_date'
       end
     end
   end
