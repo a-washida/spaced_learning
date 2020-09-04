@@ -1,4 +1,4 @@
-// 挙動確認用。アプリリリース時には削除。
+// 挙動確認用のファイル。アプリリリース時には削除。
 if (window.location.pathname.includes("question_answers/change_date")){
   // 記憶度の評価ボタンをクリックすると、非同期通信が行われ、サーバー内で計算されたインターバルを表示する関数
   function display_interval_if_memory_level_clicked() {

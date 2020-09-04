@@ -1,10 +1,14 @@
-<%# 挙動確認用。アプリリリース時には削除 %>
+<%# 挙動確認用のファイル。アプリリリース時には削除 %>
 <%= render "shared/header" %>
 <div class="review-main">
-  <%= form_with url: change_date_group_question_answers_path(@group), local: true, method: :get do |f| %>
-    <%= f.date_field :date %>
-    <%= f.submit '送信' %>
-  <% end %>
+  <div class="change-date">
+    <p class="change-date__text">挙動確認用に日付を変更できます</p>
+    <%= form_with url: change_date_group_question_answers_path(@group), method: :get, class: 'change-date__form', local: true do |f| %>
+      <%= f.date_field :date %>
+      <%= f.submit '送信' %>
+    <% end %>
+    <div class="change-date__current-date">現在の日付: <%= @date %></div>
+  </div>
   <div class="all-reviews-wrap">
   <%# 残りの問題が0個なら表示 %>
   <% if @question_answers.empty? %>

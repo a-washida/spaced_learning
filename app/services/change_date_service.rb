@@ -1,4 +1,4 @@
-# 挙動確認用。アプリリリース時には削除。
+# 挙動確認用のファイル。アプリリリース時には削除。
 class ChangeDateService
   attr_accessor :review_params, :question_answer, :repetition_algorithm
 
