@@ -18,7 +18,7 @@ if (window.location.pathname.includes("question_answers/review")){
             reviewCount = 0
           }
           const XHR = new XMLHttpRequest();
-          XHR.open("POST", `/repetition_algorithms`, true);
+          XHR.open("PATCH", `/repetition_algorithms`, true);
           XHR.responseType = "json";
           XHR.setRequestHeader( 'content-type', 'application/x-www-form-urlencoded;charset=UTF-8' );
           // 6つのデータをparamsに格納してサーバーへ送る

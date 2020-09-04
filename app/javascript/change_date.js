@@ -20,7 +20,7 @@ if (window.location.pathname.includes("question_answers/change_date")){
             reviewCount = 0
           }
           const XHR = new XMLHttpRequest();
-          XHR.open("POST", `/repetition_algorithms/change_date`, true);
+          XHR.open("PATCH", `/repetition_algorithms/change_date`, true);
           XHR.responseType = "json";
           XHR.setRequestHeader( 'content-type', 'application/x-www-form-urlencoded;charset=UTF-8' );
           // 7つのデータをparamsに格納してサーバーへ送る
