@@ -6,10 +6,12 @@
     <%= render partial: 'qa_form_input', locals: {f: f} %>
     <%= f.submit '編集', class:"qa-form__submit-btn" %>
     <div class="qa-form__preview-and-pulldown">
-      <div class="question-preview-and-pulldown">問題のプレビュー
+      <div class="question-preview-and-pulldown">
+        <div class="qa-form__question-preview-text">問題のプレビュー</div>
         <%= render partial: 'question_preview_and_pulldown', locals: {f: f} %>
       </div>
-      <div class="answer-preview-and-pulldown">解答のプレビュー
+      <div class="answer-preview-and-pulldown">
+        <div class="qa-form__answer-preview-text">解答のプレビュー</div>
         <%= render partial: 'answer_preview_and_pulldown', locals: {f: f} %>
       </div>
     </div> 

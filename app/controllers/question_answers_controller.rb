@@ -25,7 +25,7 @@ class QuestionAnswersController < ApplicationController
       # recordsテーブルに保存or更新
       Record.record_create_count(current_user.id)
     end
-    redirect_to new_group_question_answer_path(@group), notice: '・問題を一件作成しました'
+    redirect_to new_group_question_answer_path(@group), notice: '・問題は正常に作成されました'
   rescue StandardError => e
     @question_answer = e.record
     render 'new'
@@ -45,7 +45,6 @@ class QuestionAnswersController < ApplicationController
 
   def destroy
     if @question_answer.destroy
-      # redirect_to group_question_answers_path(@group)
       redirect_back(fallback_location: root_path)
     else
       reder 'show'
@@ -54,6 +53,11 @@ class QuestionAnswersController < ApplicationController
 
   def review
     @question_answers = @group.question_answers.where('display_date <= ?', Date.today).limit(10)
+  end
+
+  def change_date
+    @question_answers = @group.question_answers.where('display_date <= ?', params[:date]).limit(10)
+    @date = params[:date]
   end
 
   private

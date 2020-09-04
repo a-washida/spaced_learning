@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :create, :update, :destroy] do
     resources :question_answers do
       collection do
-        get 'review'
+        get 'review', 'change_date'
       end
     end
   end
-  post '/repetition_algorithms', to: 'repetition_algorithms#update'
+  patch '/repetition_algorithms', to: 'repetition_algorithms#update'
+  # 挙動確認用。アプリリリース時には削除。
+  patch '/repetition_algorithms/change_date', to: 'repetition_algorithms#change_date'
 end

@@ -1,4 +1,5 @@
-if (window.location.pathname.includes("question_answers/review")){
+// 挙動確認用のファイル。アプリリリース時には削除。
+if (window.location.pathname.includes("question_answers/change_date")){
   // 記憶度の評価ボタンをクリックすると、非同期通信が行われ、サーバー内で計算されたインターバルを表示する関数
   function display_interval_if_memory_level_clicked() {
     const noticeDisplayDates = document.querySelectorAll(".review-option__notice-display-date")
@@ -11,6 +12,7 @@ if (window.location.pathname.includes("question_answers/review")){
         const questionAnswerId = buttons[j].getAttribute("data-qa-id");
         const repeatCount = buttons[j].getAttribute("data-repeat-count");
         const reviewCount = buttons[j].getAttribute("data-review-count")
+        const changeDate = buttons[j].getAttribute("data-date")
         const memoryLevel = buttons[j].innerHTML
         buttons[j].addEventListener("click", (e) => {
           // イベント発火した段階で記憶度ボタンのdata-review-countの値が0に変化していた場合、reviewCountを0にする
@@ -18,11 +20,11 @@ if (window.location.pathname.includes("question_answers/review")){
             reviewCount = 0
           }
           const XHR = new XMLHttpRequest();
-          XHR.open("PATCH", `/repetition_algorithms`, true);
+          XHR.open("PATCH", `/repetition_algorithms/change_date`, true);
           XHR.responseType = "json";
           XHR.setRequestHeader( 'content-type', 'application/x-www-form-urlencoded;charset=UTF-8' );
-          // 6つのデータをparamsに格納してサーバーへ送る
-          XHR.send(`interval=${interval}&easiness_factor=${easinessFactor}&question_answer_id=${questionAnswerId}&repeat_count=${repeatCount}&memory_level=${memoryLevel}&review_count=${reviewCount}`);
+          // 7つのデータをparamsに格納してサーバーへ送る
+          XHR.send(`interval=${interval}&easiness_factor=${easinessFactor}&question_answer_id=${questionAnswerId}&repeat_count=${repeatCount}&memory_level=${memoryLevel}&review_count=${reviewCount}&date=${changeDate}`);
           XHR.onload = () => {
             const item = XHR.response.post;
             noticeDisplayDates[j].innerHTML = item

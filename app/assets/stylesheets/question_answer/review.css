@@ -102,7 +102,7 @@ input[type="checkbox"]:checked ~ .review-option__close {
   height: 25px;
   line-height: 25px;
   padding-left: 10px;
-  color: #9900ff;
+  color: #808080;
   font-size: 0.8rem;
   font-weight: bold;
 }
@@ -176,6 +176,30 @@ input[type="checkbox"]:checked ~ .review-option__close {
   font-weight: bold;
 }
 
+/* 挙動確認用。アプリリリース時には削除。 */
+.change-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 620px;
+  padding: 20px 20px 0;
+  margin: 0 auto;
+}
+
+.change-date__text {
+  width: 230px;
+  font-size: 0.9rem;
+}
+
+.change-date__form {
+  width: 230px;
+}
+
+.change-date__current-date {
+  width: 230px;
+}
+/* //挙動確認用。アプリリリース時には削除。 */
+
 @media (max-width: 599px) {
   .all-reviews-wrap {
     width: 330px;
@@ -193,5 +217,10 @@ input[type="checkbox"]:checked ~ .review-option__close {
     display: flex;
     align-items: center;
     width: 40px;
+  }
+
+  /* 挙動確認用。アプリリリース時には削除。 */
+  .change-date {
+    width: 330px;
   }
 }
