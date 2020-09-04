@@ -63,10 +63,11 @@
 
 .img-three-point-supplement-text {
   position: absolute;
-  top: 23px;
+  top: 20px;
   right: 0;
-  color: #0000DD;
+  color: #808080;
   font-size: 0.6rem;
+  font-weight: bold;
 }
 
 .qa-index-item__close {
