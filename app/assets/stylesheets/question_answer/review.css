@@ -102,7 +102,7 @@ input[type="checkbox"]:checked ~ .review-option__close {
   height: 25px;
   line-height: 25px;
   padding-left: 10px;
-  color: #9900ff;
+  color: #808080;
   font-size: 0.8rem;
   font-weight: bold;
 }
