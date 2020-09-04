@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     end
   end
   post '/repetition_algorithms', to: 'repetition_algorithms#update'
+  # 挙動確認用。アプリリリース時には削除。
+  post '/repetition_algorithms/change_date', to: 'repetition_algorithms#change_date'
 end

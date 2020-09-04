@@ -1,4 +1,4 @@
-<%# 挙動確認用のビューファイル、review.html.erbとほぼ同じ内容で53行目のカスタムデータ属性data-dateのみ追加。アプリリリース時には削除 %>
+<%# 挙動確認用。アプリリリース時には削除 %>
 <%= render "shared/header" %>
 <div class="review-main">
   <%= form_with url: change_date_group_question_answers_path(@group), local: true, method: :get do |f| %>
@@ -63,7 +63,7 @@
   <%# 残りの問題が0個の場合には非表示 %>
   <% if @question_answers.present? %>
     <div class="review-link-outer-line">
-      <%= link_to '次の問題を表示する', review_group_question_answers_path(@group), class: 'review-display-next-quesiton' %>
+      <%= link_to '次の問題を表示する', "/groups/#{@group.id}/question_answers/change_date?date=#{@date}", class: 'review-display-next-quesiton' %>
     </div>
   <% end %>
   </div>

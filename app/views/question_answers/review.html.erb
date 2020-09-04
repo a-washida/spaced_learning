@@ -61,7 +61,7 @@
   <%# 残りの問題が0個の場合には非表示 %>
   <% if @question_answers.present? %>
     <div class="review-link-outer-line">
-      <%= link_to '次の問題を表示する', review_group_question_answers_path(@group), class: 'review-display-next-quesiton' %>
+      <%= link_to '次の問題を表示する', request.path, class: 'review-display-next-quesiton' %>
     </div>
   <% end %>
   </div>

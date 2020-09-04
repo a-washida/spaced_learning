@@ -15,6 +15,8 @@ require("../pulldown_font_image.js")
 require("../edit.js")
 require("../answer_appear.js")
 require("../display_interval_if_memory_level_clicked.js")
+// 挙動確認用。アプリリリース時には削除
+require("../change_date")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
