@@ -1,7 +1,7 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
-  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset]
-  before_action :set_session, only: [:destroy, :reset]
+  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
+  before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
     @question_answers = @group.question_answers.page(params[:page]).per(10)
@@ -71,6 +71,15 @@ class QuestionAnswersController < ApplicationController
     redirect_to url_of_specific_question_position_on_management_page, notice: '問題は初期状態にリセットされました'
   rescue StandardError => e
     redirect_to url_of_specific_question_position_on_management_page, notice: '問題のリセットに失敗しました'
+  end
+
+  # 問題を復習周期から外して、復習ページに表示されないようにするアクション
+  def remove
+    if @question_answer.update(display_date: Date.today + 100.year)
+      redirect_to url_of_specific_question_position_on_management_page, notice: '問題を復習周期から外しました'
+    else
+      redirect_to url_of_specific_question_position_on_management_page, notice: '問題を復習周期から外すのに失敗しました'
+    end
   end
 
   private
