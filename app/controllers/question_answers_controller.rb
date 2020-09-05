@@ -1,7 +1,7 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset]
-  before_action :set_session, only: :reset
+  before_action :set_session, only: [:destroy, :reset]
 
   def index
     @question_answers = @group.question_answers.page(params[:page]).per(10)
@@ -48,7 +48,7 @@ class QuestionAnswersController < ApplicationController
     if @question_answer.destroy
       redirect_back(fallback_location: root_path)
     else
-      reder 'show'
+      redirect_to url_of_specific_question_position_on_management_page, notice: '問題の削除に失敗しました'
     end
   end
 
