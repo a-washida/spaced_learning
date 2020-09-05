@@ -30,8 +30,8 @@
   top: -50px;
 }
 
-.qa-index-notice {
-  color: #0000DD;
+.qa-index-alert {
+  color: rgb(182, 48, 0);
   font-size: 0.8rem;
 }
 

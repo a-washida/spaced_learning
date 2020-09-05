@@ -1,7 +1,6 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
-  before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
     @question_answers = @group.question_answers.page(params[:page]).per(10)
@@ -47,7 +46,8 @@ class QuestionAnswersController < ApplicationController
     if @question_answer.destroy
       redirect_back(fallback_location: root_path)
     else
-      redirect_to url_of_specific_question_position_on_management_page, notice: '問題の削除に失敗しました'
+      set_session
+      redirect_to url_of_specific_question_position_on_management_page, alert: '問題の削除に失敗しました'
     end
   end
 
@@ -67,17 +67,19 @@ class QuestionAnswersController < ApplicationController
       @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
       @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 200)
     end
-    redirect_to url_of_specific_question_position_on_management_page, notice: '問題は初期状態にリセットされました'
+    redirect_to url_of_specific_question_position_on_management_page
   rescue StandardError => e
-    redirect_to url_of_specific_question_position_on_management_page, notice: '問題のリセットに失敗しました'
+    set_session
+    redirect_to url_of_specific_question_position_on_management_page, alert: '問題のリセットに失敗しました'
   end
 
   # 問題を復習周期から外して、復習ページに表示されないようにするアクション
   def remove
     if @question_answer.update(display_date: Date.today + 100.year)
-      redirect_to url_of_specific_question_position_on_management_page, notice: '問題を復習周期から外しました'
+      redirect_to url_of_specific_question_position_on_management_page
     else
-      redirect_to url_of_specific_question_position_on_management_page, notice: '問題を復習周期から外すのに失敗しました'
+      set_session
+      redirect_to url_of_specific_question_position_on_management_page, alert: '問題を復習周期から外すのに失敗しました'
     end
   end
 

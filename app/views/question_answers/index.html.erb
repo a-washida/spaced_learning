@@ -9,11 +9,11 @@
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
         <div class="qa-index-link-target" id=link-<%=question_answer.id%>></div>
-        <%# resetやremoveアクションなどを実行すると、操作を行ったレコードのidがsession[:qa_id]に保存される。そのidがquestion_answer.idと等しい場合、noticeを表示 %>
+        <%# resetやremove,destroyアクションが失敗すると、操作対象のレコードのidがsession[:qa_id]に保存される。そのidと同じidを持つ問題が表示されている場所で、alertを出す %>
         <% if question_answer.id == session[:qa_id] %>
           <%# セッションの中身をリセット %>
           <% session[:qa_id] = nil %> 
-          <p class="qa-index-notice"><%= notice %></p>
+          <p class="qa-index-alert"><%= alert %></p>
         <% end %>
         <%# 問題と解答を表示 %>
         <div class="qa-index-item__qa">
