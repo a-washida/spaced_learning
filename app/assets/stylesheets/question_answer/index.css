@@ -21,13 +21,18 @@
 .qa-index-item {
   position: relative;
   width: 580px;
-  height: 250px;
+  height: 265px;
   margin: 0 auto;
 }
 
 .qa-index-link-target {
   position: absolute;
   top: -50px;
+}
+
+.qa-index-alert {
+  color: rgb(182, 48, 0);
+  font-size: 0.8rem;
 }
 
 .qa-index-item__qa {
@@ -146,7 +151,7 @@ input[type="checkbox"]:checked ~ .qa-index-item__close {
 
   .qa-index-item {
     width: 290px;
-    height: 450px;
+    height: 465px;
     margin: 0 auto;
   }
 

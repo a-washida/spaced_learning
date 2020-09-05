@@ -9,6 +9,12 @@
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
         <div class="qa-index-link-target" id=link-<%=question_answer.id%>></div>
+        <%# resetやremove,destroyアクションが失敗すると、操作対象のレコードのidがsession[:qa_id]に保存される。そのidと同じidを持つ問題が表示されている場所で、alertを出す %>
+        <% if question_answer.id == session[:qa_id] %>
+          <%# セッションの中身をリセット %>
+          <% session[:qa_id] = nil %> 
+          <p class="qa-index-alert"><%= alert %></p>
+        <% end %>
         <%# 問題と解答を表示 %>
         <div class="qa-index-item__qa">
           <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
@@ -18,15 +24,7 @@
         <%# 問題と解答の下に位置するコンテンツを表示 %>
         <div class="qa-index-item__description">
           <div class="qa-index-item__record">
-            復習までの日数：
-            <span>
-              <%# 復習までの日数がマイナスになる場合は0と表記する %>
-              <% if (question_answer.display_date - Date.today).to_i >= 0 %>
-                <%= (question_answer.display_date - Date.today).to_i %>
-              <% else %>
-                0
-              <% end %>
-            </span>
+            復習までの日数：<span><%= display_date_until_review((question_answer.display_date - Date.today).to_i) %></span>
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
           </div>
@@ -39,8 +37,8 @@
           <%# 以下のリストは縦3点リーダーアイコンを押さない限り非表示 %>
           <ul class="qa-index-item__management-list">
             <li><%= link_to '問題編集', edit_group_question_answer_path(@group, question_answer) %></li>
-            <li>復習周期から外す</li>
-            <li>初期状態にリセット</li>
+            <li><%= link_to '初期状態にリセット', reset_group_question_answer_path(@group, question_answer), method: :patch %></li>
+            <li><%= link_to '復習周期から外す', remove_group_question_answer_path(@group, question_answer), method: :patch %></li>
             <li><%= link_to '削除', group_question_answer_path(@group, question_answer), method: :delete %></li>
           </ul>
           <%# //以上のlabelとul要素は初期状態では非表示。上の縦3点リーダーの画像をクリックすることで表示される %>
