@@ -37,7 +37,6 @@ class QuestionAnswersController < ApplicationController
 
   def update
     if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
-      # 問題管理ページの、編集を行った問題の場所にリダイレクト(ページネーションのページ数も考慮)
       redirect_to url_of_specific_question_position_on_management_page
     else
       render 'edit'

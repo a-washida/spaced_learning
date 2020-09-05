@@ -9,7 +9,9 @@
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
         <div class="qa-index-link-target" id=link-<%=question_answer.id%>></div>
-        <% if session[:qa_id] == question_answer.id %>
+        <%# resetやremoveアクションなどを実行すると、操作を行ったレコードのidがsession[:qa_id]に保存される。そのidがquestion_answer.idと等しい場合、noticeを表示 %>
+        <% if question_answer.id == session[:qa_id] %>
+          <%# セッションの中身をリセット %>
           <% session[:qa_id] = nil %> 
           <p class="qa-index-notice"><%= notice %></p>
         <% end %>
