@@ -64,8 +64,8 @@ class QuestionAnswersController < ApplicationController
   # 問題を投稿した時の状態にリセットするアクション
   def reset
     ActiveRecord::Base.transaction do
-      @question_answer.update(display_date: Date.today, memory_level: 0, repeat_count: 0)
-      @question_answer.repetition_algorithm.update(interval: 0, easiness_factor: 200)
+      @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
+      @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 200)
     end
     redirect_to url_of_specific_question_position_on_management_page, notice: '問題は初期状態にリセットされました'
   rescue StandardError => e
