@@ -1,6 +1,11 @@
-if (window.location.pathname.includes("edit")){
-  // 問題編集ページを読み込んだ時、プレビューエリアの表示が問題作成時と全く同じになるように以下のコードを記述
-  window.addEventListener("load", (e) => {
+  // 問題編集ページを読み込んだ時、もしくはrender 'edit'で再表示した時、プレビューエリアの表示が問題作成時と全く同じになるように以下のコードを記述
+window.addEventListener("load", (e) => {
+  const controller = document.querySelector("body").getAttribute("data-controller")
+  const action = document.querySelector("body").getAttribute("data-action")
+  // question_answersコントローラーの、new, create, edit, updateアクションによって遷移してきたページのみで以下のコードを実行
+  if (controller === "question_answers" && (action === "edit" ||
+                                            action === "update")){
+
     // テキストエリアに入力された値を取得し、フォントサイズのプルダウンで設定された倍率を適用した上で、プレビュー表示する関数式
     const textareaSet = (questionOrAnswer) => {
       const textarea = document.querySelector(`.qa-form__textarea.js-${questionOrAnswer}`)
@@ -42,5 +47,5 @@ if (window.location.pathname.includes("edit")){
       pulldownSelectedSet(arrays[i], "font")
       pulldownSelectedSet(arrays[i], "image")
     }
-  })
-}
+  }
+})

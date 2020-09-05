@@ -12,7 +12,7 @@ require("../group_form_appear_or_hide.js")
 require("../update_group_name.js")
 require("../preview")
 require("../pulldown_font_image.js")
-require("../edit.js")
+require("../preview_when_edit_page_loaded.js")
 require("../answer_appear.js")
 require("../display_interval_if_memory_level_clicked.js")
 // 挙動確認用。アプリリリース時には削除
