@@ -9,11 +9,11 @@
   <div class="question-pulldown">
     <div class="question-pulldown__font-size">
       <div class="pulldown-description">文字サイズを変更(倍)</div>
-      <%= qo.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: 6}, {class:"pulldown-select"}) %>
+      <%= qo.collection_select(:font_size_id, FontSize.all, :id, :name, {selected: set_font_size_id(@question_answer.question_option.font_size_id)}, {class:"pulldown-select"}) %>
     </div>
     <div class="question-pulldown__answer-size">
       <div class="pulldown-description">画像サイズを変更(倍)</div>
-      <%= qo.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: 4}, {class:"pulldown-select"}) %>
+      <%= qo.collection_select(:image_size_id, ImageSize.all, :id, :name, {selected: set_image_size_id(@question_answer.question_option.image_size_id)}, {class:"pulldown-select"}) %>
     </div>
   </div>
   <%= qo.hidden_field :id %>
