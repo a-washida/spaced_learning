@@ -52,12 +52,18 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    @question_answers = @group.question_answers.where('display_date <= ?', Date.today).limit(10)
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .where('display_date <= ?', Date.today)
+                              .references(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .limit(10)
   end
 
   # change_dateは挙動確認用。アプリリリース時には削除。
   def change_date
-    @question_answers = @group.question_answers.where('display_date <= ?', params[:date]).limit(10)
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .where('display_date <= ?', params[:date])
+                              .references(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .limit(10)
     @date = params[:date]
   end
 
