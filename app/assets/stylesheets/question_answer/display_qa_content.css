@@ -6,7 +6,7 @@
   border: 1px solid gray;
   overflow: visible;
   overflow-y: scroll;
-  word-break : break-all;
+  word-break : normal;
 }
 
 .display-question-content__textarea,
