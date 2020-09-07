@@ -3,7 +3,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
   def index
-    @question_answers = @group.question_answers.page(params[:page]).per(10)
+    @question_answers = @group.question_answers.includes(question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob}).page(params[:page]).per(10)
   end
 
   def show
