@@ -1,9 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:update, :destroy]
-  # before_action追加する
-  # DRYも解消するべきかも
-  # エラーハンドリング見直した方が良さそう(create, update両方)
-  # create失敗時のエラーメッセージはJavaScript必要になりそう
+  before_action :move_to_root_if_different_user, only: [:update, :destroy]
+
   def index
     @groups = current_user.groups
     @group = Group.new
@@ -30,7 +28,6 @@ class GroupsController < ApplicationController
     if @group.destroy
       redirect_to root_path
     else
-      # renderで書くべき？
       redirect_to group_question_answers_path(@group)
     end
   end
@@ -43,5 +40,9 @@ class GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def move_to_root_if_different_user
+    redirect_to root_path unless current_user.id == @group.id
   end
 end

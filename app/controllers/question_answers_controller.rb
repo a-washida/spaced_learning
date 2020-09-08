@@ -1,5 +1,6 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
+  before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
   def index
@@ -108,6 +109,10 @@ class QuestionAnswersController < ApplicationController
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
                                             answer_option_attributes: [:image, :font_size_id, :image_size_id, :id])
           .merge(display_date: Date.today, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+  end
+
+  def move_to_root_if_different_user
+    redirect_to root_path unless current_user.id == @group.id
   end
 
   # 問題管理ページの、特定の問題の位置に遷移するためのurl
