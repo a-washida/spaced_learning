@@ -1,12 +1,10 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
+  before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
   def index
-    @question_answers = @group.question_answers.page(params[:page]).per(10)
-  end
-
-  def show
+    @question_answers = @group.question_answers.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
   end
 
   def new
@@ -21,7 +19,7 @@ class QuestionAnswersController < ApplicationController
       # 次の一行で3つのテーブル: question_answers, question_options, answer_optionsに同時保存
       @question_answer.save!
       # repetition_algorithmsテーブルに保存
-      RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
+      RepetitionAlgorithm.create!(interval: 0, easiness_factor: 250, question_answer_id: @question_answer.id)
       # recordsテーブルに保存or更新
       Record.record_create_count(current_user.id)
     end
@@ -52,12 +50,18 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    @question_answers = @group.question_answers.where('display_date <= ?', Date.today).limit(10)
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
+                              .where('display_date <= ?', Date.today)
+                              .references(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
+                              .limit(10)
   end
 
   # change_dateは挙動確認用。アプリリリース時には削除。
   def change_date
-    @question_answers = @group.question_answers.where('display_date <= ?', params[:date]).limit(10)
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
+                              .where('display_date <= ?', params[:date])
+                              .references(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
+                              .limit(10)
     @date = params[:date]
   end
 
@@ -65,7 +69,7 @@ class QuestionAnswersController < ApplicationController
   def reset
     ActiveRecord::Base.transaction do
       @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
-      @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 200)
+      @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 250)
     end
     redirect_to url_of_specific_question_position_on_management_page
   rescue StandardError => e
@@ -102,6 +106,10 @@ class QuestionAnswersController < ApplicationController
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
                                             answer_option_attributes: [:image, :font_size_id, :image_size_id, :id])
           .merge(display_date: Date.today, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
+  end
+
+  def move_to_root_if_different_user
+    redirect_to root_path unless current_user.id == @group.user.id
   end
 
   # 問題管理ページの、特定の問題の位置に遷移するためのurl

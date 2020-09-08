@@ -15,11 +15,11 @@ class ChangeDateService
       when '1'
         execute_repetition_algorithm_if_repeat_count_equal_0(1, -20)
       when '2'
-        execute_repetition_algorithm_if_repeat_count_equal_0(1, -15)
+        execute_repetition_algorithm_if_repeat_count_equal_0(2, -15)
       when '3'
-        execute_repetition_algorithm_if_repeat_count_equal_0(2, 0)
+        execute_repetition_algorithm_if_repeat_count_equal_0(4, 0)
       when '4'
-        execute_repetition_algorithm_if_repeat_count_equal_0(3, 20)
+        execute_repetition_algorithm_if_repeat_count_equal_0(6, 20)
       end
     elsif repeat_count.to_i > 0
       case memory_level
@@ -30,7 +30,7 @@ class ChangeDateService
       when '3'
         execute_repetition_algorithm_if_repeat_count_greater_than_0(3, 0, 1)
       when '4'
-        execute_repetition_algorithm_if_repeat_count_greater_than_0(4, 20, 2)
+        execute_repetition_algorithm_if_repeat_count_greater_than_0(4, 20, 3)
       end
     end
   end
@@ -51,6 +51,7 @@ class ChangeDateService
     # 再復習までのインターバルは、(前回のインターバル * modified_easiness_factor/100) + 記憶度が高い場合にはbonus発生。
     @review_params[:interval] = @review_params[:interval].to_f * modified_easiness_factor / 100 + bonus_if_memory_level_is_high
     limit_interval_range_1_to_100
+    set_upper_limit_of_interval_if_memory_level_low(memory_level)
     is_common_part_of_repetition_algorithm(difference_of_easiness_factor)
   end
 
@@ -82,5 +83,11 @@ class ChangeDateService
   def limit_interval_range_1_to_100
     @review_params[:interval] = 1 if @review_params[:interval].to_f < 1
     @review_params[:interval] = 100 if @review_params[:interval].to_f > 100
+  end
+
+  # 記憶度が1の時はインターバルの上限を3, 記憶度が2の時はインターバルの上限を7に制限するメソッド
+  def set_upper_limit_of_interval_if_memory_level_low(memory_level)
+    @review_params[:interval] = 3 if memory_level == 1 && @review_params[:interval] > 3
+    @review_params[:interval] = 7 if memory_level == 2 && @review_params[:interval] > 7
   end
 end

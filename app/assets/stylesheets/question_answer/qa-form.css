@@ -75,7 +75,7 @@
   border: 1px solid gray;
   overflow: visible;
   overflow-y: scroll;
-  word-break : break-all;
+  word-break : normal;
 }
 
 .qa-form__question-preview-text,
