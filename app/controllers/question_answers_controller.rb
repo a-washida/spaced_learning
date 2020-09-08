@@ -21,7 +21,7 @@ class QuestionAnswersController < ApplicationController
       # 次の一行で3つのテーブル: question_answers, question_options, answer_optionsに同時保存
       @question_answer.save!
       # repetition_algorithmsテーブルに保存
-      RepetitionAlgorithm.create!(interval: 0, easiness_factor: 200, question_answer_id: @question_answer.id)
+      RepetitionAlgorithm.create!(interval: 0, easiness_factor: 250, question_answer_id: @question_answer.id)
       # recordsテーブルに保存or更新
       Record.record_create_count(current_user.id)
     end
@@ -71,7 +71,7 @@ class QuestionAnswersController < ApplicationController
   def reset
     ActiveRecord::Base.transaction do
       @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
-      @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 200)
+      @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 250)
     end
     redirect_to url_of_specific_question_position_on_management_page
   rescue StandardError => e
