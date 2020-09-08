@@ -43,6 +43,6 @@ class GroupsController < ApplicationController
   end
 
   def move_to_root_if_different_user
-    redirect_to root_path unless current_user.id == @group.id
+    redirect_to root_path unless current_user.id == @group.user.id
   end
 end
