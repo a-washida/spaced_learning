@@ -4,7 +4,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
   def index
-    @question_answers = @group.question_answers.includes(question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob}).page(params[:page]).per(10)
+    @question_answers = @group.question_answers.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
   end
 
   def new
@@ -50,17 +50,17 @@ class QuestionAnswersController < ApplicationController
   end
 
   def review
-    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
                               .where('display_date <= ?', Date.today)
-                              .references(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .references(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
                               .limit(10)
   end
 
   # change_dateは挙動確認用。アプリリリース時には削除。
   def change_date
-    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+    @question_answers = @group.question_answers.includes(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
                               .where('display_date <= ?', params[:date])
-                              .references(:repetition_algorithm, question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob})
+                              .references(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
                               .limit(10)
     @date = params[:date]
   end
