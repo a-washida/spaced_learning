@@ -7,9 +7,6 @@ class QuestionAnswersController < ApplicationController
     @question_answers = @group.question_answers.includes(question_option: {image_attachment: :blob}, answer_option: {image_attachment: :blob}).page(params[:page]).per(10)
   end
 
-  def show
-  end
-
   def new
     @question_answer = QuestionAnswer.new
     @question_answer.build_question_option
