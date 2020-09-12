@@ -4,7 +4,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
-  context 'ユーザー新規登録ができるとき' do 
+  context 'ユーザー新規登録ができるとき' do
     it '正しい情報を入力すればユーザー新規登録ができてトップページに移動する' do
       # 新規登録ページに移動する
       visit new_user_registration_path
@@ -14,9 +14,9 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       fill_in 'user_password', with: @user.password
       fill_in 'user_password_confirmation', with: @user.password_confirmation
       # 新規登録ボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect {
-       find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      expect do
+        find('input[name="commit"]').click
+      end.to change { User.count }.by(1)
       # トップページへ遷移する
       expect(current_path).to eq root_path
       # ユーザー名のボタンや、ログアウトボタンが表示されていることを確認する
@@ -32,14 +32,14 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       # 新規登録ページへ移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
-      fill_in 'user_nickname', with: ""
-      fill_in 'user_email', with: ""
-      fill_in 'user_password', with: ""
-      fill_in 'user_password_confirmation', with: ""
+      fill_in 'user_nickname', with: ''
+      fill_in 'user_email', with: ''
+      fill_in 'user_password', with: ''
+      fill_in 'user_password_confirmation', with: ''
       # 新規登録ボタンを押してもユーザーモデルのカウントは上がらないことを確認する
-      expect {
+      expect do
         find('input[name="commit"]')
-      }.to change { User.count }.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq new_user_registration_path
     end
@@ -83,8 +83,8 @@ RSpec.describe 'ログイン', type: :system do
       # ログインページへ遷移する
       visit new_user_session_path
       # ユーザー情報を入力する
-      fill_in 'user_email', with: ""
-      fill_in 'user_password', with: ""
+      fill_in 'user_email', with: ''
+      fill_in 'user_password', with: ''
       # ログインボタンを押す
       find('input[name="commit"]').click
       # ログインページへ戻されることを確認する
@@ -105,7 +105,7 @@ RSpec.describe 'ログアウト', type: :system do
     # ログアウトボタンが表示されている
     expect(page).to have_content('ログアウト')
     # ログアウトボタンをクリックする
-    click_on("ログアウト")
+    click_on('ログアウト')
     # ログインページに遷移することを確認する
     expect(current_path).to eq new_user_session_path
   end
