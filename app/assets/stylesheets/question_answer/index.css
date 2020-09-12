@@ -108,7 +108,7 @@
 
 input[type="checkbox"] {
   position: absolute;
-  left: -100vh;
+  left: -100vw;
 }
 
 input[type="checkbox"]:checked ~ .qa-index-item__management-list{
