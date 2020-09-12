@@ -73,7 +73,7 @@
   width: 80%;
   overflow: visible;
   overflow-y: scroll;
-  word-break : break-all;
+  word-break : normal;
 }
 
 .group-panel__edit {
