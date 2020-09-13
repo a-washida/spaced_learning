@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
   validates :name,
     presence: true,
-    uniqueness: { scope: :user_id },
+    uniqueness: { case_sensitive: true, scope: :user_id },
     length: { maximum: 16 }
 
   belongs_to :user
