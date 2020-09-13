@@ -254,25 +254,19 @@
   }
 
   /* 初期状態では問題復習のタブのみ太文字, 背景色あり, border-bottomなし */
-  .top-tab__item.review {
+  .top-tab__item {
     width: calc(100% / 3);
+    height: 30px;
+    line-height: 28px;
     border: 1px solid gray;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .top-tab__item.review {
     border-bottom: none;
     background-color: #f5f5f5;
     font-weight: bold;
-    text-align: center;
-  }
-
-  .top-tab__item.create {
-    width: calc(100% / 3);
-    border: 1px solid gray;
-    text-align: center;
-  }
-
-  .top-tab__item.management {
-    width: calc(100% / 3);
-    border: 1px solid gray;
-    text-align: center;
   }
   /* //初期状態では問題復習のタブのみ太文字, 背景色あり, border-bottomなし */
 
