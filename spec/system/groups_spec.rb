@@ -135,4 +135,67 @@ RSpec.describe "グループ編集機能", type: :system do
   end
 end
 
+RSpec.describe "グループ削除機能", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @group = FactoryBot.create(:group, user_id: @user.id)
+  end
 
+  it 'グループ削除ボタンを押して、確認ダイアログのokを押すと、グループが削除されること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 画面上にあらかじめ作成したグループが3つ存在することを確認する
+    expect(page).to have_content(@group.name, count: 3)
+    # 問題管理ページへのリンクが存在することを確認する
+    expect(page).to have_link @group.name, href: group_question_answers_path(@group)
+    # 問題管理ページへのリンクをクリックする
+    find(".group-panel.js-2").click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 画面上にグループを削除のリンクが存在することを確認する
+    expect(page).to have_link 'グループを削除', href: group_path(@group)
+    # グループ削除のリンクをクリックする
+    find(".destroy-group").click
+    # グループ削除の確認ダイアログが表示されることを確認してokを押すと、レコードの数が1減ることを確認する
+    expect{
+      expect(page.accept_confirm).to eq "グループ内の問題も全て削除されます。\n本当に削除しますか？"
+      sleep 0.1
+    }.to change { Group.count }.by(-1)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 削除したグループが存在しないことを確認する
+    expect(page).to have_no_content(@group.name)
+  end
+
+  it 'グループ削除ボタンを押して、確認ダイアログのキャンセルを押すと、グループが削除されないこと' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 画面上にあらかじめ作成したグループが3つ存在することを確認する
+    expect(page).to have_content(@group.name, count: 3)
+    # 問題管理ページへのリンクが存在することを確認する
+    expect(page).to have_link @group.name, href: group_question_answers_path(@group)
+    # 問題管理ページへのリンクをクリックする
+    find(".group-panel.js-2").click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 画面上にグループを削除のリンクが存在することを確認する
+    expect(page).to have_link 'グループを削除', href: group_path(@group)
+    # グループ削除のリンクをクリックする
+    find(".destroy-group").click
+    # グループ削除の確認ダイアログが表示されることを確認してキャンセルを押すと、レコードの数が変わらないことを確認する
+    expect{
+      expect(page.dismiss_confirm).to eq "グループ内の問題も全て削除されます。\n本当に削除しますか？"
+      sleep 0.1
+    }.to change { Group.count }.by(0)
+    # 現在のページが問題管理ページのままであることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # トップページに遷移する
+    visit root_path
+    # 削除ボタンを押した後確認ダイアログでキャンセルしたグループが3つ存在することを確認する
+    expect(page).to have_content(@group.name, count: 3)
+  end
+end
