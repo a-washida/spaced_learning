@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :question_answer do
-    question {Faker::Lorem.characters(number: 10)}
-    answer {Faker::Lorem.characters(number: 10)}
-    display_date {Date.today}
+    question { Faker::Lorem.characters(number: 10) }
+    answer { Faker::Lorem.characters(number: 10) }
+    display_date { Date.today }
     memory_level { 0 }
     repeat_count { 0 }
     association :user

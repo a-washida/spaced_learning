@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "グループ作成機能", type: :system do
+RSpec.describe 'グループ作成機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @group = FactoryBot.build(:group)
@@ -13,17 +13,17 @@ RSpec.describe "グループ作成機能", type: :system do
       # トップページに遷移していることを確認する
       expect(current_path).to eq root_path
       # 画面上にグループ作成フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-create")
+      expect(page).to have_no_css('.top-form-create')
       # 「グループを作成」をクリックする
-      find(".open-create-form").click
+      find('.open-create-form').click
       # 画面上にグループ作成フォームが現れることを確認する
-      expect(page).to have_css(".top-form-create")
+      expect(page).to have_css('.top-form-create')
       # 値をフォームに入力する
       fill_in 'group_name', with: @group.name
       # 送信すると、値がテーブルに保存されていることを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { Group.count }.by(1)
+      end.to change { Group.count }.by(1)
       # トップページに遷移していることを確認する
       expect(current_path).to eq root_path
       # トップページに新たにグループが3箇所に作成されていることを確認する
@@ -38,28 +38,28 @@ RSpec.describe "グループ作成機能", type: :system do
       # トップページに遷移していることを確認する
       expect(current_path).to eq root_path
       # 画面上にグループ作成フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-create")
+      expect(page).to have_no_css('.top-form-create')
       # 「グループを作成」をクリックする
-      find(".open-create-form").click
+      find('.open-create-form').click
       # 画面上にグループ作成フォームが現れることを確認する
-      expect(page).to have_css(".top-form-create")
+      expect(page).to have_css('.top-form-create')
       # フォームに空の値を入力する
-      fill_in 'group_name', with: ""
+      fill_in 'group_name', with: ''
       # フォームを送信すると、テーブルにレコードが保存されていないことを確認する
-      expect{
+      expect  do
         find('input[name="commit"]').click
-      }.to change { Group.count }.by(0)
+      end.to change { Group.count }.by(0)
       # indexテンプレートがrenderされていることを確認する
       expect(current_path).to eq groups_path
       # グループが作成されていないことを確認する
-      expect(page).to have_no_css(".group-panel")
+      expect(page).to have_no_css('.group-panel')
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content("Name can't be blank")      
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end
 
-RSpec.describe "グループ編集機能", type: :system do
+RSpec.describe 'グループ編集機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @groups = FactoryBot.create_list(:group, 2, user_id: @user.id)
@@ -77,14 +77,14 @@ RSpec.describe "グループ編集機能", type: :system do
         expect(page).to have_content(group.name, count: 3)
       end
       # 画面上にグループ編集フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-edit")
+      expect(page).to have_no_css('.top-form-edit')
       # グループパネル右上のペンのアイコンをクリックする
-      all(".group-panel__edit.js-0")[0].click
+      all('.group-panel__edit.js-0')[0].click
       # 画面上にグループ編集フォームが存在することを確認する
-      expect(page).to have_css(".top-form-edit")
+      expect(page).to have_css('.top-form-edit')
       # フォームのテキストエリアに既にグループ名が入力されていることを確認する
       expect(
-        find(".top-form-edit__input").text
+        find('.top-form-edit__input').text
       ).to eq @groups[0].name
       # 編集後のグループ名を入力する
       fill_in 'group_name', with: @group.name
@@ -93,7 +93,7 @@ RSpec.describe "グループ編集機能", type: :system do
       # 画面上に編集後のグループ名が3つ存在することを確認する
       expect(page).to have_content(@group.name, count: 3)
       # 画面上にグループ編集フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-edit")
+      expect(page).to have_no_css('.top-form-edit')
     end
   end
 
@@ -108,34 +108,34 @@ RSpec.describe "グループ編集機能", type: :system do
         expect(page).to have_content(group.name, count: 3)
       end
       # 画面上にグループ編集フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-edit")
+      expect(page).to have_no_css('.top-form-edit')
       # グループパネル右上のペンのアイコンをクリックする
-      all(".group-panel__edit.js-0")[0].click
+      all('.group-panel__edit.js-0')[0].click
       # 画面上にグループ編集フォームが存在することを確認する
-      expect(page).to have_css(".top-form-edit")
+      expect(page).to have_css('.top-form-edit')
       # フォームのテキストエリアに既にグループ名が入力されていることを確認する
       expect(
-        find(".top-form-edit__input").text
+        find('.top-form-edit__input').text
       ).to eq @groups[0].name
       # 空の値を入力する
-      fill_in 'group_name', with: ""
+      fill_in 'group_name', with: ''
       # フォームを送信する
       find('input[name="commit"]').click
       # 画面上にalertダイアログが表示されていることを確認して、okを押す
       expect(page.accept_alert).to eq "Name can't be blank"
       # 画面上にグループ編集フォームが存在することを確認する
-      expect(page).to have_css(".top-form-edit")
+      expect(page).to have_css('.top-form-edit')
       # ×ボタンをクリックする
-      find(".top-form-edit__close-btn.js-0").click
+      find('.top-form-edit__close-btn.js-0').click
       # 画面上にグループ編集フォームが存在しないことを確認する
-      expect(page).to have_no_css(".top-form-edit")
+      expect(page).to have_no_css('.top-form-edit')
       # 画面上に編集前のグループ名が3つ存在することを確認する
-      expect(page).to have_content(@groups[0].name, count: 3)      
+      expect(page).to have_content(@groups[0].name, count: 3)
     end
   end
 end
 
-RSpec.describe "グループ削除機能", type: :system do
+RSpec.describe 'グループ削除機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @group = FactoryBot.create(:group, user_id: @user.id)
@@ -151,18 +151,18 @@ RSpec.describe "グループ削除機能", type: :system do
     # 問題管理ページへのリンクが存在することを確認する
     expect(page).to have_link @group.name, href: group_question_answers_path(@group)
     # 問題管理ページへのリンクをクリックする
-    find(".group-panel.js-2").click
+    find('.group-panel.js-2').click
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 画面上にグループを削除のリンクが存在することを確認する
     expect(page).to have_link 'グループを削除', href: group_path(@group)
     # グループ削除のリンクをクリックする
-    find(".destroy-group").click
+    find('.destroy-group').click
     # グループ削除の確認ダイアログが表示されることを確認してokを押すと、レコードの数が1減ることを確認する
-    expect{
+    expect do
       expect(page.accept_confirm).to eq "グループ内の問題も全て削除されます。\n本当に削除しますか？"
       sleep 0.1
-    }.to change { Group.count }.by(-1)
+    end.to change { Group.count }.by(-1)
     # トップページに遷移していることを確認する
     expect(current_path).to eq root_path
     # 削除したグループが存在しないことを確認する
@@ -179,18 +179,18 @@ RSpec.describe "グループ削除機能", type: :system do
     # 問題管理ページへのリンクが存在することを確認する
     expect(page).to have_link @group.name, href: group_question_answers_path(@group)
     # 問題管理ページへのリンクをクリックする
-    find(".group-panel.js-2").click
+    find('.group-panel.js-2').click
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 画面上にグループを削除のリンクが存在することを確認する
     expect(page).to have_link 'グループを削除', href: group_path(@group)
     # グループ削除のリンクをクリックする
-    find(".destroy-group").click
+    find('.destroy-group').click
     # グループ削除の確認ダイアログが表示されることを確認してキャンセルを押すと、レコードの数が変わらないことを確認する
-    expect{
+    expect do
       expect(page.dismiss_confirm).to eq "グループ内の問題も全て削除されます。\n本当に削除しますか？"
       sleep 0.1
-    }.to change { Group.count }.by(0)
+    end.to change { Group.count }.by(0)
     # 現在のページが問題管理ページのままであることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # トップページに遷移する

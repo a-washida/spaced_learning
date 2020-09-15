@@ -21,9 +21,9 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      render json: { post: @group, update: "true" }
+      render json: { post: @group, update: 'true' }
     else
-      render json: { post: @group.errors.full_messages, update: "false" }
+      render json: { post: @group.errors.full_messages, update: 'false' }
     end
   end
 
