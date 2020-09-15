@@ -101,7 +101,7 @@ RSpec.describe 'ログアウト', type: :system do
   end
   it 'ログアウトボタンを押すと、ログアウトができる' do
     # ログインする
-    sign_in(@user)
+    login(@user)
     # ログアウトボタンが表示されている
     expect(page).to have_content('ログアウト')
     # ログアウトボタンをクリックする

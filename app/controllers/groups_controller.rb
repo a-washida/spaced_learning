@@ -20,8 +20,11 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group.update(group_params)
-    render json: { post: @group }
+    if @group.update(group_params)
+      render json: { post: @group, update: 'true' }
+    else
+      render json: { post: @group.errors.full_messages, update: 'false' }
+    end
   end
 
   def destroy

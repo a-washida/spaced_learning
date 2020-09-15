@@ -7,7 +7,6 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
       const groupPanels = document.querySelectorAll(`.group-panel.js-${i}`)
       for(let j = 0; j < submits.length; j++){
         submits[j].addEventListener("click", (e) => {
-          e.preventDefault();
           const formData = new FormData(editGroupForms[j]);
           const XHR = new XMLHttpRequest();
           const groupId = groupPanels[j].getAttribute("group-id");
@@ -15,11 +14,10 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
           XHR.responseType = "json";
           XHR.send(formData);
           XHR.onload = () => {
+            // テーブルのupdateに成功した場合はupdateにtrueが、失敗した場合はfalseが入っている
+            const update = XHR.response.update;
             const item = XHR.response.post;
-            // グループ名を空白で更新しようとした場合にalertを出す
-            if (item.name == ""){
-              alert("グループ名を入力して下さい")
-            } else {
+            if (update == "true"){
               // グループ編集フォームを隠す
               editGroupForms[j].removeAttribute("style", "display: flex;");
               // グループのパネルを表示させる
@@ -29,7 +27,10 @@ if (window.location.pathname === '/' || window.location.pathname === '/groups') 
                 const groupNames = document.querySelectorAll(`.group-panel__name.js-${k}`);
                 groupNames[j].innerHTML = item.name
               }
-            } 
+            } else {
+              // updateに失敗した場合はエラーメッセージを表示
+              window.alert(`${item}`)
+            }
 
             if (XHR.status != 200) {
               alert(`Error ${XHR.status}: ${XHR.statusText}`);
