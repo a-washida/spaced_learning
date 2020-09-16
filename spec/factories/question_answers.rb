@@ -11,6 +11,7 @@ FactoryBot.define do
     after(:build) do |question_answer|
       question_answer.question_option = FactoryBot.build(:question_option, question_answer: question_answer)
       question_answer.answer_option = FactoryBot.build(:answer_option, question_answer: question_answer)
+      question_answer.repetition_algorithm = FactoryBot.build(:repetition_algorithm, question_answer: question_answer)
     end
   end
 end
