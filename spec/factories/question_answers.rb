@@ -9,9 +9,26 @@ FactoryBot.define do
     association :group
 
     after(:build) do |question_answer|
-      question_answer.question_option = FactoryBot.build(:question_option, question_answer: question_answer)
-      question_answer.answer_option = FactoryBot.build(:answer_option, question_answer: question_answer)
-      question_answer.repetition_algorithm = FactoryBot.build(:repetition_algorithm, question_answer: question_answer)
+      question_answer.question_option = FactoryBot.build(:question_option)
+      question_answer.answer_option = FactoryBot.build(:answer_option)
+      question_answer.repetition_algorithm = FactoryBot.build(:repetition_algorithm)
+    end
+
+    # font_size_idとimage_size_idを変更した状態のテストデータ
+    factory :qa_size_change, class: QuestionAnswer do
+      question { Faker::Lorem.characters(number: 10) }
+      answer { Faker::Lorem.characters(number: 10) }
+      display_date { Date.today }
+      memory_level { 0 }
+      repeat_count { 0 }
+      association :user
+      association :group
+
+      after(:build) do |question_answer|
+        question_answer.question_option = FactoryBot.build(:question_option, font_size_id: 8, image_size_id: 6)
+        question_answer.answer_option = FactoryBot.build(:answer_option, font_size_id: 8, image_size_id: 6)
+        question_answer.repetition_algorithm = FactoryBot.build(:repetition_algorithm)
+      end
     end
   end
 end
