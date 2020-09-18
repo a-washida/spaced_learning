@@ -230,7 +230,7 @@ RSpec.describe "問題編集機能", type: :system do
 
   context '問題編集に成功したとき' do
     it '問題編集に成功すると、問題管理ページにリダイレクトし、編集内容が反映されていること' do
-      qa_size_change = FactoryBot.create(:qa_size_change, user_id: @user.id, group_id: @group.id)
+      qa_size_change = FactoryBot.create(:question_answer, :size_change, user_id: @user.id, group_id: @group.id)
       # サインインする
       login(@user)
       # トップページに遷移していることを確認する
@@ -314,13 +314,6 @@ RSpec.describe "問題編集機能", type: :system do
       # 問題と解答の画像選択フォームに画像を添付する
       attach_file('question_answer[question_option_attributes][image]', image_path, make_visible: true)
       attach_file('question_answer[answer_option_attributes][image]', image_path, make_visible: true)
-      # プレビューエリアに表示されている画像が、画像添付前に表示されていた画像と異なることを確認する
-      expect(
-        find('.img-preview-question')[:src]
-      ).not_to eq src_question
-      expect(
-        find('.img-preview-answer')[:src]
-      ).not_to eq src_answer
       #「文字サイズを変更」のプルダウンで1を選択する(問題プレビューと解答プレビュー両方)
       select('1', from: 'question_answer[question_option_attributes][font_size_id]')
       select('1', from: 'question_answer[answer_option_attributes][font_size_id]')
@@ -358,5 +351,80 @@ RSpec.describe "問題編集機能", type: :system do
       expect(page).to have_selector(".display-question-content__image[style='width: 200px;']")
       expect(page).to have_selector(".display-answer-content__image[style='width: 200px;']")
     end
+
+    it '編集後の入力がテキストのみでも、問題編集に成功すること' do
+      qa_with_no_image = FactoryBot.create(:question_answer, :no_image, user_id: @user.id, group_id: @group.id)
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 問題管理ページへのリンクをクリックする
+      find('.group-panel.js-2').click
+      # 問題管理ページへ遷移していることを確認する
+      expect(current_path).to eq group_question_answers_path(@group)
+      # 縦三点リーダーのアイコンをクリックする
+      find(".qa-index-item__img-three-point").click
+      # 問題編集のリンクをクリックする
+      all(".qa-index-item__management-list a")[0].click
+      # 問題編集ページへ遷移していることを確認する
+      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      # フォームの問題エリアと解答エリアに、編集後の問題と解答を入力する
+      fill_in 'question_answer_question', with: @question_answer.question
+      fill_in 'question_answer_answer', with: @question_answer.answer
+      # 編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # 問題管理ページの編集した問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+      uri = URI.parse(current_url)
+      expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', qa_with_no_image.id).count / 10 + 1}#link-#{qa_with_no_image.id}"
+      # 編集後のテキストが表示されていることを確認する(問題と解答エリア両方)
+      expect(
+        find(".display-question-content__textarea").text
+      ).to eq @question_answer.question
+      expect(
+        find(".display-answer-content__textarea").text
+      ).to eq @question_answer.answer
+    end
+
+    it '編集後の入力が画像のみでも、問題編集に成功すること' do
+      qa_with_no_image = FactoryBot.create(:question_answer, :no_image, user_id: @user.id, group_id: @group.id)
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 問題管理ページへのリンクをクリックする
+      find('.group-panel.js-2').click
+      # 問題管理ページへ遷移していることを確認する
+      expect(current_path).to eq group_question_answers_path(@group)
+      # 縦三点リーダーのアイコンをクリックする
+      find(".qa-index-item__img-three-point").click
+      # 問題編集のリンクをクリックする
+      all(".qa-index-item__management-list a")[0].click
+      # 問題編集ページへ遷移していることを確認する
+      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      # フォームの問題エリアと解答エリアに、空のテキストを入力する
+      fill_in 'question_answer_question', with: ""
+      fill_in 'question_answer_answer', with: ""
+      # 添付する画像を定義する
+      image_path = Rails.root.join('public/images/test_image.png')
+      # 問題と解答の画像選択フォームに画像を添付する
+      attach_file('question_answer[question_option_attributes][image]', image_path, make_visible: true)
+      attach_file('question_answer[answer_option_attributes][image]', image_path, make_visible: true)
+      # 編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # 問題管理ページの編集した問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+      uri = URI.parse(current_url)
+      expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', qa_with_no_image.id).count / 10 + 1}#link-#{qa_with_no_image.id}"
+      # テキストが表示されていないことを確認する(問題と解答エリア両方)
+      expect(
+        find(".display-question-content__textarea", visible: false).text
+      ).to eq ""
+      expect(
+        find(".display-answer-content__textarea", visible: false).text
+      ).to eq ""
+      # 添付した画像が表示されていることを確認する(問題と解答エリア両方)
+      expect(page).to have_css(".display-question-content__image")
+      expect(page).to have_css(".display-answer-content__image")
+    end
   end
+
 end
