@@ -558,3 +558,75 @@ RSpec.describe "問題削除機能", type: :system do
     expect(page).to have_no_css(".qa-index-item")
   end
 end
+
+RSpec.describe "問題復習機能", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @group = FactoryBot.create(:group, user_id: @user.id)
+    @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+  end
+
+  it '問題復習ページに遷移すると、問題は表示されているが解答は隠れており、解答欄をクリックすることで解答が表示されること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題復習ページへのリンクが存在することを確認する
+    expect(page).to have_link @group.name, href: review_group_question_answers_path(@group)
+    # 問題復習ページへのリンクをクリックする
+    find(".group-panel.js-0").click
+    # 問題復習ページへ遷移していることを確認する
+    expect(current_path).to eq review_group_question_answers_path(@group)
+    # 問題エリアに保存したテキストと画像が表示されていることを確認する
+    expect(
+      find(".display-question-content__textarea").text
+    ).to eq @question_answer.question
+    expect(page).to have_css(".display-question-content__image")
+    # 解答エリアに保存したテキストと画像が表示されていないことを確認する
+    expect(page).to have_no_content(@question_answer.answer)
+    expect(page).to have_no_css(".display-answer-content__image")
+    # 解答エリアをクリックする
+    find(".review-click").click
+    # 解答エリアに保存したテキストと画像が表示されていることを確認する
+    expect(
+      find(".display-answer-content__textarea").text
+    ).to eq @question_answer.answer
+    expect(page).to have_css(".display-answer-content__image")
+  end
+
+  it '問題復習ページの記憶度ボタンを押すと、次回復習までのインターバルが表示され、ページを更新すると問題が表示されなくなっていること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題復習ページへのリンクをクリックする
+    find(".group-panel.js-0").click
+    # 問題復習ページへ遷移していることを確認する
+    expect(current_path).to eq review_group_question_answers_path(@group)
+    # 画面上に記憶度を自己評価する1, 2, 3, 4のボタンが存在することを確認する
+    expect(page).to have_css(".review-option__btn.js-0")
+    expect(page).to have_css(".review-option__btn.js-1")
+    expect(page).to have_css(".review-option__btn.js-2")
+    expect(page).to have_css(".review-option__btn.js-3")
+    # 「1」のボタンをクリックする
+    find(".review-option__btn.js-0").click
+    # 画面上に「次は1日後です」と表示されていることを確認する
+    expect(page).to have_content("次は1日後です")
+    # 「2」のボタンをクリックする
+    find(".review-option__btn.js-1").click
+    # 画面上に「次は2日後です」と表示されていることを確認する
+    expect(page).to have_content("次は2日後です")
+    # 「3」のボタンをクリックする
+    find(".review-option__btn.js-2").click
+    # 画面上に「次は4日後です」と表示されていることを確認する
+    expect(page).to have_content("次は4日後です")
+    # 「4」のボタンをクリックする
+    find(".review-option__btn.js-3").click
+    # 画面上に「次は6日後です」と表示されていることを確認する
+    expect(page).to have_content("次は6日後です")
+    # 「次の問題を表示する」のリンクをクリック
+    click_link("次の問題を表示する")
+    # 画面上に問題が存在しないことを確認する
+    expect(page).to have_no_css(".review-individual-wrap")
+  end
+end
