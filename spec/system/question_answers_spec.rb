@@ -513,3 +513,48 @@ RSpec.describe "問題編集機能", type: :system do
     end
   end
 end
+
+RSpec.describe "問題削除機能", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @group = FactoryBot.create(:group, user_id: @user.id)
+    @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+  end
+
+  it '問題削除のリンクをクリックすると、問題が削除されて問題管理ページにリダイレクトバックすること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題管理ページへのリンクをクリックする
+    find('.group-panel.js-2').click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 問題管理ページのページネーションで分割した1ページ目のURLに遷移する
+    visit "/groups/#{@group.id}/question_answers/?page=1"
+    # 画面上に、保存したテキストと画像が表示されていることを確認する(問題と解答エリア両方)
+    expect(
+      find(".display-question-content__textarea").text
+    ).to eq @question_answer.question
+    expect(
+      find(".display-answer-content__textarea").text
+    ).to eq @question_answer.answer
+    expect(page).to have_css(".display-question-content__image")
+    expect(page).to have_css(".display-answer-content__image")
+    # 画面上に問題削除のリンクが存在しないことを確認する
+    expect(page).to have_no_link '問題削除', href: group_question_answer_path(@group, @question_answer)
+    # 縦三点リーダーのアイコンをクリックする
+    find(".qa-index-item__img-three-point").click
+    # 画面上に問題削除のリンクが存在することを確認する
+    expect(page).to have_link '問題削除', href: group_question_answer_path(@group, @question_answer)
+    # 問題削除のリンクをクリックすると、QuestionAnswerモデルとQuestionOptionモデルとAnswerOptionモデルとRepetitionAlgorithmモデルのカウントが1ずつ減少することを確認する
+    expect{
+      click_link("問題削除")
+    }.to change { QuestionAnswer.count && QuestionOption.count && AnswerOption.count && RepetitionAlgorithm.count }.by(-1)
+    # 問題削除を行ったページにリダイレクトバックしていることを確認
+    uri = URI.parse(current_url)
+    expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers/?page=1"
+    # 画面上に問題が存在しないことを確認する
+    expect(page).to have_no_css(".qa-index-item")
+  end
+end
