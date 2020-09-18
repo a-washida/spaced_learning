@@ -427,4 +427,89 @@ RSpec.describe "問題編集機能", type: :system do
     end
   end
 
+  context '問題編集に失敗した時' do
+    it '問題エリアの入力にテキストも画像も存在しない場合、問題編集に失敗すること' do
+      qa_with_no_image = FactoryBot.create(:question_answer, :no_image, user_id: @user.id, group_id: @group.id)
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 問題管理ページへのリンクをクリックする
+      find('.group-panel.js-2').click
+      # 問題管理ページへ遷移していることを確認する
+      expect(current_path).to eq group_question_answers_path(@group)
+      # 縦三点リーダーのアイコンをクリックする
+      find(".qa-index-item__img-three-point").click
+      # 問題編集のリンクをクリックする
+      all(".qa-index-item__management-list a")[0].click
+      # 問題編集ページへ遷移していることを確認する
+      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      # フォームの問題エリアのテキストエリア に、空のテキストを入力する
+      fill_in 'question_answer_question', with: ""
+      # 編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # editテンプレートがrenderされていることを確認する
+      expect(current_path).to eq group_question_answer_path(@group, qa_with_no_image)
+      # フォームの問題エリアのテキストエリアに、テキストが存在しないことを確認する
+      expect(
+        find("#question_answer_question").text
+      ).to eq ""
+      # フォームの解答エリアのテキストエリアに、テキストが存在することを確認する
+      expect(
+        find("#question_answer_answer").text
+      ).to eq qa_with_no_image.answer
+      # 問題プレビューにテキストが存在しないことを確認する
+      expect(
+        find("#question-preview__textarea", visible: false).text
+      ).to eq ""
+      # 解答プレビューにテキストが存在することを確認する
+      expect(
+        find("#answer-preview__textarea").text
+      ).to eq qa_with_no_image.answer
+      # エラーメッセージが表示されていることを確認する
+      expect(page).to have_content("Question text or image is indispensable")
+    end
+
+    it '解答エリアの入力にテキストも画像も存在しない場合、問題編集に失敗すること' do
+      qa_with_no_image = FactoryBot.create(:question_answer, :no_image, user_id: @user.id, group_id: @group.id)
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 問題管理ページへのリンクをクリックする
+      find('.group-panel.js-2').click
+      # 問題管理ページへ遷移していることを確認する
+      expect(current_path).to eq group_question_answers_path(@group)
+      # 縦三点リーダーのアイコンをクリックする
+      find(".qa-index-item__img-three-point").click
+      # 問題編集のリンクをクリックする
+      all(".qa-index-item__management-list a")[0].click
+      # 問題編集ページへ遷移していることを確認する
+      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      # フォームの解答エリアのテキストエリア に、空のテキストを入力する
+      fill_in 'question_answer_answer', with: ""
+      # 編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # editテンプレートがrenderされていることを確認する
+      expect(current_path).to eq group_question_answer_path(@group, qa_with_no_image)
+      # フォームの問題エリアのテキストエリアに、テキストが存在することを確認する
+      expect(
+        find("#question_answer_question").text
+      ).to eq qa_with_no_image.question
+      # フォームの解答エリアのテキストエリアに、テキストが存在しないことを確認する
+      expect(
+        find("#question_answer_answer").text
+      ).to eq ""
+      # 問題プレビューにテキストが存在することを確認する
+      expect(
+        find("#question-preview__textarea").text
+      ).to eq qa_with_no_image.question
+      # 解答プレビューにテキストが存在しないことを確認する
+      expect(
+        find("#answer-preview__textarea", visible: false).text
+      ).to eq ""
+      # エラーメッセージが表示されていることを確認する
+      expect(page).to have_content("Answer text or image is indispensable")
+    end
+  end
 end
