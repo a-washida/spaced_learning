@@ -1,8 +1,6 @@
 <%# 解答を表示するエリア %>
 <div class="display-answer-content">
-  <div class="display-answer-content__textarea" style="font-size: <%=question_answer.answer_option.font_size.name.to_f%>rem;"><%= question_answer.answer %></div>
-  <div id="display-answer-content__image">
-    <%= image_tag question_answer.answer_option.image, class: 'img-preview-answer', style: "width: #{200 * question_answer.answer_option.image_size.name.to_f}px;" if question_answer.answer_option.image.attached? %>
-  </div>
+  <div class="display-answer-content__textarea" style="font-size: <%=question_answer.answer_option.font_size.name%>rem;"><%= question_answer.answer %></div>
+  <%= image_tag question_answer.answer_option.image, class: 'display-answer-content__image', style: "width: #{(200 * question_answer.answer_option.image_size.name.to_f).floor}px;" if question_answer.answer_option.image.attached? %>
 </div>
 <%# //解答を表示するエリア %>

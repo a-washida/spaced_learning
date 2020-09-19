@@ -34,7 +34,7 @@ window.addEventListener("load", (e) => {
       selectedOption = getSelectedOptionInPulldown(questionOrAnswer, "image")
       // imageが存在する場合のみ以下のコードを実行
       if (image){
-        image.setAttribute("style", `width: ${200 * selectedOption.innerHTML}px;`)
+        image.setAttribute("style", `width: ${Math.floor(200 * selectedOption.innerHTML)}px;`)
         const insertImage = document.getElementById(`${questionOrAnswer}-preview__img`)
         insertImage.appendChild(image)
       }

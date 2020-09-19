@@ -38,7 +38,7 @@ window.addEventListener("load", (e) => {
         const imageWidth = 200 * selectedOption.innerHTML
         const previewImage = document.querySelector(`.img-preview-${questionOrAnswer}`)
         if (previewImage !== null) {
-          previewImage.setAttribute("style", `width: ${imageWidth}px;`)
+          previewImage.setAttribute("style", `width: ${Math.floor(imageWidth)}px;`)
         }
       })
     }
