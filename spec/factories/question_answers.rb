@@ -23,7 +23,7 @@ FactoryBot.define do
     end
 
     # 画像を添付しない場合のテストデータ
-    trait :no_image do  
+    trait :no_image do
       after(:build) do |question_answer|
         question_answer.question_option = FactoryBot.build(:question_option)
         question_answer.answer_option = FactoryBot.build(:answer_option)

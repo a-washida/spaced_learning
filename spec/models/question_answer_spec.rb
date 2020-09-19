@@ -29,7 +29,7 @@ RSpec.describe QuestionAnswer, type: :model do
       it 'answerが存在しなくても、answer_optionに紐づいたimageが存在すれば保存できること' do
         @question_answer.answer = nil
         expect(@question_answer).to be_valid
-      end 
+      end
     end
 
     context '@question_answerが保存できない場合' do
@@ -37,14 +37,14 @@ RSpec.describe QuestionAnswer, type: :model do
         @question_answer.question = nil
         @question_answer.question_option.image = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("Question text or image is indispensable")
+        expect(@question_answer.errors.full_messages).to include('Question text or image is indispensable')
       end
 
       it 'answerと、answer_optionに紐づいたimageが存在しなければ保存できないこと' do
         @question_answer.answer = nil
         @question_answer.answer_option.image = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("Answer text or image is indispensable")
+        expect(@question_answer.errors.full_messages).to include('Answer text or image is indispensable')
       end
 
       it 'display_dateが空なら保存できないこと' do
@@ -60,9 +60,9 @@ RSpec.describe QuestionAnswer, type: :model do
       end
 
       it 'memory_levelが数値でないなら保存できないこと' do
-        @question_answer.memory_level = "あ"
+        @question_answer.memory_level = 'あ'
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("Memory level is not a number")
+        expect(@question_answer.errors.full_messages).to include('Memory level is not a number')
       end
 
       it 'repeat_countが空なら保存できないこと' do
@@ -72,9 +72,9 @@ RSpec.describe QuestionAnswer, type: :model do
       end
 
       it 'repeat_countが数値でないなら保存できないこと' do
-        @question_answer.repeat_count = "あ"
+        @question_answer.repeat_count = 'あ'
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("Repeat count is not a number")
+        expect(@question_answer.errors.full_messages).to include('Repeat count is not a number')
       end
     end
   end
