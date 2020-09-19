@@ -630,3 +630,96 @@ RSpec.describe "問題復習機能", type: :system do
     expect(page).to have_no_css(".review-individual-wrap")
   end
 end
+
+RSpec.describe "問題管理機能", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @group = FactoryBot.create(:group, user_id: @user.id)
+    @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+  end
+
+  it '「初期状態にリセット」を実行すると、各種パラメータが問題作成した瞬間の状態と等しくなること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題復習ページへのリンクが存在することを確認する
+    expect(page).to have_link @group.name, href: review_group_question_answers_path(@group)
+    # 問題復習ページへのリンクをクリックする
+    find(".group-panel.js-0").click
+    # 問題復習ページへ遷移していることを確認する
+    expect(current_path).to eq review_group_question_answers_path(@group)
+    # 「4」のボタンをクリックする
+    find(".review-option__btn.js-3").click
+    # 画面上に「次は6日後です」と表示されていることを確認する
+    expect(page).to have_content("次は6日後です")
+    # 「問題管理」のリンクが存在することを確認する
+    expect(page).to have_link '問題管理', href: "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+    # 「問題管理」のリンクをクリックする
+    click_link('問題管理')
+    # 問題管理ページの特定の問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+    uri = URI.parse(current_url)
+    expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+    # 復習までの日数が「6」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[0].text
+    ).to eq "6"
+    # 記憶度が「4」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[1].text
+    ).to eq "4"
+    # 復習回数が「1」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[2].text
+    ).to eq "1"
+    # 画面上に「初期状態にリセット」のリンクが存在しないことを確認する
+    expect(page).to have_no_link '初期状態にリセット', href: reset_group_question_answer_path(@group, @question_answer)
+    # 縦三点リーダーのアイコンをクリックする
+    find(".qa-index-item__img-three-point").click
+    # 画面上に「初期状態にリセット」のリンクが存在することを確認する
+    expect(page).to have_link '初期状態にリセット', href: reset_group_question_answer_path(@group, @question_answer)
+    # 「初期状態にリセット」のリンクをクリックする
+    click_link("初期状態にリセット")
+    # 問題管理ページの、リセットを行った問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+    uri2 = URI.parse(current_url)
+    expect("#{uri2.path}?#{uri2.query}##{uri2.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+    # 復習までの日数が「0」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[0].text
+    ).to eq "0"
+    # 記憶度が「0」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[1].text
+    ).to eq "0"
+    # 復習回数が「0」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[2].text
+    ).to eq "0"
+  end
+
+  it '「復習周期から外す」のリンクをクリックすると、復習までの日数が「--」と表示されること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題管理ページへのリンクをクリックする
+    find('.group-panel.js-2').click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 画面上に「復習周期から外す」のリンクが存在しないことを確認する
+    expect(page).to have_no_link '復習周期から外す', href: remove_group_question_answer_path(@group, @question_answer)
+    # 縦三点リーダーのアイコンをクリックする
+    find(".qa-index-item__img-three-point").click
+    # 画面上に「復習周期から外す」のリンクが存在することを確認する
+    expect(page).to have_link '復習周期から外す', href: remove_group_question_answer_path(@group, @question_answer)
+    # 「復習周期から外す」のリンクをクリックする
+    click_link("復習周期から外す")
+    # 問題管理ページの、「復習周期から外す」を行った問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+    uri = URI.parse(current_url)
+    expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+    # 復習までの日数が「--」と表示されていることを確認する
+    expect(
+      all(".qa-index-item__record span")[0].text
+    ).to eq "--"
+  end
+end
