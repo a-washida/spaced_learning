@@ -2,7 +2,7 @@
 <div class="qa-index-main">
   <div class="qa-index-question-and-answer-area">
     <%# 投稿された問題が0個なら表示 %>
-    <% if @question_answers.empty? %>
+    <% if @results.empty? %>
       <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
     <% end %>
 
@@ -16,7 +16,7 @@
       <%= f.submit '検索' %>
     <% end %>
 
-    <% @question_answers.each_with_index do |question_answer, i| %>
+    <% @results.each_with_index do |question_answer, i| %>
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
         <div class="qa-index-link-target" id=link-<%=question_answer.id%>></div>
@@ -57,7 +57,7 @@
         <%# //問題と解答の下に位置するコンテンツを表示 %>
       </div>
     <% end %>
-    <%= paginate @question_answers %>
+    <%= paginate @results %>
     <%= link_to 'グループを削除', group_path(@group), method: :delete, class: 'destroy-group', data: { confirm: "グループ内の問題も全て削除されます。\n本当に削除しますか？" } %>
   </div>
 </div>

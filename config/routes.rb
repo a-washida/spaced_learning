@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :create, :update, :destroy] do
     resources :question_answers do
       collection do
-        get 'review', 'change_date' # change_dateは挙動確認用。アプリリリース時には削除
+        get 'search', 'review', 'change_date' # change_dateは挙動確認用。アプリリリース時には削除
       end
       member do
         patch 'reset', 'remove'
