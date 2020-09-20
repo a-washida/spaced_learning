@@ -2,9 +2,10 @@ class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
-  before_action :search_question_answer, only: :index
 
   def index
+    # ransackで利用する検索オブジェクトを生成。
+    @q = @group.question_answers.ransack(params[:q])
     @question_answers = @q.result.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
     set_question_answer_column
   end
@@ -113,11 +114,6 @@ class QuestionAnswersController < ApplicationController
 
   def move_to_root_if_different_user
     redirect_to root_path unless current_user.id == @group.user.id
-  end
-
-  # ransackで利用する検索オブジェクトを生成。
-  def search_question_answer
-    @q = @group.question_answers.ransack(params[:q])
   end
 
   def set_question_answer_column
