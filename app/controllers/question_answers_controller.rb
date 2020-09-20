@@ -36,7 +36,8 @@ class QuestionAnswersController < ApplicationController
 
   def update
     if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
-      redirect_to url_of_specific_question_position_on_management_page
+      # ?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1} この部分は特定の問題が、ページネーションで分割したどのページに存在するかを考慮して遷移するための記述。
+      redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
     else
       render 'edit'
     end
@@ -47,7 +48,7 @@ class QuestionAnswersController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       set_session
-      redirect_to url_of_specific_question_position_on_management_page, alert: '問題の削除に失敗しました'
+      redirect_to back_to_specific_question_position, alert: '問題の削除に失敗しました'
     end
   end
 
@@ -73,19 +74,19 @@ class QuestionAnswersController < ApplicationController
       @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
       @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: 250)
     end
-    redirect_to url_of_specific_question_position_on_management_page
+    redirect_to back_to_specific_question_position
   rescue StandardError => e
     set_session
-    redirect_to url_of_specific_question_position_on_management_page, alert: '問題のリセットに失敗しました'
+    redirect_to back_to_specific_question_position, alert: '問題のリセットに失敗しました'
   end
 
   # 問題を復習周期から外して、復習ページに表示されないようにするアクション
   def remove
     if @question_answer.update(display_date: Date.today + 100.year)
-      redirect_to url_of_specific_question_position_on_management_page
+      redirect_to back_to_specific_question_position
     else
       set_session
-      redirect_to url_of_specific_question_position_on_management_page, alert: '問題を復習周期から外すのに失敗しました'
+      redirect_to back_to_specific_question_position, alert: '問題を復習周期から外すのに失敗しました'
     end
   end
 
@@ -126,9 +127,8 @@ class QuestionAnswersController < ApplicationController
     @qa_repeat_count = @group.question_answers.select("repeat_count").distinct.order(repeat_count: "ASC")
   end
 
-  # 問題管理ページの、特定の問題の位置に遷移するためのurl
-  def url_of_specific_question_position_on_management_page
-    # ?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1} この部分は特定の問題が、ページネーションで分割したどのページに存在するかを考慮して遷移するための記述。
-    "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+  # 問題管理ページの、特定の問題の位置に戻るためのurlを返すメソッド
+  def back_to_specific_question_position
+    request.referer + "#link-#{@question_answer.id}" || root_path
   end
 end
