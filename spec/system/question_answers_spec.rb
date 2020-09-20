@@ -715,7 +715,7 @@ RSpec.describe '問題管理機能', type: :system do
     click_link('復習周期から外す')
     # 問題管理ページの、「復習周期から外す」を行った問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
     uri = URI.parse(current_url)
-    expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+    expect("#{uri.path}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers#link-#{@question_answer.id}"
     # 復習までの日数が「--」と表示されていることを確認する
     expect(
       all('.qa-index-item__record span')[0].text
