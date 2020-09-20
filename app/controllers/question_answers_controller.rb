@@ -2,7 +2,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
-  before_action :search_question_answer, only: [:index, :search]
+  before_action :search_question_answer, only: :index
 
   def index
     @question_answers = @group.question_answers.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
@@ -49,11 +49,6 @@ class QuestionAnswersController < ApplicationController
       set_session
       redirect_to url_of_specific_question_position_on_management_page, alert: '問題の削除に失敗しました'
     end
-  end
-
-  def search
-    @results = @q.result.page(params[:page]).per(10)
-    set_question_answer_column
   end
 
   def review
@@ -124,7 +119,8 @@ class QuestionAnswersController < ApplicationController
   end
 
   def set_question_answer_column
-    @question_answer_name = QuestionAnswer.select("memory_level").distinct.order(memory_level: "ASC")
+    @qa_memory_level = @group.question_answers.select("memory_level").distinct.order(memory_level: "ASC")
+    @qa_repeat_count = @group.question_answers.select("repeat_count").distinct.order(repeat_count: "ASC")
   end
 
   # 問題管理ページの、特定の問題の位置に遷移するためのurl
