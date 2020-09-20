@@ -2,8 +2,12 @@
 <div class="qa-index-main">
   <div class="qa-index-question-and-answer-area">
     <%# 投稿された問題が0個なら表示 %>
-    <% if @question_answers.empty? %>
+    <% if @question_answers.empty? && params[:q].nil? %>
       <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
+    <% end %>
+    <%# 検索結果が0件の場合表示 %>
+    <% if @question_answers.empty? && params[:q].present? %>
+      <p class="qa-index-message-empty">検索条件に該当する問題はありません</p>
     <% end %>
     
     <h1>
@@ -28,7 +32,7 @@
         <%# resetやremove,destroyアクションが失敗すると、操作対象のレコードのidがsession[:qa_id]に保存される。そのidと同じidを持つ問題が表示されている場所で、alertを出す %>
         <% if question_answer.id == session[:qa_id] %>
           <%# セッションの中身をリセット %>
-          <% session[:qa_id] = nil %> 
+          <% session[:qa_id] = nil %>
           <p class="qa-index-alert"><%= alert %></p>
         <% end %>
         <%# 問題と解答を表示 %>
