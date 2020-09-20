@@ -5,7 +5,7 @@ class QuestionAnswersController < ApplicationController
   before_action :search_question_answer, only: :index
 
   def index
-    @question_answers = @group.question_answers.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
+    @question_answers = @q.result.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
     set_question_answer_column
   end
 
@@ -114,12 +114,15 @@ class QuestionAnswersController < ApplicationController
     redirect_to root_path unless current_user.id == @group.user.id
   end
 
+  # ransackで利用する検索オブジェクトを生成。
   def search_question_answer
     @q = @group.question_answers.ransack(params[:q])
   end
 
   def set_question_answer_column
+    # レコードを取得する際に、memory_levelカラムの値が重複したものは削除し、memory_levelカラムの値を参照して昇順に並べ直す。
     @qa_memory_level = @group.question_answers.select("memory_level").distinct.order(memory_level: "ASC")
+    # レコードを取得する際に、repeat_countカラムの値が重複したものは削除し、repeat_countカラムの値を参照して昇順に並べ直す。
     @qa_repeat_count = @group.question_answers.select("repeat_count").distinct.order(repeat_count: "ASC")
   end
 

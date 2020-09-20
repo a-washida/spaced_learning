@@ -27,4 +27,14 @@ module QuestionAnswersHelper
       '--'
     end
   end
+
+  # params[:q][:sorts]が存在する場合にparams[:q][:sorts]を返し、その他の場合は""を返すメソッド
+  def set_sorts
+    # params[:q]が存在しない場合にparams[:q][:sorts]を実行しようとするとNoMethodErrorが発生するため、先にparams[:q].present?の条件判定を挟んでおく。
+    if params[:q].present? && params[:q][:sorts].present?
+      params[:q][:sorts]
+    else
+      ""
+    end
+  end
 end

@@ -5,14 +5,19 @@
     <% if @question_answers.empty? %>
       <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
     <% end %>
-
+    
     <h1>
       問題検索
     </h1>
-    <%= search_form_for @q, url: search_group_question_answers_path(@group) do |f| %>
+    <%= search_form_for @q, url: group_question_answers_path(@group) do |f| %>
+      <%= f.label :sorts, '並び替え' %>
+      <%= f.collection_select :sorts, Sort.all, :value, :name, selected: set_sorts, include_blank: '指定なし' %>
+      <%= f.label :question_or_answer, 'キーワード' %>
+      <%= f.search_field :question_or_answer_cont %>
       <%= f.label :memory_level_eq, '記憶度' %>
-      <%= f.collection_select :memory_level_eq, @question_answer_name, :memory_level, :memory_level,  include_blank: '指定なし' %>
-      <br>
+      <%= f.collection_select :memory_level_eq, @qa_memory_level, :memory_level, :memory_level,  include_blank: '指定なし' %>
+      <%= f.label :repeat_count_eq, '復習回数' %>
+      <%= f.collection_select :repeat_count_eq, @qa_repeat_count, :repeat_count, :repeat_count,  include_blank: '指定なし' %>
       <%= f.submit '検索' %>
     <% end %>
 
