@@ -118,9 +118,9 @@ class QuestionAnswersController < ApplicationController
 
   def set_question_answer_column
     # レコードを取得する際に、memory_levelカラムの値が重複したものは削除し、memory_levelカラムの値を参照して昇順に並べ直す。
-    @qa_memory_level = @group.question_answers.select("memory_level").distinct.order(memory_level: "ASC")
+    @qa_memory_level = @group.question_answers.select('memory_level').distinct.order(memory_level: 'ASC')
     # レコードを取得する際に、repeat_countカラムの値が重複したものは削除し、repeat_countカラムの値を参照して昇順に並べ直す。
-    @qa_repeat_count = @group.question_answers.select("repeat_count").distinct.order(repeat_count: "ASC")
+    @qa_repeat_count = @group.question_answers.select('repeat_count').distinct.order(repeat_count: 'ASC')
   end
 
   # 問題管理ページの、特定の問題の位置に戻るためのurlを返すメソッド

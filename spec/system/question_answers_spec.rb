@@ -740,9 +740,9 @@ RSpec.describe '問題検索機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 問題が3つ作成されていることを確認する
-    expect(page).to have_css(".qa-index-item__qa", count: 3)
+    expect(page).to have_css('.qa-index-item__qa', count: 3)
     # 検索フォームが存在することを確認する
-    expect(page).to have_css(".search-form")
+    expect(page).to have_css('.search-form')
     # キーワードの入力欄に、@question_answers[0].questionを入力する
     fill_in 'キーワード', with: question_answers[0].question
     # 検索ボタンをクリックする
@@ -752,11 +752,11 @@ RSpec.describe '問題検索機能', type: :system do
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=#{question_answers[0].question}&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
     # 検索したキーワードが入力された状態が保持されていることを確認する
     expect(
-      find("#q_question_or_answer_cont").value
+      find('#q_question_or_answer_cont').value
     ).to eq question_answers[0].question
     # 検索したキーワードを含む問題のみが表示されていることを確認する
     expect(page).to have_content(question_answers[0].question)
-    expect(page).to have_css(".qa-index-item__qa", count: 1)
+    expect(page).to have_css('.qa-index-item__qa', count: 1)
   end
 
   it '並び替え(最終更新日時(新しい順))を行うと、最終更新日時が新しい順に問題が表示されていること' do
@@ -770,7 +770,7 @@ RSpec.describe '問題検索機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 検索フォームが存在することを確認する
-    expect(page).to have_css(".search-form")
+    expect(page).to have_css('.search-form')
     # 並び替えのプルダウンの最終更新日時(新しい順)を選択する
     select('最終更新日時(新しい順)', from: 'q[sorts]')
     # 検索ボタンをクリックする
@@ -782,13 +782,13 @@ RSpec.describe '問題検索機能', type: :system do
     expect(page).to have_select('q_sorts', selected: '最終更新日時(新しい順)')
     # 最終更新日時が新しい順に問題が表示されていることを確認する
     expect(
-      all(".display-question-content__textarea")[0].text
+      all('.display-question-content__textarea')[0].text
     ).to eq question_answers[2].question
     expect(
-      all(".display-question-content__textarea")[1].text
+      all('.display-question-content__textarea')[1].text
     ).to eq question_answers[1].question
     expect(
-      all(".display-question-content__textarea")[2].text
+      all('.display-question-content__textarea')[2].text
     ).to eq question_answers[0].question
   end
 
@@ -806,9 +806,9 @@ RSpec.describe '問題検索機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 問題が5つ作成されていることを確認する
-    expect(page).to have_css(".qa-index-item__qa", count: 5)
+    expect(page).to have_css('.qa-index-item__qa', count: 5)
     # 検索フォームが存在することを確認する
-    expect(page).to have_css(".search-form")
+    expect(page).to have_css('.search-form')
     # 記憶度のプルダウンの1を選択する
     select('1', from: 'q[memory_level_eq]')
     # 検索ボタンをクリックする
@@ -820,9 +820,9 @@ RSpec.describe '問題検索機能', type: :system do
     expect(page).to have_select('q_memory_level_eq', selected: '1')
     # 記憶度が1の問題のみが表示されていることを確認する
     expect(
-      all(".qa-index-item__record span")[1].text
+      all('.qa-index-item__record span')[1].text
     ).to eq '1'
-    expect(page).to have_css(".qa-index-item__qa", count: 1)
+    expect(page).to have_css('.qa-index-item__qa', count: 1)
   end
 
   it '復習回数を選択して検索すると、選択した復習回数の問題のみが表示されていること' do
@@ -839,9 +839,9 @@ RSpec.describe '問題検索機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 問題が5つ作成されていることを確認する
-    expect(page).to have_css(".qa-index-item__qa", count: 5)
+    expect(page).to have_css('.qa-index-item__qa', count: 5)
     # 検索フォームが存在することを確認する
-    expect(page).to have_css(".search-form")
+    expect(page).to have_css('.search-form')
     # 復習回数のプルダウンの1を選択する
     select('1', from: 'q[repeat_count_eq]')
     # 検索ボタンをクリックする
@@ -853,8 +853,8 @@ RSpec.describe '問題検索機能', type: :system do
     expect(page).to have_select('q_repeat_count_eq', selected: '1')
     # 復習回数が1の問題のみが表示されていることを確認する
     expect(
-      all(".qa-index-item__record span")[2].text
+      all('.qa-index-item__record span')[2].text
     ).to eq '1'
-    expect(page).to have_css(".qa-index-item__qa", count: 1)
+    expect(page).to have_css('.qa-index-item__qa', count: 1)
   end
 end

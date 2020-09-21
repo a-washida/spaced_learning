@@ -34,7 +34,7 @@ module QuestionAnswersHelper
     if params[:q].present? && params[:q][:sorts].present?
       params[:q][:sorts]
     else
-      ""
+      ''
     end
   end
 end
