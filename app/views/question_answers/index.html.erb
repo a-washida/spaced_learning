@@ -7,23 +7,34 @@
     <% end %>
     <%# 検索結果が0件の場合表示 %>
     <% if @question_answers.empty? && params[:q].present? %>
-      <p class="qa-index-message-empty">検索条件に該当する問題はありません</p>
+      <p class="qa-index-message-empty">検索に該当する問題はありません</p>
     <% end %>
     
-    <h1>
-      問題検索
-    </h1>
-    <%= search_form_for @q, url: group_question_answers_path(@group) do |f| %>
-      <%= f.label :sorts, '並び替え' %>
-      <%= f.collection_select :sorts, Sort.all, :value, :name, selected: set_sorts, include_blank: '指定なし' %>
-      <%= f.label :question_or_answer, 'キーワード' %>
-      <%= f.search_field :question_or_answer_cont %>
-      <%= f.label :memory_level_eq, '記憶度' %>
-      <%= f.collection_select :memory_level_eq, @qa_memory_level, :memory_level, :memory_level,  include_blank: '指定なし' %>
-      <%= f.label :repeat_count_eq, '復習回数' %>
-      <%= f.collection_select :repeat_count_eq, @qa_repeat_count, :repeat_count, :repeat_count,  include_blank: '指定なし' %>
-      <%= f.submit '検索' %>
+    <%# ransackを利用した検索フォーム %>
+    <%= search_form_for @q, url: group_question_answers_path(@group), class: 'search-form' do |f| %>
+      <div class="search-form__group-wrap">
+        <div class="search-form__group">
+          <%= f.label :question_or_answer_cont, 'キーワード', class: "search-form__label keyword" %>
+          <%= f.search_field :question_or_answer_cont, placeholder:"検索ワードを入力" %>
+        </div>
+        <div class="search-form__group">
+          <%= f.label :sorts, '並び替え', class: "search-form__label sort" %>
+          <%= f.collection_select :sorts, Sort.all, :value, :name, selected: set_sorts, include_blank: '指定なし' %>
+        </div>
+      </div>
+      <div class="search-form__group-wrap">
+        <div class="search-form__group">
+          <%= f.label :memory_level_eq, '記憶度', class: "search-form__label memory-level" %>
+          <%= f.collection_select :memory_level_eq, @qa_memory_level, :memory_level, :memory_level,  include_blank: '指定なし' %>
+        </div>
+        <div class="search-form__group">
+          <%= f.label :repeat_count_eq, '復習回数', class: "search-form__label repeat-count" %>
+          <%= f.collection_select :repeat_count_eq, @qa_repeat_count, :repeat_count, :repeat_count,  include_blank: '指定なし' %>
+        </div>
+      </div>
+      <%= f.submit '検索', class: "search-form__submit-btn" %>
     <% end %>
+    <%# // ransackを利用した検索フォーム %>
 
     <% @question_answers.each_with_index do |question_answer, i| %>
       <div class="qa-index-item" >
