@@ -89,7 +89,7 @@
   top: calc(50vh + 25px);
   left: 50vw;
   transform: translate(-50%, -50%);
-  width: 60vw;
+  width: 500px;
   max-height: calc(100vh - 50px);
 }
 
