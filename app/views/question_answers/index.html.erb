@@ -36,6 +36,10 @@
     <% end %>
     <%# // ransackを利用した検索フォーム %>
 
+    <%# 画像をクリックすると、この要素の子要素として挿入され、拡大表示される %>
+    <div id="image-target">
+    </div>
+
     <% @question_answers.each_with_index do |question_answer, i| %>
       <div class="qa-index-item" >
         <%# 復習ページから遷移してくる際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
