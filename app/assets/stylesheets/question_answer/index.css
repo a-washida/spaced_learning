@@ -72,6 +72,27 @@
   cursor: pointer;
 }
 
+#image-target {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.3);
+  z-index: 1;
+}
+
+#image-clone {
+  position: absolute;
+  /* headerの50pxを考慮して、要素がheaderを除いた画面領域でちょうど中央になるように設定 */
+  top: calc(50vh + 25px);
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-height: calc(100vh - 50px);
+}
+
 .qa-index-item {
   position: relative;
   width: 580px;
@@ -219,6 +240,11 @@ input[type="checkbox"]:checked ~ .qa-index-item__close {
     position: absolute;
     right: 30px;
     bottom: 10px;
+  }
+
+  #image-clone {
+    width: 95vw;
+    max-height: calc(100Vh - 50px);
   }
 
   .qa-index-item__qa {

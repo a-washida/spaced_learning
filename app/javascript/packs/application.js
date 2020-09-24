@@ -15,6 +15,7 @@ require("../change_font_or_image_size_by_pulldown.js")
 require("../preview_when_page_loaded.js")
 require("../answer_appear.js")
 require("../display_interval_if_memory_level_clicked.js")
+require("../zoom_image.js")
 // 挙動確認用。アプリリリース時には削除
 require("../change_date")
 

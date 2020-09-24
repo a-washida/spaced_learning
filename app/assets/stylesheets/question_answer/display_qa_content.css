@@ -17,4 +17,5 @@
 .display-answer-content__image {
   width: 200px;
   height: auto;
+  cursor: pointer;
 }
