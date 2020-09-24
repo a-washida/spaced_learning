@@ -876,21 +876,21 @@ RSpec.describe '画像の拡大表示機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 問題エリアに存在する画像をクリックする
-    find(".display-question-content__image").click
+    find('.display-question-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
     # 解答エリアに存在する画像をクリックする
-    find(".display-answer-content__image").click
+    find('.display-answer-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
   end
 
   it '問題管理ページで検索を行なった先のページで、画像をクリックすると拡大表示され、再度クリックすると拡大表示が消えること' do
@@ -908,21 +908,21 @@ RSpec.describe '画像の拡大表示機能', type: :system do
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
     # 問題エリアに存在する画像をクリックする
-    find(".display-question-content__image").click
+    find('.display-question-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
     # 解答エリアに存在する画像をクリックする
-    find(".display-answer-content__image").click
+    find('.display-answer-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
   end
 
   it '問題復習ページで、画像をクリックすると拡大表示され、再度クリックすると拡大表示が消えること' do
@@ -935,22 +935,22 @@ RSpec.describe '画像の拡大表示機能', type: :system do
     # 問題復習ページへ遷移していることを確認する
     expect(current_path).to eq review_group_question_answers_path(@group)
     # 問題エリアに存在する画像をクリックする
-    find(".display-question-content__image").click
+    find('.display-question-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
     # 解答エリアをクリックする
     find('.review-click').click
     # 解答エリアに存在する画像をクリックする
-    find(".display-answer-content__image").click
+    find('.display-answer-content__image').click
     # 画像が拡大表示されていることを確認する
-    expect(page).to  have_css("#image-clone")
+    expect(page).to have_css('#image-clone')
     # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
-    find("#image-target").click
+    find('#image-target').click
     # 拡大表示されていた画像が消えていることを確認する
-    expect(page).to have_no_css("#image-clone")
+    expect(page).to have_no_css('#image-clone')
   end
 end
