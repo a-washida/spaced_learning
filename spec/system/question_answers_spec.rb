@@ -858,3 +858,99 @@ RSpec.describe '問題検索機能', type: :system do
     expect(page).to have_css('.qa-index-item__qa', count: 1)
   end
 end
+
+RSpec.describe '画像の拡大表示機能', type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @group = FactoryBot.create(:group, user_id: @user.id)
+    @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+  end
+
+  it '問題管理ページで、画像をクリックすると拡大表示され、再度クリックすると拡大表示が消えること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題管理ページへのリンクをクリックする
+    find('.group-panel.js-2').click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 問題エリアに存在する画像をクリックする
+    find(".display-question-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+    # 解答エリアに存在する画像をクリックする
+    find(".display-answer-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+  end
+
+  it '問題管理ページで検索を行なった先のページで、画像をクリックすると拡大表示され、再度クリックすると拡大表示が消えること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題管理ページへのリンクをクリックする
+    find('.group-panel.js-2').click
+    # 問題管理ページへ遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@group)
+    # 検索ボタンをクリックする
+    find('input[name="commit"]').click
+    # 検索後のページに遷移していることを確認する
+    uri = URI.parse(current_url)
+    expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
+    # 問題エリアに存在する画像をクリックする
+    find(".display-question-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+    # 解答エリアに存在する画像をクリックする
+    find(".display-answer-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+  end
+
+  it '問題復習ページで、画像をクリックすると拡大表示され、再度クリックすると拡大表示が消えること' do
+    # サインインする
+    login(@user)
+    # トップページに遷移していることを確認する
+    expect(current_path).to eq root_path
+    # 問題復習ページへのリンクをクリックする
+    find('.group-panel.js-0').click
+    # 問題復習ページへ遷移していることを確認する
+    expect(current_path).to eq review_group_question_answers_path(@group)
+    # 問題エリアに存在する画像をクリックする
+    find(".display-question-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+    # 解答エリアをクリックする
+    find('.review-click').click
+    # 解答エリアに存在する画像をクリックする
+    find(".display-answer-content__image").click
+    # 画像が拡大表示されていることを確認する
+    expect(page).to  have_css("#image-clone")
+    # 画面をクリックする(id="image-target"の要素で画面全域が覆われているので、この要素をクリック)
+    find("#image-target").click
+    # 拡大表示されていた画像が消えていることを確認する
+    expect(page).to have_no_css("#image-clone")
+  end
+end
