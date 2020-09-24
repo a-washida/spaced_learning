@@ -89,11 +89,16 @@
   z-index: 2;
 }
 
-input[type="checkbox"]:checked ~ .memory-level-detail {
+.review-option__checkbox {
+  position: absolute;
+  left: -100vw;
+}
+
+.review-option__checkbox:checked ~ .memory-level-detail {
   display: block;
 }
 
-input[type="checkbox"]:checked ~ .review-option__close {
+.review-option__checkbox:checked ~ .review-option__close {
   display: block;
 }
 

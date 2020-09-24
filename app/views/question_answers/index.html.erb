@@ -63,7 +63,7 @@
             復習回数：<span><%= question_answer.repeat_count %></span>
           </div>
           <%# このチェックボックスは画面上には表示されない。下のlabel要素2つと紐づいている。 %>
-          <input type="checkbox" id="qa-index__check-<%=i%>">
+          <input type="checkbox" id="qa-index__check-<%=i%>" class="qa-index-item__checkbox">
           <label for="qa-index__check-<%=i%>"><%= image_tag 'vertical_three_point_reader.png', class: 'qa-index-item__img-three-point' %></label>
           <div class="img-three-point-supplement-text">管理</div>
           <%# 以下のlabel要素は縦3点リーダーアイコンを押さない限り非表示 %>
