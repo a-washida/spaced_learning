@@ -37,6 +37,12 @@ window.addEventListener("load", (e) => {
         image.setAttribute("style", `width: ${Math.floor(200 * selectedOption.innerHTML)}px;`)
         const insertImage = document.getElementById(`${questionOrAnswer}-preview__img`)
         insertImage.appendChild(image)
+        // checkboxと紐付けるlabel要素を生成
+        const destroy = document.createElement("label")
+        destroy.innerText = '削除'
+        destroy.setAttribute("class", `${questionOrAnswer}-preview__img-destroy`)
+        destroy.setAttribute("for", `qa-form__${questionOrAnswer}-checkbox`)
+        insertImage.insertAdjacentElement('beforeend', destroy)
       }
     }
 
