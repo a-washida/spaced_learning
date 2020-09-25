@@ -36,12 +36,16 @@ class QuestionAnswersController < ApplicationController
   end
 
   def update
-    if @question_answer.update(nested_form_params.except(:display_date, :memory_level, :repeat_count))
-      # ?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1} この部分は特定の問題が、ページネーションで分割したどのページに存在するかを考慮して遷移するための記述。
-      redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
-    else
-      render 'edit'
+    ActiveRecord::Base.transaction do
+      detach_image
+      @question_answer.update!(nested_form_params.except(:display_date, :memory_level, :repeat_count))
     end
+    # 画像の関連づけ解消の際に、active_storage_blobsなどは残り無駄なデータとなるので削除。(バッチ処理のやり方が分かったら、そちらに移す)
+    ActiveStorage::Blob.unattached.find_each(&:purge)
+    # ?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1} この部分は特定の問題が、ページネーションで分割したどのページに存在するかを考慮して遷移するための記述。
+    redirect_to "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', @question_answer.id).count / 10 + 1}#link-#{@question_answer.id}"
+  rescue StandardError => e
+    render 'edit'
   end
 
   def destroy
@@ -126,5 +130,11 @@ class QuestionAnswersController < ApplicationController
   # 問題管理ページの、特定の問題の位置に戻るためのurlを返すメソッド
   def back_to_specific_question_position
     request.referer + "#link-#{@question_answer.id}" || root_path
+  end
+
+  # editページで画像の削除をクリックした場合、active_storage_attachmentsを削除して画像の関連づけを解消するメソッド
+  def detach_image
+    @question_answer.question_option.image.detach if params[:question_answer][:question_option_attributes][:_destroy] == '1'
+    @question_answer.answer_option.image.detach if params[:question_answer][:answer_option_attributes][:_destroy] == '1'
   end
 end

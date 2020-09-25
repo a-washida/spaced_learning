@@ -49,6 +49,11 @@
   cursor: pointer;
 }
 
+.qa-form__checkbox {
+  position: absolute;
+  left: -100vw;
+}
+
 .hidden {
   display: none;
 }
