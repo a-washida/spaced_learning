@@ -37,12 +37,22 @@ window.addEventListener("load", (e) => {
         image.setAttribute("style", `width: ${Math.floor(200 * selectedOption.innerHTML)}px;`)
         const insertImage = document.getElementById(`${questionOrAnswer}-preview__img`)
         insertImage.appendChild(image)
-        // checkboxと紐付けるlabel要素を生成
+        // checkboxと紐付けるために、label要素を生成して変数destroyに代入
         const destroy = document.createElement("label")
         destroy.innerText = '削除'
         destroy.setAttribute("class", `${questionOrAnswer}-preview__img-destroy`)
         destroy.setAttribute("for", `qa-form__${questionOrAnswer}-checkbox`)
         insertImage.insertAdjacentElement('beforeend', destroy)
+        // destroyに、クリックするとボタンの見た目を変更するイベントを追加
+        destroy.addEventListener("click", (e) => {
+          if (destroy.getAttribute("data-clicked") == null){
+            destroy.setAttribute("data-clicked", "true")
+            destroy.setAttribute("style", "background-color: #282c2f; color: #fff;")
+          } else {
+            destroy.removeAttribute("data-clicked")
+            destroy.removeAttribute("style")
+          }
+        })
       }
     }
 
