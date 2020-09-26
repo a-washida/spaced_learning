@@ -424,6 +424,41 @@ RSpec.describe '問題編集機能', type: :system do
       expect(page).to have_css('.display-question-content__image')
       expect(page).to have_css('.display-answer-content__image')
     end
+
+    it '編集時に画像を削除できること' do
+      question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 問題管理ページへのリンクをクリックする
+      find('.group-panel.js-2').click
+      # 問題管理ページへ遷移していることを確認する
+      expect(current_path).to eq group_question_answers_path(@group)
+      # 問題エリアと解答エリアに、保存した画像が存在することを確認する
+      expect(page).to have_css('.display-question-content__image')
+      expect(page).to have_css('.display-answer-content__image')
+      # 縦三点リーダーのアイコンをクリックする
+      find('.qa-index-item__img-three-point').click
+      # 問題編集のリンクをクリックする
+      all('.qa-index-item__management-list a')[0].click
+      # 問題編集ページへ遷移していることを確認する
+      expect(current_path).to eq edit_group_question_answer_path(@group, question_answer)
+      # 問題と解答のプレビューエリアに「画像を削除」ボタンが存在することを確認する
+      expect(page).to have_css(".question-preview__img-destroy")
+      expect(page).to have_css(".answer-preview__img-destroy")
+      # 「画像を削除」ボタンをクリックする(問題と解答両方)
+      find(".question-preview__img-destroy").click
+      find(".answer-preview__img-destroy").click
+      # 編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # 問題管理ページの編集した問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
+      uri = URI.parse(current_url)
+      expect("#{uri.path}?#{uri.query}##{uri.fragment}").to eq "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where('id<?', question_answer.id).count / 10 + 1}#link-#{question_answer.id}"
+      # 問題エリアと解答エリアに表示されていた画像が削除されていることを確認する
+      expect(page).to have_no_css('.display-question-content__image')
+      expect(page).to have_no_css('.display-answer-content__image')
+    end
   end
 
   context '問題編集に失敗した時' do
