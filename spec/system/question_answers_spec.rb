@@ -445,11 +445,11 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集ページへ遷移していることを確認する
       expect(current_path).to eq edit_group_question_answer_path(@group, question_answer)
       # 問題と解答のプレビューエリアに「画像を削除」ボタンが存在することを確認する
-      expect(page).to have_css(".question-preview__img-destroy")
-      expect(page).to have_css(".answer-preview__img-destroy")
+      expect(page).to have_css('.question-preview__img-destroy')
+      expect(page).to have_css('.answer-preview__img-destroy')
       # 「画像を削除」ボタンをクリックする(問題と解答両方)
-      find(".question-preview__img-destroy").click
-      find(".answer-preview__img-destroy").click
+      find('.question-preview__img-destroy').click
+      find('.answer-preview__img-destroy').click
       # 編集ボタンをクリックしてフォームを送信する
       find('input[name="commit"]').click
       # 問題管理ページの編集した問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
