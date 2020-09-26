@@ -51,6 +51,8 @@
 
 #qa-form__question-checkbox,
 #qa-form__answer-checkbox {
+  /* フォームの入力欄をtabで移動する際にcheckboxが割り込んでくるので、display: none;でcheckboxの方にはtab移動しないようにする */
+  display: none;
   position: absolute;
   left: -100vw;
 }
