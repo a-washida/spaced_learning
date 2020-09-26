@@ -105,10 +105,12 @@
 .question-preview__img-destroy,
 .answer-preview__img-destroy {
   display: block;
-  width: 50px;
+  width: 90px;
   height: 23px;
-  line-height: 19px;
-  border: 2px solid #000;
+  line-height: 21px;
+  border: 1px solid #808080;
+  border-radius: 3px;
+  background-color: rgb(239, 239, 239);
   font-size: 0.9rem;
   color: #000;
   text-align: center;

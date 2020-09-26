@@ -39,7 +39,7 @@ window.addEventListener("load", (e) => {
         insertImage.appendChild(image)
         // checkboxと紐付けるために、label要素を生成して変数destroyに代入
         const destroy = document.createElement("label")
-        destroy.innerText = '削除'
+        destroy.innerText = '画像を削除'
         destroy.setAttribute("class", `${questionOrAnswer}-preview__img-destroy`)
         destroy.setAttribute("for", `qa-form__${questionOrAnswer}-checkbox`)
         insertImage.insertAdjacentElement('beforeend', destroy)
