@@ -7,17 +7,8 @@ window.addEventListener("load", (e) => {
                                             action === "update" ||
                                             action === "create")){
 
-    // プルダウンのoption要素の中でselectedされている要素を返り値として返す関数式
-    const getSelectedOptionInPulldown = (questionOrAnswer, fontOrImage) => {
-      const pulldownElement = document.getElementById(`question_answer_${questionOrAnswer}_option_attributes_${fontOrImage}_size_id`)
-      // 現在選択されているブルダウンの項目が、上から何番目の項目なのかを取得
-      const value = pulldownElement.value
-      // プルダウン内のoption要素を全て取得
-      const pulldownOptions = document.querySelectorAll(`#question_answer_${questionOrAnswer}_option_attributes_${fontOrImage}_size_id option`);
-      // 現在選択されているプルダウンの項目の要素(<option>)を取得
-      const selectedOption = pulldownOptions[value - 1];
-      return selectedOption
-    }
+    // モジュールを読み込むことで、プルダウンでselectedされているoption要素を返す関数式を、変数に代入
+    const getSelectedOptionInPulldown = require('./module_get_selected_option.js')
 
     // テキストエリアに入力された値を取得し、フォントサイズのプルダウンで設定された倍率を適用した上で、プレビュー表示する関数式
     const setText = (questionOrAnswer) => {
@@ -37,6 +28,22 @@ window.addEventListener("load", (e) => {
         image.setAttribute("style", `width: ${Math.floor(200 * selectedOption.innerHTML)}px;`)
         const insertImage = document.getElementById(`${questionOrAnswer}-preview__img`)
         insertImage.appendChild(image)
+        // checkboxと紐付けるために、label要素を生成して変数destroyに代入
+        const destroy = document.createElement("label")
+        destroy.innerText = '画像を削除'
+        destroy.setAttribute("class", `${questionOrAnswer}-preview__img-destroy`)
+        destroy.setAttribute("for", `qa-form__${questionOrAnswer}-checkbox`)
+        insertImage.insertAdjacentElement('beforeend', destroy)
+        // destroyに、クリックするとボタンの見た目を変更するイベントを追加
+        destroy.addEventListener("click", (e) => {
+          if (destroy.getAttribute("data-clicked") == null){
+            destroy.setAttribute("data-clicked", "true")
+            destroy.setAttribute("style", "background-color: #282c2f; color: #fff;")
+          } else {
+            destroy.removeAttribute("data-clicked")
+            destroy.removeAttribute("style")
+          }
+        })
       }
     }
 

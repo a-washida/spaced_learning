@@ -30,7 +30,7 @@
           <div class="review-option__memory-level-description">
             <div class="review-option__memory-level-text">記憶度</div>
             <%# このチェックボックスは画面上に表示されない。下のlabel要素2つと紐づいている %>
-            <input type="checkbox" id="review-option__check-<%=i%>">
+            <input type="checkbox" id="review-option__check-<%=i%>" class="review-option__checkbox">
             <label for="review-option__check-<%=i%>" class="review-option__question"><%= image_tag 'review_question.png', class: "review-option__question-img" %></label>
             <%# 以下のlabel要素は?アイコンを押さない限り非表示 %>
             <label for="review-option__check-<%=i%>" class="review-option__close"></label>

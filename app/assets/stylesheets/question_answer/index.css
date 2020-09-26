@@ -181,12 +181,12 @@
   text-decoration: none;
 }
 
-input[type="checkbox"] {
+.qa-index-item__checkbox {
   position: absolute;
   left: -100vw;
 }
 
-input[type="checkbox"]:checked ~ .qa-index-item__management-list{
+.qa-index-item__checkbox:checked ~ .qa-index-item__management-list{
   display: block;
   position: absolute;
   right: 0px;
@@ -197,7 +197,7 @@ input[type="checkbox"]:checked ~ .qa-index-item__management-list{
   z-index: 2;
 }
 
-input[type="checkbox"]:checked ~ .qa-index-item__close {
+.qa-index-item__checkbox:checked ~ .qa-index-item__close {
   display: block;
 }
 
