@@ -175,7 +175,7 @@ RSpec.describe '問題作成機能', type: :system do
       # プレビューエリアのテキストの文字サイズにプルダウンで選択した0.8が反映されていることを確認する
       expect(page).to have_selector("#answer-preview__textarea[style='font-size: 0.8rem;']")
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content('Question text or image is indispensable')
+      expect(page).to have_content('問題はテキストもしくは画像の入力が必須です')
     end
 
     it '解答エリアにテキストと画像どちらも入力していない場合、問題作成に失敗し、エラーメッセージが表示されること' do
@@ -215,7 +215,7 @@ RSpec.describe '問題作成機能', type: :system do
         find('input[name="commit"]').click
       end.not_to change { QuestionAnswer.count && QuestionOption.count && AnswerOption.count && RepetitionAlgorithm.count && Record.count }
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content('Answer text or image is indispensable')
+      expect(page).to have_content('解答はテキストもしくは画像の入力が必須です')
     end
   end
 end
@@ -501,7 +501,7 @@ RSpec.describe '問題編集機能', type: :system do
         find('#answer-preview__textarea').text
       ).to eq qa_with_no_image.answer
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content('Question text or image is indispensable')
+      expect(page).to have_content('問題はテキストもしくは画像の入力が必須です')
     end
 
     it '解答エリアの入力にテキストも画像も存在しない場合、問題編集に失敗すること' do
@@ -543,7 +543,7 @@ RSpec.describe '問題編集機能', type: :system do
         find('#answer-preview__textarea', visible: false).text
       ).to eq ''
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content('Answer text or image is indispensable')
+      expect(page).to have_content('解答はテキストもしくは画像の入力が必須です')
     end
   end
 end
