@@ -57,7 +57,7 @@ RSpec.describe 'GroupsController', type: :request do
 
       it 'エラーメッセージが表示されること' do
         post groups_path, params: { group: FactoryBot.attributes_for(:group, :invalid) }
-        expect(response.body).to include('Name can&#39;t be blank')
+        expect(response.body).to include('グループ名を入力してください')
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe 'GroupsController', type: :request do
 
       it 'レスポンスにエラーメッセージが含まれること' do
         patch group_path(english), params: { group: FactoryBot.attributes_for(:group, :invalid) }
-        expect(response.body).to include("Name can't be blank")
+        expect(response.body).to include("グループ名を入力してください")
       end
     end
   end

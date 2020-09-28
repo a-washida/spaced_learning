@@ -54,7 +54,7 @@ RSpec.describe 'グループ作成機能', type: :system do
       # グループが作成されていないことを確認する
       expect(page).to have_no_css('.group-panel')
       # エラーメッセージが表示されていることを確認する
-      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("グループ名を入力してください")
     end
   end
 end
@@ -122,7 +122,7 @@ RSpec.describe 'グループ編集機能', type: :system do
       # フォームを送信する
       find('input[name="commit"]').click
       # 画面上にalertダイアログが表示されていることを確認して、okを押す
-      expect(page.accept_alert).to eq "Name can't be blank"
+      expect(page.accept_alert).to eq "グループ名を入力してください"
       # 画面上にグループ編集フォームが存在することを確認する
       expect(page).to have_css('.top-form-edit')
       # ×ボタンをクリックする

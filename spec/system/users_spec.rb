@@ -72,10 +72,10 @@ RSpec.describe 'ログイン', type: :system do
       expect(page).to have_content(@user.nickname)
       expect(page).to have_content('ログアウト')
       # サインアップページへ遷移するボタンや、ログインページへ遷移するボタンが表示されていないことを確認する
-      expect(page).to have_no_content('ログイン')
+      expect(page).to have_no_css(".login")
       expect(page).to have_no_content('新規登録')
-      # ログイン成功のnotice(Signed in successfully.)が表示されていることを確認する
-      expect(page).to have_content('Signed in successfully.')
+      # ログイン成功のnotice(ログインしました。)が表示されていることを確認する
+      expect(page).to have_content('ログインしました。')
     end
   end
   context 'ログインができないとき' do
@@ -89,8 +89,8 @@ RSpec.describe 'ログイン', type: :system do
       find('input[name="commit"]').click
       # ログインページへ戻されることを確認する
       expect(current_path).to eq new_user_session_path
-      # エラーメッセージ(Invalid Email or password.)が表示されることを確認する
-      expect(page).to have_content('Invalid Email or password.')
+      # エラーメッセージ(Eメールまたはパスワードが違います。)が表示されることを確認する
+      expect(page).to have_content('Eメールまたはパスワードが違います。')
     end
   end
 end
