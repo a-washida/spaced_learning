@@ -1,0 +1,13 @@
+ja:
+ activerecord:
+   attributes:
+     user:
+       nickname: ニックネーム
+     group:
+       name: グループ名
+     question_answer:
+       question: 問題
+       answer: 解答
+       display_date: 表示日
+       memory_level: 記憶度
+       repeat_count: 復習回数
