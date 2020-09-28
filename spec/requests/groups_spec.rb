@@ -97,7 +97,7 @@ RSpec.describe 'GroupsController', type: :request do
 
       it 'レスポンスにエラーメッセージが含まれること' do
         patch group_path(english), params: { group: FactoryBot.attributes_for(:group, :invalid) }
-        expect(response.body).to include("グループ名を入力してください")
+        expect(response.body).to include('グループ名を入力してください')
       end
     end
   end

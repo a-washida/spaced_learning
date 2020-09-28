@@ -50,13 +50,13 @@ RSpec.describe QuestionAnswer, type: :model do
       it 'display_dateが空なら保存できないこと' do
         @question_answer.display_date = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("表示日を入力してください")
+        expect(@question_answer.errors.full_messages).to include('表示日を入力してください')
       end
 
       it 'memory_levelが空なら保存できないこと' do
         @question_answer.memory_level = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("記憶度を入力してください")
+        expect(@question_answer.errors.full_messages).to include('記憶度を入力してください')
       end
 
       it 'memory_levelが数値でないなら保存できないこと' do
@@ -68,7 +68,7 @@ RSpec.describe QuestionAnswer, type: :model do
       it 'repeat_countが空なら保存できないこと' do
         @question_answer.repeat_count = nil
         @question_answer.valid?
-        expect(@question_answer.errors.full_messages).to include("復習回数を入力してください")
+        expect(@question_answer.errors.full_messages).to include('復習回数を入力してください')
       end
 
       it 'repeat_countが数値でないなら保存できないこと' do

@@ -27,7 +27,7 @@ RSpec.describe Group, type: :model do
       it 'nameが存在しなければ保存できないこと' do
         @group.name = ''
         @group.valid?
-        expect(@group.errors.full_messages).to include("グループ名を入力してください")
+        expect(@group.errors.full_messages).to include('グループ名を入力してください')
       end
 
       it 'nameが17文字以上であれば登録できないこと' do
