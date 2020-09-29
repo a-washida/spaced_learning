@@ -1,20 +1,15 @@
 <%= render 'shared/header' %>
 <div class="qa-index-main">
+
+  <%# 異なるグループに遷移するための、グループリンクの一覧 %>
   <div class="group-links">
     <ul class="group-links__ul">
-      <% @groups.each do |group| %>
-        <%= link_to group_question_answers_path(group) do %>
-          <li class="group-links__li">
-            <div class="group-links__li-left"><%= group.name %></div>
-            <div class="group-links__li-right"><%= group.question_answers.count %></div>
-            <% if group.id == @group.id %>
-              <div class="hoge"></div>
-            <% end %>
-          </li>
-        <% end %>
-      <% end %>
+    <% @groups.each do |group| %>
+      <%= render partial: 'group-link', locals: { group: group, path: group_question_answers_path(group), count: group.question_answers.count } %>
+    <% end %>
     </ul>
   </div>
+
   <div class="qa-index-question-and-answer-area">
     <%# 投稿された問題が0個なら表示 %>
     <% if @question_answers.empty? && params[:q].nil? %>
