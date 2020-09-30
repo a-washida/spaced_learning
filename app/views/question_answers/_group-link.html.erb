@@ -1,10 +1,10 @@
 <%= link_to path do %>
   <li class="group-links__li">
-    <div class="group-links__li-left"><%= group.name %></div>
-    <div class="group-links__li-right"><%= count %></div>
     <%# 現在のページを示しているリンクだけ見た目を変える %>
     <% if group.id == @group.id %>
       <div class="group-links__li-current"></div>
     <% end %>
+    <div class="group-links__li-left"><%= group.name %></div>
+    <div class="group-links__li-right"><%= count %></div>
   </li>
 <% end %>
