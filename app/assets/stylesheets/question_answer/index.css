@@ -215,6 +215,11 @@
   text-align: center;
 }
 
+@media (max-width: 820px) {
+  .qa-index-question-and-answer-area {
+    margin-bottom: 60px;
+  }
+}
 
 @media (max-width: 599px) {
   .qa-index-question-and-answer-area {

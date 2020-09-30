@@ -1,74 +1,86 @@
 <%# 挙動確認用のファイル。アプリリリース時には削除 %>
 <%= render "shared/header" %>
 <div class="review-main">
-  <div class="change-date">
-    <p class="change-date__text">挙動確認用に日付を変更できます</p>
-    <%= form_with url: change_date_group_question_answers_path(@group), method: :get, class: 'change-date__form', local: true do |f| %>
-      <%= f.date_field :date %>
-      <%= f.submit '送信' %>
+
+  <%# 異なるグループに遷移するための、グループリンクの一覧 %>
+  <div class="group-links">
+    <ul class="group-links__ul">
+    <% @groups.each do |group| %>
+      <%= render partial: 'group-link', locals: { group: group, path: review_group_question_answers_path(group), count: group.question_answers.count } %>
     <% end %>
-    <div class="change-date__current-date">現在の日付: <%= @date %></div>
+    </ul>
   </div>
-  <div class="all-reviews-wrap">
-  <%# 残りの問題が0個なら表示 %>
-  <% if @question_answers.empty? %>
-    <p class="review-message-complete">今日の復習は完了です!<br>お疲れ様でした!</p>
-  <% end %>
-  <% @question_answers.each_with_index do |question_answer, i| %>
-    <div class="review-individual-wrap">
-      <div class="review-question-answer">
-        <%# 問題と解答の内容が記述されている部分テンプレートをrender %>
-        <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
-        <%= render partial: 'display_answer_content', locals: {question_answer: question_answer} %>
-        <div class="review-click">クリックすると解答を表示</div>
-      </div>
-      <%# 問題と解答の下に位置するエリア %>
-      <div class="review-option">
-        <%# 問題管理ページの、対応する問題の場所にリダイレクト(ページネーションのページ数も考慮) %>
-        <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/10 + 1}#link-#{question_answer.id}", class: "link-question-management" %>
-        <div class="review-option__memory-level-wrap">
-          <div class="review-option__memory-level-description">
-            <div class="review-option__memory-level-text">記憶度</div>
-            <%# このチェックボックスは画面上に表示されない。下のlabel要素2つと紐づいている %>
-            <input type="checkbox" id="review-option__check-<%=i%>" class="review-option__checkbox">
-            <label for="review-option__check-<%=i%>" class="review-option__question"><%= image_tag 'review_question.png', class: "review-option__question-img" %></label>
-            <%# 以下のlabel要素は?アイコンを押さない限り非表示 %>
-            <label for="review-option__check-<%=i%>" class="review-option__close"></label>
-            <%# 記憶度の数字の説明。?アイコンを押さない限り非表示 %>
-            <p class="memory-level-detail">
-              記憶度1: 思い出せず、見覚えもない<br>
-              記憶度2: 思い出せなかったが、見覚えはある<br>
-              記憶度3: 思い出せたが、少し考えた<br>
-              記憶度4: 瞬時に思い出せた
-            </p>
-            <div class="review-option__notice-display-date">ボタンを選択してください</div>
-          </div>
-          <div class="review-option__btn-wrap">
-            <div class="review-option__memory-level-low">低</div>
-            <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が5つ付与されている %>
-            <% 4.times do |i| %>
-              <div class="rebiew-option__btn-outer-line">
-                <div class="review-option__btn js-<%=i%>"
-                    data-interval=<%=question_answer.repetition_algorithm.interval%> 
-                    data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
-                    data-qa-id=<%=question_answer.id%> 
-                    data-repeat-count=<%=question_answer.repeat_count%>
-                    data-review-count="1"
-                    data-date=<%=@date%>><%= i + 1 %></div>
-              </div>
-            <% end %>
-            <div class="review-option__memory-level-high">高</div>
+
+  <div class="review-main__right">
+    <div class="change-date">
+      <p class="change-date__text">挙動確認用に日付を変更できます</p>
+      <%= form_with url: change_date_group_question_answers_path(@group), method: :get, class: 'change-date__form', local: true do |f| %>
+        <%= f.date_field :date %>
+        <%= f.submit '送信' %>
+      <% end %>
+      <div class="change-date__current-date">現在の日付: <%= @date %></div>
+    </div>
+    <div class="all-reviews-wrap">
+    <%# 残りの問題が0個なら表示 %>
+    <% if @question_answers.empty? %>
+      <p class="review-message-complete">今日の復習は完了です!<br>お疲れ様でした!</p>
+    <% end %>
+    <% @question_answers.each_with_index do |question_answer, i| %>
+      <div class="review-individual-wrap">
+        <div class="review-question-answer">
+          <%# 問題と解答の内容が記述されている部分テンプレートをrender %>
+          <%= render partial: 'display_question_content', locals: {question_answer: question_answer} %>
+          <%= render partial: 'display_answer_content', locals: {question_answer: question_answer} %>
+          <div class="review-click">クリックすると解答を表示</div>
+        </div>
+        <%# 問題と解答の下に位置するエリア %>
+        <div class="review-option">
+          <%# 問題管理ページの、対応する問題の場所にリダイレクト(ページネーションのページ数も考慮) %>
+          <%= link_to '問題管理', "/groups/#{@group.id}/question_answers/?page=#{@group.question_answers.where("id<?", question_answer.id).count/10 + 1}#link-#{question_answer.id}", class: "link-question-management" %>
+          <div class="review-option__memory-level-wrap">
+            <div class="review-option__memory-level-description">
+              <div class="review-option__memory-level-text">記憶度</div>
+              <%# このチェックボックスは画面上に表示されない。下のlabel要素2つと紐づいている %>
+              <input type="checkbox" id="review-option__check-<%=i%>" class="review-option__checkbox">
+              <label for="review-option__check-<%=i%>" class="review-option__question"><%= image_tag 'review_question.png', class: "review-option__question-img" %></label>
+              <%# 以下のlabel要素は?アイコンを押さない限り非表示 %>
+              <label for="review-option__check-<%=i%>" class="review-option__close"></label>
+              <%# 記憶度の数字の説明。?アイコンを押さない限り非表示 %>
+              <p class="memory-level-detail">
+                記憶度1: 思い出せず、見覚えもない<br>
+                記憶度2: 思い出せなかったが、見覚えはある<br>
+                記憶度3: 思い出せたが、少し考えた<br>
+                記憶度4: 瞬時に思い出せた
+              </p>
+              <div class="review-option__notice-display-date">ボタンを選択してください</div>
+            </div>
+            <div class="review-option__btn-wrap">
+              <div class="review-option__memory-level-low">低</div>
+              <%# 1から4までの数字のついたボタンを作成。それぞれにカスタムデータ属性が5つ付与されている %>
+              <% 4.times do |i| %>
+                <div class="rebiew-option__btn-outer-line">
+                  <div class="review-option__btn js-<%=i%>"
+                      data-interval=<%=question_answer.repetition_algorithm.interval%> 
+                      data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
+                      data-qa-id=<%=question_answer.id%> 
+                      data-repeat-count=<%=question_answer.repeat_count%>
+                      data-review-count="1"
+                      data-date=<%=@date%>><%= i + 1 %></div>
+                </div>
+              <% end %>
+              <div class="review-option__memory-level-high">高</div>
+            </div>
           </div>
         </div>
+        <%# //問題と解答の下に位置するエリア %>
       </div>
-      <%# //問題と解答の下に位置するエリア %>
+    <% end %>
+    <%# 残りの問題が0個の場合には非表示 %>
+    <% if @question_answers.present? %>
+      <div class="review-link-outer-line">
+        <%= link_to '次の問題を表示する', "/groups/#{@group.id}/question_answers/change_date?date=#{@date}", class: 'review-display-next-quesiton' %>
+      </div>
+    <% end %>
     </div>
-  <% end %>
-  <%# 残りの問題が0個の場合には非表示 %>
-  <% if @question_answers.present? %>
-    <div class="review-link-outer-line">
-      <%= link_to '次の問題を表示する', "/groups/#{@group.id}/question_answers/change_date?date=#{@date}", class: 'review-display-next-quesiton' %>
-    </div>
-  <% end %>
   </div>
 </div>

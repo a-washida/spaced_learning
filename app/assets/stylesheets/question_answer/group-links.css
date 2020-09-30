@@ -37,10 +37,17 @@
   position: absolute;
   right: 8px;
   bottom: 0;
-  color: purple;
   font-size: 0.8rem;
   font-weight: bold;
   text-align: right;
+}
+
+.qa-index-main .group-links__li-right {
+  color: #800080;
+}
+
+.review-main .group-links__li-right {
+  color: #008000;
 }
 
 .group-links__li-current {

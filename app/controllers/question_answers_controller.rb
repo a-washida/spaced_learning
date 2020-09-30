@@ -1,6 +1,6 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
-  before_action :set_groups, only: :index
+  before_action :set_groups, only: [:index, :review, :change_date]
   before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
