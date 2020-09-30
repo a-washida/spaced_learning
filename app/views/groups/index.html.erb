@@ -27,7 +27,15 @@
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 0 } %>
       <% end %>
-      <%# <div class="insert-group-panel"></div> %>
+      <div class="open-create-form"><span class="top-plus">+</span> グループを作成
+      </div>
+      <%= form_with model: @group, class: 'top-form-create', local: true do |f| %>
+        <%= f.text_area :name, class:"top-form-create__input", placeholder:"グループ名を入力してください。" %>
+        <div class="top-form-create__lower">
+          <%= f.submit "作成", class:"top-form-create__submit-btn" %>
+          <div class="top-form-create__close-btn"><%=image_tag 'top_form_close.png'%></div>
+        </div>
+      <% end %>
       </div>
     </div>
     <%# //左の問題復習エリア %>
@@ -42,16 +50,6 @@
         <% end %>
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 1 } %>
-      <% end %>
-      <%# <div class="insert-group-panel"></div> %>
-      <div class="open-create-form"><span class="top-plus">+</span> グループを作成
-      </div>
-      <%= form_with model: @group, class: 'top-form-create', local: true do |f| %>
-        <%= f.text_area :name, class:"top-form-create__input", placeholder:"グループ名を入力してください。" %>
-        <div class="top-form-create__lower">
-          <%= f.submit "作成", class:"top-form-create__submit-btn" %>
-          <div class="top-form-create__close-btn"><%=image_tag 'top_form_close.png'%></div>
-        </div>
       <% end %>
       </div>
     </div>
@@ -69,7 +67,6 @@
         <%# formはcssでdisplay: none;されているので最初は非表示 %>
         <%= render partial: 'edit_form', locals: { group: group, num: 2 } %>
       <% end %>
-      <%# <div class="insert-group-panel"></div> %>
       </div>
     </div>
     <%# //右の問題管理エリア %>
