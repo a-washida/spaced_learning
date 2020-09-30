@@ -56,28 +56,39 @@
     position: fixed;
     bottom: 0;
     width: 100vw;
-    height: 25px;
+    height: 30px;
     z-index: 1;
   }
 
   .group-links__ul {
     display: flex;
     justify-content: flex-start;
-    top: calc(100vh - 25px);
+    top: calc(100vh - 30px);
     left: 0;
     width: 100vw;
-    height: 25px;
+    height: 30px;
   }
+
+  .group-links__ul::-webkit-scrollbar {
+    display: none;
+   }
 
   .group-links__li {
     width: 150px;
-    line-height: 25px;
+    height: 28px;
+    line-height: 28px;
     border-right: 1px solid #ccc;
+    border-bottom: none;
     font-size: 0.8rem;
+  }
+
+  .group-links__li-left {
+    white-space: nowrap;
     overflow-x: scroll;
   }
 
   .group-links__li-current {
     width: 150px;
+    height: 28px;
   }
 }
