@@ -142,6 +142,10 @@
     border: 1px solid #ffffff;
   }
 
+  .create-question-main .qa-form {
+    margin-bottom: 50px;
+  }
+
   .qa-form__input-qa-wrap {
     display: block;
     height: 400px;
