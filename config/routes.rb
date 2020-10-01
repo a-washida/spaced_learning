@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
   root 'groups#index'
   resources :groups, only: [:index, :create, :update, :destroy] do
     resources :question_answers do
