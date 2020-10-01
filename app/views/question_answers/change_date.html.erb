@@ -6,7 +6,7 @@
   <div class="group-links">
     <ul class="group-links__ul">
     <% @groups.each do |group| %>
-      <%= render partial: 'group-link', locals: { group: group, path: review_group_question_answers_path(group), count: group.question_answers.count } %>
+      <%= render partial: 'group-link', locals: { group: group, path: review_group_question_answers_path(group), count: group.question_answers.where('display_date <= ?', @date).count } %>
     <% end %>
     </ul>
   </div>
