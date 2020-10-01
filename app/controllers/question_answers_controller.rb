@@ -1,5 +1,6 @@
 class QuestionAnswersController < ApplicationController
   before_action :set_group
+  before_action :set_groups, only: [:index, :new, :create, :review, :change_date]
   before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
 
@@ -99,6 +100,10 @@ class QuestionAnswersController < ApplicationController
 
   def set_group
     @group = Group.find(params[:group_id])
+  end
+
+  def set_groups
+    @groups = Group.where(user_id: current_user.id)
   end
 
   def set_question_answer

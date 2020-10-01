@@ -97,11 +97,11 @@
 }
 
 .group-panel__count.count-0 {
-  color: green;
+  color: #008000;
 }
 
 .group-panel__count.count-2 {
-  color: purple;
+  color: #800080;
 }
 
 .top-tab {

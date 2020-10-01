@@ -1,5 +1,5 @@
 <%= render 'shared/header' %>
-<div class="create-question-main">
+<div class="edit-question-main">
   <%# form_withはここから開始して、一番下から二行目の時点でend %>
   <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
     <%= render partial: 'shared/error_messages', locals: { model: f.object } %>

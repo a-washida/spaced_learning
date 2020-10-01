@@ -989,3 +989,61 @@ RSpec.describe '画像の拡大表示機能', type: :system do
     expect(page).to have_no_css('#image-clone')
   end
 end
+
+RSpec.describe 'グループ遷移機能', type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @groups = FactoryBot.create_list(:group, 5, user_id: @user.id)
+  end
+
+  it '問題復習ページにグループのリンク一覧があり、クリックすると遷移できること' do
+    # サインインする
+    login(@user)
+    # 問題復習ページへのリンクをクリックする
+    all('.group-panel.js-0')[0].click
+    # 問題復習ページに各グループのリンクが存在することを確認する
+    5.times do |i|
+      expect(page).to have_link @groups[i].name, href: review_group_question_answers_path(@groups[i])
+    end
+    # @groups[1]のリンクをクリックする
+    click_link(@groups[1].name)
+    # @groups[1]の問題復習ページに遷移していることを確認する
+    expect(current_path).to eq review_group_question_answers_path(@groups[1])
+    # @groups[1]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
+    expect(page).to have_css('.group-links__ul a:nth-child(2) .group-links__li-current')
+  end
+
+  it '問題作成ページにグループのリンク一覧があり、クリックすると遷移できること' do
+    # サインインする
+    login(@user)
+    # 問題作成ページへのリンクをクリックする
+    all('.group-panel.js-1')[0].click
+    # 問題作成ページに各グループのリンクが存在することを確認する
+    5.times do |i|
+      expect(page).to have_link @groups[i].name, href: new_group_question_answer_path(@groups[i])
+    end
+    # @groups[2]のリンクをクリックする
+    click_link(@groups[2].name)
+    # @groups[2]の問題作成ページに遷移していることを確認する
+    expect(current_path).to eq new_group_question_answer_path(@groups[2])
+    # @groups[2]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
+    expect(page).to have_css('.group-links__ul a:nth-child(3) .group-links__li-current')
+  end
+
+  it '問題管理ページにグループのリンク一覧があり、クリックすると遷移できること' do
+    # サインインする
+    login(@user)
+    # 問題管理ページへのリンクをクリックする
+    all('.group-panel.js-2')[0].click
+    # 問題管理ページに各グループのリンクが存在することを確認する
+    5.times do |i|
+      expect(page).to have_link @groups[i].name, href: group_question_answers_path(@groups[i])
+    end
+    # @groups[3]のリンクをクリックする
+    click_link(@groups[3].name)
+    # @groups[3]の問題復習ページに遷移していることを確認する
+    expect(current_path).to eq group_question_answers_path(@groups[3])
+    # @groups[3]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
+    expect(page).to have_css('.group-links__ul a:nth-child(4) .group-links__li-current')
+  end
+end
