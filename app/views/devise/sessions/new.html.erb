@@ -2,7 +2,7 @@
 <div class="registration-main">
   <div class="registration-form-wrap">
   <div class="registration-form__header">ユーザー情報入力</div>
-  <%= form_with model: @user, url: user_session_path, class: 'registration-form', local: true do |f| %>
+  <%= form_with model: resource, as: resource_name, url: session_path(resource_name), class: 'registration-form', local: true do |f| %>
     <% if flash[:alert].present? %>
       <div class="login-failure-message"><%=flash[:alert]%></div>
     <% end %>

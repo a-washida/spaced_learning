@@ -1,9 +1,12 @@
 <%= render "shared/header" %>
 <div class="registration-main">
   <div class="registration-form-wrap">
-    <div class="registration-form__header">ユーザー情報入力</div>
+    <div class="registration-form__header">ユーザー情報を編集</div>
     <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), class: 'registration-form', local: true do |f| %>
       <%= render partial: 'shared/error_messages', locals: { model: resource } %>
+      <% if alert.present? %>
+        <div class="registration-form__alert"><%= alert %></div>
+      <% end %>
       <div class="registration-form__group">
         <%= f.label :nickname, 'ニックネーム' %>
         <%= f.text_field :nickname, class:"registration-form__input", placeholder:"例) 山田太郎", autofocus: true %>
@@ -12,16 +15,7 @@
         <%= f.label :email, 'メールアドレス' %>
         <%= f.email_field :email, class:"registration-form__input", placeholder:"PC・携帯どちらでも可" %>
       </div>
-      <div class="registration-form__group">
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class:"registration-form__input", placeholder:"6文字以上の半角英数字" %>
-        <div class="password-restriction">※英字と数字の両方を含めて設定してください</div>
-      </div>
-      <div class="registration-form__group">
-        <%= f.label :password_confirmation, 'パスワード(確認)' %>
-        <%= f.password_field :password_confirmation, class:"registration-form__input", placeholder:"6文字以上の半角英数字" %>
-      </div>
-      <%= f.submit "新規登録" ,class:"registration-form__btn" %>
+      <%= f.submit "ユーザー編集" ,class:"registration-form__btn" %>
     <% end %>
   </div>
 </div>
