@@ -4,9 +4,9 @@
   height: 200px;
   padding: 10px;
   border: 1px solid gray;
-  overflow: visible;
   overflow-y: scroll;
-  word-break : normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .display-question-content__textarea,

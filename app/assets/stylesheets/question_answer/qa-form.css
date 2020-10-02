@@ -79,11 +79,13 @@
 .question-preview,
 .answer-preview {
   height: 200px;
+  width: 290px;
   padding: 10px;
   border: 1px solid gray;
   overflow: visible;
   overflow-y: scroll;
-  word-break : normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .qa-form__question-preview-text,
