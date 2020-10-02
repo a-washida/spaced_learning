@@ -21,7 +21,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    super
+    # テストユーザーは編集できないように設定
+    if current_user.nickname == 'テスト'
+      flash.now[:alert] = 'テストユーザーの情報は編集できません'
+      render 'edit'
+    else
+      super
+    end
   end
 
   # DELETE /resource

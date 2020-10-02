@@ -13,6 +13,11 @@
   background-color: #ffffff;
 }
 
+.registration-form__alert {
+  color: rgb(182, 48, 0);
+  font-size: 0.8rem;
+}
+
 .registration-form__header {
   height: 60px;
   line-height: 60px;
