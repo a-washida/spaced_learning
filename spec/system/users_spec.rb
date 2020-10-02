@@ -95,6 +95,106 @@ RSpec.describe 'ログイン', type: :system do
   end
 end
 
+RSpec.describe 'ユーザー情報編集', type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @another_user = FactoryBot.build(:user)
+  end
+
+  context 'ユーザー情報編集ができるとき' do
+    it '正しい情報を入力すればユーザー情報を編集できてトップページにリダイレクトすること' do
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 画面上にログインしているユーザー名が表示されており、ユーザー情報編集ページへのリンクとなっていることを確認する
+      expect(page).to have_link @user.nickname, href: edit_user_registration_path
+      # ユーザー名のリンクをクリックする
+      click_link(@user.nickname)
+      # ユーザー情報編集ページに遷移していることを確認する
+      expect(current_path).to eq edit_user_registration_path
+      # フォームに既にニックネームとメールアドレスが記入されていることを確認する
+      expect(
+        find('#user_nickname').value
+      ).to eq @user.nickname
+      expect(
+        find('#user_email').value
+      ).to eq @user.email
+      # フォームに新しいニックネームとメールアドレスを記入する
+      fill_in 'ニックネーム', with: @another_user.nickname
+      fill_in 'メールアドレス', with: @another_user.email
+      # ユーザー編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 「アカウント情報を変更しました。」のnoticeが表示されていることを確認する
+      expect(page).to have_content('アカウント情報を変更しました。')
+      # 画面上に表示されているユーザー名が変更されていることを確認する
+      expect(page).to have_content(@another_user.nickname)
+    end
+  end
+
+  context 'ユーザー情報編集に失敗するとき' do
+    it '不正なユーザー情報を入力すると、ユーザー情報編集に失敗しエラーメッセージが表示されること' do
+      # サインインする
+      login(@user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # 画面上にログインしているユーザー名が表示されており、ユーザー情報編集ページへのリンクとなっていることを確認する
+      expect(page).to have_link @user.nickname, href: edit_user_registration_path
+      # ユーザー名のリンクをクリックする
+      click_link(@user.nickname)
+      # ユーザー情報編集ページに遷移していることを確認する
+      expect(current_path).to eq edit_user_registration_path
+      # フォームに既にニックネームとメールアドレスが記入されていることを確認する
+      expect(
+        find('#user_nickname').value
+      ).to eq @user.nickname
+      expect(
+        find('#user_email').value
+      ).to eq @user.email
+      # フォームに空のニックネームとメールアドレスを記入する
+      fill_in 'ニックネーム', with: ''
+      fill_in 'メールアドレス', with: ''
+      # ユーザー編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # ユーザー情報編集ページへ戻されることを確認する
+      expect(current_path).to eq '/users'
+      # エラーメッセージが表示されていることを確認する
+      expect(page).to have_content('ニックネームを入力してください')
+      expect(page).to have_content('Eメールを入力してください')
+    end
+
+    it 'テストユーザーはユーザー情報編集できないこと' do
+      test_user = FactoryBot.create(:user, nickname: 'テスト')
+      # サインインする
+      login(test_user)
+      # トップページに遷移していることを確認する
+      expect(current_path).to eq root_path
+      # ユーザー名のリンクをクリックする
+      click_link(test_user.nickname)
+      # ユーザー情報編集ページに遷移していることを確認する
+      expect(current_path).to eq edit_user_registration_path
+      # フォームに既にニックネームとメールアドレスが記入されていることを確認する
+      expect(
+        find('#user_nickname').value
+      ).to eq test_user.nickname
+      expect(
+        find('#user_email').value
+      ).to eq test_user.email
+      # フォームに新しいニックネームとメールアドレスを記入する
+      fill_in 'ニックネーム', with: @another_user.nickname
+      fill_in 'メールアドレス', with: @another_user.email
+      # ユーザー編集ボタンをクリックしてフォームを送信する
+      find('input[name="commit"]').click
+      # ユーザー情報編集ページへ戻されることを確認する
+      expect(current_path).to eq '/users'
+      # エラーメッセージが表示されていることを確認する
+      expect(page).to have_content('テストユーザーの情報は編集できません')
+    end
+  end
+end
+
 RSpec.describe 'ログアウト', type: :system do
   before do
     @user = FactoryBot.create(:user)
