@@ -5,7 +5,7 @@ class RepetitionAlgorithmsController < ApplicationController
     question_answer = QuestionAnswer.find(params[:question_answer_id])
     repetition_algorithm = question_answer.repetition_algorithm
 
-    repetition_service = RepetitionAlgorithmService.new(review_params, question_answer, repetition_algorithm)
+    repetition_service = RepetitionAlgorithmService.new(review_params, question_answer, repetition_algorithm, current_user)
     post = repetition_service.execute_repetition_algorithm_considering_conditional_branch(params[:repeat_count], params[:memory_level])
 
     render json: { post: post }
@@ -16,7 +16,7 @@ class RepetitionAlgorithmsController < ApplicationController
     question_answer = QuestionAnswer.find(params[:question_answer_id])
     repetition_algorithm = question_answer.repetition_algorithm
 
-    repetition_service = ChangeDateService.new(review_params.merge!(change_date: params[:date]), question_answer, repetition_algorithm)
+    repetition_service = ChangeDateService.new(review_params.merge!(change_date: params[:date]), question_answer, repetition_algorithm, current_user)
     post = repetition_service.execute_repetition_algorithm_considering_conditional_branch(params[:repeat_count], params[:memory_level])
 
     render json: { post: post }
