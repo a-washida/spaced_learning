@@ -1,1 +1,17 @@
-編集
+<%= render "shared/header" %>
+<div class="option-main">
+  <%= form_with model: @option, class: 'option-form', local: true do |f| %>
+    <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
+    <div class="option-form__interval">
+      <%= f.number_field :interval_of_ml1 %>
+      <%= f.number_field :interval_of_ml2 %>
+      <%= f.number_field :interval_of_ml3 %>
+      <%# ナンバーフィールドの右の矢印 %>
+      <%= f.number_field :interval_of_ml4 %>
+    </div>
+    <div class="option-form__easiness-factor">
+      <%= f.number_field :easiness_factor %>
+    </div>
+    <%= f.submit '更新' %>
+  <% end %>
+</div>
