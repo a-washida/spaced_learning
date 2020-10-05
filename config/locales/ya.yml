@@ -11,3 +11,9 @@ ja:
        display_date: 表示日
        memory_level: 記憶度
        repeat_count: 復習回数
+     option:
+       interval_of_ml1: 記憶度1の場合のインターバル
+       interval_of_ml2: 記憶度2の場合のインターバル
+       interval_of_ml3: 記憶度3の場合のインターバル
+       interval_of_ml4: 記憶度4の場合のインターバル
+       easiness_factor: 問題の易しさ
