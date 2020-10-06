@@ -27,12 +27,14 @@
       </div>
     </div>
     <div class="option-form__easiness-factor">
-      <div class="option-form__easiness-factor-text">問題の易しさを設定</div>
       <div class="option-form__group">
+        <%= f.label :easiness_factor, '問題の易しさ:', class: 'option-form__label-easiness-factor' %>
         <%= f.number_field :easiness_factor, step: '10', class: 'option-form__input-easiness-factor' %>
-        <div class="option-form__easiness-factor-restriction">※130~250の値を入力してください。</div>
       </div>
+      <div class="option-form__easiness-factor-restriction">※130~250の値を入力してください。</div>
     </div>
-    <%= f.submit '更新' %>
+    <div class="option-form__submit-btn-wrap">
+      <%= f.submit '更新', class: 'option-form__submit-btn' %>
+    </div>
   <% end %>
 </div>
