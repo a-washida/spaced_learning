@@ -87,7 +87,7 @@ class RepetitionAlgorithmService
 
   # 記憶度が1の時はインターバルの上限を3, 記憶度が2の時はインターバルの上限を7に制限するメソッド
   def set_upper_limit_of_interval_if_memory_level_low(memory_level)
-    @review_params[:interval] = 3 if memory_level == 1 && @review_params[:interval] > 3
-    @review_params[:interval] = 7 if memory_level == 2 && @review_params[:interval] > 7
+    @review_params[:interval] = @current_user.option.upper_limit_of_ml1 if memory_level == 1 && @review_params[:interval] > @current_user.option.upper_limit_of_ml1
+    @review_params[:interval] = @current_user.option.upper_limit_of_ml2 if memory_level == 2 && @review_params[:interval] > @current_user.option.upper_limit_of_ml2
   end
 end

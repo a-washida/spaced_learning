@@ -19,6 +19,6 @@ class OptionsController < ApplicationController
   end
 
   def option_params
-    params.require(:option).permit(:interval_of_ml1, :interval_of_ml2, :interval_of_ml3, :interval_of_ml4, :easiness_factor)
+    params.require(:option).permit(:interval_of_ml1, :interval_of_ml2, :interval_of_ml3, :interval_of_ml4, :upper_limit_of_ml1, :upper_limit_of_ml2, :easiness_factor)
   end
 end
