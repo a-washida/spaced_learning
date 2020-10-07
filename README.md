@@ -176,14 +176,16 @@ URL: 54.95.50.27<br>
 
 ## options テーブル
 
-| Column          | Type       | Options           |
-| --------------- | ---------- | ----------------- |
-| interval_of_ml1 | integer    | null: false       |
-| interval_of_ml2 | integer    | null: false       |
-| interval_of_ml3 | integer    | null: false       |
-| interval_of_ml4 | integer    | null: false       |
-| easiness_factor | integer    | null: false       |
-| user            | references | foreign_key: true |
+| Column             | Type       | Options           |
+| ------------------ | ---------- | ----------------- |
+| interval_of_ml1    | integer    | null: false       |
+| interval_of_ml2    | integer    | null: false       |
+| interval_of_ml3    | integer    | null: false       |
+| interval_of_ml4    | integer    | null: false       |
+| upper_limit_of_ml1 | integer    | null: false       |
+| upper_limit_of_ml2 | integer    | null: false       |
+| easiness_factor    | integer    | null: false       |
+| user               | references | foreign_key: true |
 
 ### Association
 - belongs_to :user

@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_10_03_071243) do
     t.integer "interval_of_ml2", null: false
     t.integer "interval_of_ml3", null: false
     t.integer "interval_of_ml4", null: false
+    t.integer "upper_limit_of_ml1", null: false
+    t.integer "upper_limit_of_ml2", null: false
     t.integer "easiness_factor", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
