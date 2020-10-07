@@ -17,3 +17,8 @@
  * {
   box-sizing: border-box;
 }
+
+/* render時にfield_with_errorsのdiv要素が追加されることによるレイアウト崩れの対策 */
+.field_with_errors {
+  display: contents;
+}
