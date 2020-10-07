@@ -3,7 +3,6 @@
   min-height: 100vh;
   padding-top: 50px;
   background-color: #f5f5f5;
-  border: 1px solid #f5f5f5;
 }
 
 .option-form {
@@ -12,6 +11,8 @@
   max-width: 550px;
   margin: 50px auto;
   background-color: #ffffff;
+  /* 以下のborderはmarginの折りたたみ対策(エラーメッセージ表示時に発生) */
+  border: 1px solid #f5f5f5;
 }
 
 .option-form__header {
