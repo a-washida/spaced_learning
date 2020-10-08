@@ -15,11 +15,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # ユーザー登録と同時にoptionsテーブルに復習タイミング関連の設定の初期値を保存
     Option.create(interval_of_ml1: 1,
                   interval_of_ml2: 2,
-                  interval_of_ml3: 4, 
-                  interval_of_ml4: 6, 
+                  interval_of_ml3: 4,
+                  interval_of_ml4: 6,
                   upper_limit_of_ml1: 3,
                   upper_limit_of_ml2: 7,
-                  easiness_factor: 250, 
+                  easiness_factor: 250,
                   user_id: @user.id)
   end
 

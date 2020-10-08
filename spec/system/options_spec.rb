@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "復習タイミング設定の編集機能", type: :system do
+RSpec.describe '復習タイミング設定の編集機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
   end
@@ -16,22 +16,22 @@ RSpec.describe "復習タイミング設定の編集機能", type: :system do
       # Optionsテーブルに保存されている値が、フォームに既に入力された状態になっていることを確認する
       expect(
         find('#option_interval_of_ml1').value
-      ).to eq "#{@user.option.interval_of_ml1}"
+      ).to eq @user.option.interval_of_ml1.to_s
       expect(
         find('#option_interval_of_ml2').value
-      ).to eq "#{@user.option.interval_of_ml2}"
+      ).to eq @user.option.interval_of_ml2.to_s
       expect(
         find('#option_interval_of_ml3').value
-      ).to eq "#{@user.option.interval_of_ml3}"
+      ).to eq @user.option.interval_of_ml3.to_s
       expect(
         find('#option_upper_limit_of_ml1').value
-      ).to eq "#{@user.option.upper_limit_of_ml1}"
+      ).to eq @user.option.upper_limit_of_ml1.to_s
       expect(
         find('#option_upper_limit_of_ml2').value
-      ).to eq "#{@user.option.upper_limit_of_ml2}"
+      ).to eq @user.option.upper_limit_of_ml2.to_s
       expect(
         find('#option_easiness_factor').value
-      ).to eq "#{@user.option.easiness_factor}"
+      ).to eq @user.option.easiness_factor.to_s
       # フォームに編集後の値を入力する
       fill_in 'option_interval_of_ml1', with: 2
       fill_in 'option_interval_of_ml2', with: 3

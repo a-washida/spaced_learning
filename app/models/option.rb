@@ -12,5 +12,4 @@ class Option < ApplicationRecord
   end
 
   belongs_to :user
-
 end

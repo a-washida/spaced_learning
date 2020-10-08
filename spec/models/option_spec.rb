@@ -142,7 +142,6 @@ RSpec.describe Option, type: :model do
         @option.valid?
         expect(@option.errors.full_messages).to include('問題の易しさは250以下の値にしてください')
       end
-
     end
   end
 end
