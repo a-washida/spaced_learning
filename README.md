@@ -87,6 +87,7 @@ URL: 54.95.50.27<br>
 - has_many :groups
 - has_many :question_answers
 - has_many :records
+- has_one :option
 
 ## groups テーブル
 
@@ -173,3 +174,18 @@ URL: 54.95.50.27<br>
 ### Association
 - belongs_to :user
 
+## options テーブル
+
+| Column             | Type       | Options           |
+| ------------------ | ---------- | ----------------- |
+| interval_of_ml1    | integer    | null: false       |
+| interval_of_ml2    | integer    | null: false       |
+| interval_of_ml3    | integer    | null: false       |
+| interval_of_ml4    | integer    | null: false       |
+| upper_limit_of_ml1 | integer    | null: false       |
+| upper_limit_of_ml2 | integer    | null: false       |
+| easiness_factor    | integer    | null: false       |
+| user               | references | foreign_key: true |
+
+### Association
+- belongs_to :user

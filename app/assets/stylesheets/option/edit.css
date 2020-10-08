@@ -1,0 +1,153 @@
+.option-main {
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 50px;
+  background-color: #f5f5f5;
+}
+
+.option-form {
+  width: 50%;
+  min-width: 350px;
+  max-width: 550px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  /* 以下のborderはmarginの折りたたみ対策(エラーメッセージ表示時に発生) */
+  border: 1px solid #f5f5f5;
+}
+
+.option-form__header {
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 1px solid #cccccc;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.option-form__interval {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10% 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.option-form__interval-text {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.option-form__group-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.option-form__group {
+  display: flex;
+  margin: 5px 0 0;
+}
+
+.option-form__label-interval {
+  width: 110px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.9rem;
+}
+
+.option-form__input-interval {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+}
+
+.option-form__upper-limit {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10% 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.option-form__upper-limit-text {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.option-form__label-upper-limit {
+  width: 110px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.9rem;
+}
+
+.option-form__input-upper-limit {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+}
+
+/* スピンボタンを常に表示 */
+.option-form input[type=number]::-webkit-inner-spin-button,
+.option-form input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.option-form__easiness-factor {
+  padding: 10px 10%;
+  border-bottom: 1px solid #cccccc;
+}
+
+.option-form__label-easiness-factor {
+  width: 100px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.9rem;
+}
+
+.option-form__input-easiness-factor {
+  width: 60px;
+  height: 25px;
+  text-align: center;
+}
+
+.option-form__easiness-factor-restriction {
+  font-size: 0.8rem;
+  color: #c0c0c0;
+}
+
+.option-form__submit-btn-wrap {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.option-form__submit-btn {
+  width: 100px;
+  height: 30px;
+  margin: 10px 0;
+}
+
+@media (max-width: 820px) {
+
+  .option-form__interval {
+    align-items: center;
+  }
+
+  .option-form__upper-limit {
+    align-items: center;
+  }
+
+  .option-form__group-wrap {
+    display: block;
+  }
+
+  .option-form__easiness-factor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+

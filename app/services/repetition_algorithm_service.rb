@@ -1,10 +1,11 @@
 class RepetitionAlgorithmService
-  attr_accessor :review_params, :question_answer, :repetition_algorithm
+  attr_accessor :review_params, :question_answer, :repetition_algorithm, :current_user
 
-  def initialize(review_params, question_answer, repetition_algorithm)
+  def initialize(review_params, question_answer, repetition_algorithm, current_user)
     @review_params = review_params
     @question_answer = question_answer
     @repetition_algorithm = repetition_algorithm
+    @current_user = current_user
   end
 
   # repeat_countとmemory_levelによる条件分岐を考慮してrepetition_algorithmを実行するメソッド
@@ -12,13 +13,13 @@ class RepetitionAlgorithmService
     if repeat_count.to_i == 0
       case memory_level
       when '1'
-        execute_repetition_algorithm_if_repeat_count_equal_0(1, -20)
+        execute_repetition_algorithm_if_repeat_count_equal_0(@current_user.option.interval_of_ml1, -20)
       when '2'
-        execute_repetition_algorithm_if_repeat_count_equal_0(2, -15)
+        execute_repetition_algorithm_if_repeat_count_equal_0(@current_user.option.interval_of_ml2, -15)
       when '3'
-        execute_repetition_algorithm_if_repeat_count_equal_0(4, 0)
+        execute_repetition_algorithm_if_repeat_count_equal_0(@current_user.option.interval_of_ml3, 0)
       when '4'
-        execute_repetition_algorithm_if_repeat_count_equal_0(6, 20)
+        execute_repetition_algorithm_if_repeat_count_equal_0(@current_user.option.interval_of_ml4, 20)
       end
     elsif repeat_count.to_i > 0
       case memory_level
@@ -86,7 +87,11 @@ class RepetitionAlgorithmService
 
   # 記憶度が1の時はインターバルの上限を3, 記憶度が2の時はインターバルの上限を7に制限するメソッド
   def set_upper_limit_of_interval_if_memory_level_low(memory_level)
-    @review_params[:interval] = 3 if memory_level == 1 && @review_params[:interval] > 3
-    @review_params[:interval] = 7 if memory_level == 2 && @review_params[:interval] > 7
+    if memory_level == 1 && @review_params[:interval] > @current_user.option.upper_limit_of_ml1
+      @review_params[:interval] = @current_user.option.upper_limit_of_ml1
+    end
+    if memory_level == 2 && @review_params[:interval] > @current_user.option.upper_limit_of_ml2
+      @review_params[:interval] = @current_user.option.upper_limit_of_ml2
+    end
   end
 end

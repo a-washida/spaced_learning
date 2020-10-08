@@ -5,5 +5,9 @@ FactoryBot.define do
     password = 'a1234z'
     password { password }
     password_confirmation { password }
+
+    after(:build) do |user|
+      user.option = FactoryBot.build(:option)
+    end
   end
 end

@@ -1,0 +1,53 @@
+<%= render "shared/header" %>
+<div class="option-main">
+  <%= form_with model: @option, class: 'option-form', local: true do |f| %>
+    <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
+    <div class="option-form__header">復習タイミングの各種設定</div>
+    <div class="option-form__interval">
+      <div class="option-form__interval-text">初回復習後のインターバル設定</div>
+      <div class="option-form__group-wrap">
+        <div class="option-form__group">
+          <%= f.label :interval_of_ml1, '記憶度1の場合:', class: 'option-form__label-interval' %>
+          <%= f.number_field :interval_of_ml1, class: 'option-form__input-interval' %>
+        </div>
+        <div class="option-form__group">
+          <%= f.label :interval_of_ml2, '記憶度2の場合:', class: 'option-form__label-interval' %>
+          <%= f.number_field :interval_of_ml2, class: 'option-form__input-interval' %>
+        </div>
+      </div>
+      <div class="option-form__group-wrap">
+        <div class="option-form__group">
+          <%= f.label :interval_of_ml3, '記憶度3の場合:', class: 'option-form__label-interval' %>
+          <%= f.number_field :interval_of_ml3, class: 'option-form__input-interval' %>
+        </div>
+        <div class="option-form__group">
+          <%= f.label :interval_of_ml4, '記憶度4の場合:', class: 'option-form__label-interval' %>
+          <%= f.number_field :interval_of_ml4, class: 'option-form__input-interval' %>
+        </div>
+      </div>
+    </div>
+    <div class="option-form__upper-limit">
+      <div class="option-form__upper-limit-text">インターバルの上限値設定</div>
+      <div class="option-form__group-wrap">
+        <div class="option-form__group">
+          <%= f.label :upper_limit_of_ml1, '記憶度1の場合:', class: 'option-form__label-upper-limit' %>
+          <%= f.number_field :upper_limit_of_ml1, class: 'option-form__input-upper-limit' %>
+        </div>
+        <div class="option-form__group">
+          <%= f.label :upper_limit_of_ml2, '記憶度2の場合:', class: 'option-form__label-upper-limit' %>
+          <%= f.number_field :upper_limit_of_ml2, class: 'option-form__input-upper-limit' %>
+        </div>
+      </div>
+    </div>
+    <div class="option-form__easiness-factor">
+      <div class="option-form__group">
+        <%= f.label :easiness_factor, '問題の易しさ:', class: 'option-form__label-easiness-factor' %>
+        <%= f.number_field :easiness_factor, step: '10', class: 'option-form__input-easiness-factor' %>
+      </div>
+      <div class="option-form__easiness-factor-restriction">※130~250の値を入力してください。</div>
+    </div>
+    <div class="option-form__submit-btn-wrap">
+      <%= f.submit '更新', class: 'option-form__submit-btn' %>
+    </div>
+  <% end %>
+</div>

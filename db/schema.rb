@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_030407) do
+ActiveRecord::Schema.define(version: 2020_10_03_071243) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,20 @@ ActiveRecord::Schema.define(version: 2020_08_28_030407) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "interval_of_ml1", null: false
+    t.integer "interval_of_ml2", null: false
+    t.integer "interval_of_ml3", null: false
+    t.integer "interval_of_ml4", null: false
+    t.integer "upper_limit_of_ml1", null: false
+    t.integer "upper_limit_of_ml2", null: false
+    t.integer "easiness_factor", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_options_on_user_id"
   end
 
   create_table "question_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -108,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_08_28_030407) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answer_options", "question_answers"
   add_foreign_key "groups", "users"
+  add_foreign_key "options", "users"
   add_foreign_key "question_answers", "groups"
   add_foreign_key "question_answers", "users"
   add_foreign_key "question_options", "question_answers"
