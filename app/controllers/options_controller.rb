@@ -1,5 +1,6 @@
 class OptionsController < ApplicationController
   before_action :set_option, only: [:edit, :update]
+  before_action :move_to_root_if_different_user, only: [:edit, :update]
 
   def edit
   end
@@ -20,5 +21,9 @@ class OptionsController < ApplicationController
 
   def option_params
     params.require(:option).permit(:interval_of_ml1, :interval_of_ml2, :interval_of_ml3, :interval_of_ml4, :upper_limit_of_ml1, :upper_limit_of_ml2, :easiness_factor)
+  end
+
+  def move_to_root_if_different_user
+    redirect_to root_path unless current_user.id == @option.user.id
   end
 end
