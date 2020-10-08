@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Option, type: :model do
   describe '#create' do
     before do
-      @option = FactoryBot.build(:option)
+      @option = FactoryBot.build(:option, :for_model_test)
     end
 
     context '@optionが保存できる場合' do
