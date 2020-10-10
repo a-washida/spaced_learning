@@ -57,6 +57,7 @@
         <% if question_answer.id == session[:qa_id] %>
           <%# セッションの中身をリセット %>
           <% session[:qa_id] = nil %>
+          <p class="qa-index-notice"><%= notice %></p>
           <p class="qa-index-alert"><%= alert %></p>
         <% end %>
         <%# 問題と解答を表示 %>

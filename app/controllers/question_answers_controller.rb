@@ -3,6 +3,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_groups, only: [:index, :new, :create, :review, :change_date]
   before_action :move_to_root_if_different_user
   before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
+  before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
     # ransackで利用する検索オブジェクトを生成。
@@ -53,7 +54,6 @@ class QuestionAnswersController < ApplicationController
     if @question_answer.destroy
       redirect_back(fallback_location: root_path)
     else
-      set_session
       redirect_to back_to_specific_question_position, alert: '問題の削除に失敗しました'
     end
   end
@@ -80,18 +80,16 @@ class QuestionAnswersController < ApplicationController
       @question_answer.update!(display_date: Date.today, memory_level: 0, repeat_count: 0)
       @question_answer.repetition_algorithm.update!(interval: 0, easiness_factor: current_user.option.easiness_factor)
     end
-    redirect_to back_to_specific_question_position
+    redirect_to back_to_specific_question_position, notice: '問題を初期状態にリセットしました'
   rescue StandardError => e
-    set_session
     redirect_to back_to_specific_question_position, alert: '問題のリセットに失敗しました'
   end
 
   # 問題を復習周期から外して、復習ページに表示されないようにするアクション
   def remove
     if @question_answer.update(display_date: Date.today + 100.year)
-      redirect_to back_to_specific_question_position
+      redirect_to back_to_specific_question_position, notice: '問題を復習周期から外しました'
     else
-      set_session
       redirect_to back_to_specific_question_position, alert: '問題を復習周期から外すのに失敗しました'
     end
   end

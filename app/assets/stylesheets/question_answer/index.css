@@ -111,6 +111,11 @@
   font-size: 0.8rem;
 }
 
+.qa-index-notice {
+  color: #0000DD;
+  font-size: 0.8rem;
+}
+
 .qa-index-item__qa {
   display: flex;
 }
