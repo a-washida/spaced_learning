@@ -34,7 +34,7 @@
   height: 40px;
   line-height: 20px;
   padding: 10px 0;
-  background-color: #ffffff;
+  background-color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
@@ -62,7 +62,7 @@
   color: #000088;
   border: 1px solid gray;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .group-panel:hover {
