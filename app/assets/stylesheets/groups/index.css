@@ -203,10 +203,14 @@
 .record__review-count {
   width: 75px;
   height: 75px;
-  padding: 5px;
+  padding: 5px 3px;
   background-color: #f5f5f5;
   border: 1px solid gray;
   border-radius: 10px;
+}
+
+.record__date-wrap {
+  font-size: 0.9rem;
 }
 
 .record__create-count-lower,
@@ -297,7 +301,7 @@
   }
 
   .record__date-wrap {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .record__create-count-lower,
