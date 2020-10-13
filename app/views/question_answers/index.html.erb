@@ -72,6 +72,10 @@
             復習までの日数：<span><%= display_date_until_review((question_answer.display_date - Date.today).to_i) %></span>
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
+            <%= form_with url: share_group_question_answer_path(@group, question_answer), local: true do |f| %>
+              <%= f.text_field :category_second %>
+              <%= f.submit %>
+            <% end %>
           </div>
           <%# このチェックボックスは画面上には表示されない。下のlabel要素2つと紐づいている。 %>
           <input type="checkbox" id="qa-index__check-<%=i%>" class="qa-index-item__checkbox">

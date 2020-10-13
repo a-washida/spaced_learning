@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_133323) do
 
   create_table "category_seconds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "category_first", null: false
+    t.integer "category_first_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

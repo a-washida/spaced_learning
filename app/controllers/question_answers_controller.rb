@@ -2,7 +2,7 @@ class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :set_groups, only: [:index, :new, :create, :review, :change_date]
   before_action :move_to_root_if_different_user
-  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
+  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :share, :reset, :remove]
   before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
@@ -72,6 +72,12 @@ class QuestionAnswersController < ApplicationController
                               .references(:repetition_algorithm, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob })
                               .limit(10)
     @date = params[:date]
+  end
+
+  def share
+    category_second = CategorySecond.create(name: params[:category_second], category_first_id: 1)
+    Share.create(question_answer_id: @question_answer.id, category_second_id: category_second.id)
+    redirect_to back_to_specific_question_position
   end
 
   # 問題を投稿した時の状態にリセットするアクション
