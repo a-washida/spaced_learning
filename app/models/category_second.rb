@@ -1,0 +1,2 @@
+class CategorySecond < ApplicationRecord
+end
