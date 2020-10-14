@@ -73,7 +73,9 @@
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
             <%= form_with url: share_group_question_answer_path(@group, question_answer), local: true do |f| %>
-              <%= f.text_field :category_second %>
+              <%= collection_select(:category_second, :category_first_id, CategoryFirst.all, :id, :name) %>
+              <div class="share-form__please-select">カテゴリー1を選択してください</div>
+              <%= f.text_field :category_second, class: "share-form__category-second" %>
               <%= f.submit %>
             <% end %>
           </div>

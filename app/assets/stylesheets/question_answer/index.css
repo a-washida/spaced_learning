@@ -140,6 +140,14 @@
   white-space: nowrap;
 }
 
+.share-form__please-select {
+  border: 1px solid #000;
+}
+
+.share-form__category-second {
+  display: none;
+}
+
 .qa-index-item__img-three-point {
   position: absolute;
   right: 0;
