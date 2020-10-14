@@ -75,8 +75,10 @@ class QuestionAnswersController < ApplicationController
   end
 
   def share
-    category_second = CategorySecond.create(name: params[:category_second], category_first_id: 1)
-    Share.create(question_answer_id: @question_answer.id, category_second_id: category_second.id)
+    unless CategorySecond.exists?(name: params[:category_second])
+      category_second = CategorySecond.create(name: params[:category_second], category_first_id: 1)
+    end
+    Share.create(question_answer_id: @question_answer.id, category_second_id: CategorySecond.find_by(name: params[:category_second]).id)
     redirect_to back_to_specific_question_position
   end
 
