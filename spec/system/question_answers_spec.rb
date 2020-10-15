@@ -781,7 +781,7 @@ RSpec.describe '問題検索機能', type: :system do
     # キーワードの入力欄に、@question_answers[0].questionを入力する
     fill_in 'キーワード', with: question_answers[0].question
     # 検索ボタンをクリックする
-    find('input[name="commit"]').click
+    find('.search-form__submit-btn').click
     # 検索後のページに遷移していることを確認する
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=#{question_answers[0].question}&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
@@ -809,7 +809,7 @@ RSpec.describe '問題検索機能', type: :system do
     # 並び替えのプルダウンの最終更新日時(新しい順)を選択する
     select('最終更新日時(新しい順)', from: 'q[sorts]')
     # 検索ボタンをクリックする
-    find('input[name="commit"]').click
+    find('.search-form__submit-btn').click
     # 検索後のページに遷移していることを確認する
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=updated_at+desc&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
@@ -847,7 +847,7 @@ RSpec.describe '問題検索機能', type: :system do
     # 記憶度のプルダウンの1を選択する
     select('1', from: 'q[memory_level_eq]')
     # 検索ボタンをクリックする
-    find('input[name="commit"]').click
+    find('.search-form__submit-btn').click
     # 検索後のページに遷移していることを確認する
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=1&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
@@ -880,7 +880,7 @@ RSpec.describe '問題検索機能', type: :system do
     # 復習回数のプルダウンの1を選択する
     select('1', from: 'q[repeat_count_eq]')
     # 検索ボタンをクリックする
-    find('input[name="commit"]').click
+    find('.search-form__submit-btn').click
     # 検索後のページに遷移していることを確認する
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=1&commit=%E6%A4%9C%E7%B4%A2"
@@ -938,7 +938,7 @@ RSpec.describe '画像の拡大表示機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 検索ボタンをクリックする
-    find('input[name="commit"]').click
+    find('.search-form__submit-btn').click
     # 検索後のページに遷移していることを確認する
     uri = URI.parse(current_url)
     expect("#{uri.path}?#{uri.query}").to eq "/groups/#{@group.id}/question_answers?q%5Bquestion_or_answer_cont%5D=&q%5Bsorts%5D=&q%5Bmemory_level_eq%5D=&q%5Brepeat_count_eq%5D=&commit=%E6%A4%9C%E7%B4%A2"
