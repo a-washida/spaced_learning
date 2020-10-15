@@ -10,6 +10,7 @@ class QuestionAnswersController < ApplicationController
     @q = @group.question_answers.ransack(params[:q])
     @question_answers = @q.result.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
     set_question_answer_column
+    @share = ShareCategory.new
   end
 
   def new
@@ -130,7 +131,7 @@ class QuestionAnswersController < ApplicationController
   end
 
   def share_params
-    params.permit(:category_second).merge(question_answer_id: params[:id])
+    params.require(:share_category).permit(:category_first_id, :category_second).merge(question_answer_id: params[:id])
   end
 
   def move_to_root_if_different_user
