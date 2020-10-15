@@ -72,20 +72,25 @@
             復習までの日数：<span><%= display_date_until_review((question_answer.display_date - Date.today).to_i) %></span>
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
+            <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share">共有</label>
+            <input type="checkbox" id="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-checkbox">
+            <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-close"></label>
             <%= form_with model: @share, url: share_group_question_answer_path(@group, question_answer), class: "share-form", local: true do |f| %>
+              <div>カテゴリー1</div>
               <%= f.collection_select(:category_first_id, CategoryFirst.all, :id, :name, {include_blank: "選択してください"}, {class:"share-form__category-first"}) %>
+              <div>カテゴリー2</div>
               <div class="share-form__please-select">カテゴリー1を選択してください</div>
               <%= f.text_field :category_second, class: "share-form__category-second" %>
               <div class="share-form__insert"></div>
-              <%= f.submit %>
+              <%= f.submit '共有' %>
             <% end %>
           </div>
           <%# このチェックボックスは画面上には表示されない。下のlabel要素2つと紐づいている。 %>
-          <input type="checkbox" id="qa-index__check-<%=i%>" class="qa-index-item__checkbox">
-          <label for="qa-index__check-<%=i%>"><%= image_tag 'vertical_three_point_reader.png', class: 'qa-index-item__img-three-point' %></label>
+          <input type="checkbox" id="qa-index-item__check-<%=i%>" class="qa-index-item__checkbox">
+          <label for="qa-index-item__check-<%=i%>"><%= image_tag 'vertical_three_point_reader.png', class: 'qa-index-item__img-three-point' %></label>
           <div class="img-three-point-supplement-text">管理</div>
           <%# 以下のlabel要素は縦3点リーダーアイコンを押さない限り非表示 %>
-          <label for="qa-index__check-<%=i%>" class="qa-index-item__close"></label>
+          <label for="qa-index-item__check-<%=i%>" class="qa-index-item__close"></label>
           <%# 以下のリストは縦3点リーダーアイコンを押さない限り非表示 %>
           <ul class="qa-index-item__management-list">
             <li><%= link_to '問題編集', edit_group_question_answer_path(@group, question_answer) %></li>

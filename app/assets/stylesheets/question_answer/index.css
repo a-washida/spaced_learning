@@ -125,6 +125,7 @@
   position: relative;
   width: 580px;
   margin-top: 5px;
+  outline: 1px solid #000;
 }
 
 .qa-index-item__record {
@@ -138,6 +139,22 @@
 
 .qa-index-item__record-interval {
   white-space: nowrap;
+}
+
+.share-form {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.qa-index-item__share-checkbox:checked ~ .share-form,
+.qa-index-item__share-checkbox:checked ~ .qa-index-item__share-close {
+  display: block;
 }
 
 .share-form__please-select {
@@ -164,7 +181,8 @@
   font-weight: bold;
 }
 
-.qa-index-item__close {
+.qa-index-item__close,
+.qa-index-item__share-close {
   display: none;
   position: fixed;
   top: 0;
@@ -195,7 +213,8 @@
   text-decoration: none;
 }
 
-.qa-index-item__checkbox {
+.qa-index-item__checkbox,
+.qa-index-item__share-checkbox {
   position: absolute;
   left: -100vw;
 }
