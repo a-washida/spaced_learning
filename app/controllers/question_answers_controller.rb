@@ -85,6 +85,11 @@ class QuestionAnswersController < ApplicationController
     end
   end
 
+  def search_category
+    result = CategorySecond.where(category_first_id: params[:category_first])
+    render json:{ result: result }
+  end
+
   # 問題を投稿した時の状態にリセットするアクション
   def reset
     ActiveRecord::Base.transaction do

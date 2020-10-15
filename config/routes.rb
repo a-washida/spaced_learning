@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get 'review', 'change_date' # change_dateは挙動確認用。アプリリリース時には削除
       end
       member do
+        get 'search_category'
         post 'share'
         patch 'reset', 'remove'
       end
