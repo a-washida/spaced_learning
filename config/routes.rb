@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   resources :question_answers, only: [:show] do
-    resources :shares, only: [:create]
+    resources :shares, only: [:create, :destroy]
   end
   resources :options, only: [:edit, :update]
   get '/search_category', to: 'shares#search_category'

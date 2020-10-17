@@ -1,6 +1,6 @@
 class SharesController < ApplicationController
-  before_action :set_question_answer, only: [:create]
-  before_action :set_session, only: [:create]
+  before_action :set_question_answer, only: [:create, :destroy]
+  before_action :set_session, only: [:create, :destroy]
 
   def create
     @share_category = ShareCategory.new(share_params)
@@ -9,6 +9,15 @@ class SharesController < ApplicationController
       redirect_to back_to_specific_question_position, notice: '問題の共有に成功しました'
     else
       redirect_to back_to_specific_question_position, alert: '問題の共有に失敗しました'
+    end
+  end
+
+  def destroy
+    share = @question_answer.share
+    if share.destroy
+      redirect_to back_to_specific_question_position, notice: '共有の解除に成功しました'
+    else
+      redirect_to back_to_specific_question_position, alert: '共有の解除に失敗しました'
     end
   end
 
@@ -35,6 +44,4 @@ class SharesController < ApplicationController
   def back_to_specific_question_position
     request.referer + "#link-#{@question_answer.id}" || root_path
   end
-
-
 end
