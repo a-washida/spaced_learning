@@ -95,10 +95,6 @@ class QuestionAnswersController < ApplicationController
     end
   end
 
-  def search_category
-    result = CategorySecond.where(category_first_id: params[:category_first])
-    render json:{ result: result }
-  end
   private
 
   def set_group

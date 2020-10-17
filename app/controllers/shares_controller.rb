@@ -1,6 +1,6 @@
 class SharesController < ApplicationController
-  before_action :set_question_answer
-  before_action :set_session
+  before_action :set_question_answer, only: [:create]
+  before_action :set_session, only: [:create]
 
   def create
     @share_category = ShareCategory.new(share_params)
@@ -10,6 +10,11 @@ class SharesController < ApplicationController
     else
       redirect_to back_to_specific_question_position, alert: '問題の共有に失敗しました'
     end
+  end
+
+  def search_category
+    result = CategorySecond.where(category_first_id: params[:category_first])
+    render json: {result: result }
   end
 
   private
