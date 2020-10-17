@@ -75,7 +75,7 @@
             <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share">共有</label>
             <input type="checkbox" id="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-checkbox">
             <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-close"></label>
-            <%= form_with model: @share, url: share_group_question_answer_path(@group, question_answer), class: "share-form", local: true do |f| %>
+            <%= form_with model: @share, url: question_answer_shares_path(question_answer), class: "share-form", local: true do |f| %>
               <div>カテゴリー1</div>
               <%= f.collection_select(:category_first_id, CategoryFirst.all, :id, :name, {include_blank: "選択してください"}, {class:"share-form__category-first"}) %>
               <div>カテゴリー2</div>

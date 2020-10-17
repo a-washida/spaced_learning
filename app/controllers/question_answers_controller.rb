@@ -2,8 +2,8 @@ class QuestionAnswersController < ApplicationController
   before_action :set_group
   before_action :set_groups, only: [:index, :new, :create, :review, :change_date]
   before_action :move_to_root_if_different_user
-  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :share, :reset, :remove]
-  before_action :set_session, only: [:destroy, :share, :reset, :remove]
+  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
+  before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
     # ransackで利用する検索オブジェクトを生成。
@@ -75,21 +75,6 @@ class QuestionAnswersController < ApplicationController
     @date = params[:date]
   end
 
-  def share
-    @share_category = ShareCategory.new(share_params)
-    if @share_category.valid?
-      @share_category.save
-      redirect_to back_to_specific_question_position, notice: '問題の共有に成功しました'
-    else
-      redirect_to back_to_specific_question_position, alert: '問題の共有に失敗しました'
-    end
-  end
-
-  def search_category
-    result = CategorySecond.where(category_first_id: params[:category_first])
-    render json:{ result: result }
-  end
-
   # 問題を投稿した時の状態にリセットするアクション
   def reset
     ActiveRecord::Base.transaction do
@@ -110,6 +95,10 @@ class QuestionAnswersController < ApplicationController
     end
   end
 
+  def search_category
+    result = CategorySecond.where(category_first_id: params[:category_first])
+    render json:{ result: result }
+  end
   private
 
   def set_group
@@ -133,10 +122,6 @@ class QuestionAnswersController < ApplicationController
                                             question_option_attributes: [:image, :font_size_id, :image_size_id, :id],
                                             answer_option_attributes: [:image, :font_size_id, :image_size_id, :id])
           .merge(display_date: Date.today, memory_level: 0, repeat_count: 0, user_id: current_user.id, group_id: params[:group_id])
-  end
-
-  def share_params
-    params.require(:share_category).permit(:category_first_id, :category_second).merge(question_answer_id: params[:id])
   end
 
   def move_to_root_if_different_user
