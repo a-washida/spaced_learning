@@ -77,13 +77,13 @@
               <input type="checkbox" id="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-checkbox">
               <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-close"></label>
               <%= form_with model: @share, url: question_answer_shares_path(question_answer), class: "share-form", local: true do |f| %>
-                <div>カテゴリー1</div>
+                <div class="share-form__category-first-text">カテゴリー1</div>
                 <%= f.collection_select(:category_first_id, CategoryFirst.all, :id, :name, {include_blank: "選択してください"}, {class:"share-form__category-first"}) %>
-                <div>カテゴリー2</div>
+                <div class="share-form__category-second-text">カテゴリー2</div>
                 <div class="share-form__please-select">カテゴリー1を選択してください</div>
                 <%= f.text_field :category_second, class: "share-form__category-second", autocomplete: 'off' %>
                 <div class="share-form__insert"></div>
-                <%= f.submit '共有' %>
+                <%= f.submit '問題の共有を実行', class: "share-form__submit-btn" %>
               <% end %>
             <% else %>
               <%= link_to '共有済み', question_answer_share_path(question_answer, question_answer.share), method: :delete, data: { confirm: '問題の共有を解除しますか?' } %>
