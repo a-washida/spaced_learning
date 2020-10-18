@@ -128,7 +128,7 @@
 }
 
 .qa-index-item__record {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .qa-index-item__record span {
@@ -138,6 +138,12 @@
 
 .qa-index-item__record-interval {
   white-space: nowrap;
+}
+
+.qa-index-item__share {
+  color: #808080;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .share-form {
@@ -193,9 +199,22 @@
 
 .share-form__insert {
   position: absolute;
-  bottom: 58px;
-  left: 7px;
+  bottom: 63px;
+  left: 5px;
+  width: 200px;
   background-color: #fff;
+  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+
+.share-form__search-result {
+  height: 25px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.share-form__search-result:hover {
+  background-color: rgba(0,0,0,.1);
 }
 
 .share-form__submit-btn {

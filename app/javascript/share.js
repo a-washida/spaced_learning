@@ -30,12 +30,12 @@ window.addEventListener("load", (e) => {
               }
             }
             deleteChild()
-            // inserts[i].innerHTML = ''
             results.forEach( function(result){
               const childElement = document.createElement('div')
               childElement.setAttribute('class', `share-form__search-result`)
               childElement.textContent = result.name
               inserts[i].insertAdjacentElement("beforeend", childElement)
+              // inserts[i].setAttribute("style", "display: block;")
               
               // マウスカーソルが要素に乗っている場合のみ、その要素のtextContentがカテゴリー2の入力欄に入力された状態として表示する
               childElement.addEventListener("mouseover", (e) => {
@@ -52,15 +52,11 @@ window.addEventListener("load", (e) => {
                 categorySeconds[i].value = childElement.textContent
                 categorySeconds[i].focus()
                 categorySeconds[i].setAttribute("style", "display: block;")
-                // while(inserts[i].firstChild){
-                //   inserts[i].removeChild(inserts[i].firstChild)
-                // }
                 deleteChild()
               })
 
               categorySeconds[i].addEventListener("blur", (e) => {
-
-                // childElementのclickイベントよりもcategorySeconds[i]のblurイベントが先に実行されてしまうので10ミリ秒のディレイを設定
+                // childElementのclickイベントより後に実行するために10ミリ秒のディレイを設定
                 setTimeout(deleteChild, 10)
               })
               

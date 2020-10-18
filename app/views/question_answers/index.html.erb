@@ -73,7 +73,7 @@
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
             <% if question_answer.share.nil? %>
-              <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share">共有</label>
+              <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share">共有する</label>
               <input type="checkbox" id="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-checkbox">
               <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-close"></label>
               <%= form_with model: @share, url: question_answer_shares_path(question_answer), class: "share-form", local: true do |f| %>
