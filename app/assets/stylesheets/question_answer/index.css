@@ -128,7 +128,7 @@
 }
 
 .qa-index-item__record {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
 }
 
 .qa-index-item__record span {
@@ -141,7 +141,7 @@
 }
 
 .qa-index-item__share {
-  color: #808080;
+  color: #0000DD;
   font-weight: bold;
   cursor: pointer;
 }
@@ -165,13 +165,13 @@
 
 .share-form__category-first {
   width: 200px;
-  height: 25px;
+  height: 22px;
 }
 
 .share-form__please-select {
   width: 200px;
-  height: 25px;
-  line-height: 25px;
+  height: 22px;
+  line-height: 22px;
   padding-left: 3px;
   color: #808080;
   overflow-x: scroll;
@@ -182,7 +182,7 @@
 
 .share-form__category-second {
   width: 200px;
-  height: 25px;
+  height: 22px;
 }
 
 .share-form__please-select::-webkit-scrollbar {
@@ -199,7 +199,7 @@
 
 .share-form__insert {
   position: absolute;
-  bottom: 63px;
+  bottom: 60px;
   left: 5px;
   width: 200px;
   background-color: #fff;
@@ -220,6 +220,12 @@
 .share-form__submit-btn {
   margin-top: 10px;
   padding: 0 5px;
+}
+
+.qa-index-item__share-complete {
+  color: #808080;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .qa-index-item__img-three-point {

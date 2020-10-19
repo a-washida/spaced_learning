@@ -86,7 +86,7 @@
                 <%= f.submit '問題の共有を実行', class: "share-form__submit-btn" %>
               <% end %>
             <% else %>
-              <%= link_to '共有済み', question_answer_share_path(question_answer, question_answer.share), method: :delete, data: { confirm: '問題の共有を解除しますか?' } %>
+              <%= link_to '共有済み', question_answer_share_path(question_answer, question_answer.share), class: "qa-index-item__share-complete", method: :delete, data: { confirm: '問題の共有を解除しますか?' } %>
             <% end %>
           </div>
           <%# このチェックボックスは画面上には表示されない。下のlabel要素2つと紐づいている。 %>
