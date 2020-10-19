@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :shares, only: [:create, :destroy]
   end
   resources :options, only: [:edit, :update]
-  get '/search_category', to: 'shares#search_category'
+  resources :category_seconds, only: [:index] do
+    collection do
+      get 'search'
+    end
+  end
   patch '/repetition_algorithms', to: 'repetition_algorithms#update'
   # 挙動確認用。アプリリリース時には削除。
   patch '/repetition_algorithms/change_date', to: 'repetition_algorithms#change_date'

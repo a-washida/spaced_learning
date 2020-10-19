@@ -18,7 +18,7 @@ window.addEventListener("load", (e) => {
           // 以下の非同期通信で、選択したカテゴリー1に属するカテゴリー2の一覧を取得して変数resultsに代入する
           const value = categoryFirsts[i].value
           const XHR = new XMLHttpRequest();
-          XHR.open("GET", `/search_category/?category_first=${value}`, true);
+          XHR.open("GET", `/category_seconds/search/?category_first=${value}`, true);
           XHR.responseType = "json";
           XHR.send();
           XHR.onload = () => {
