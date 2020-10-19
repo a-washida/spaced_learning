@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
   resources :options, only: [:edit, :update]
   resources :category_seconds, only: [:index] do
+    resources :shares, only: [:index]
     collection do
       get 'search'
     end
