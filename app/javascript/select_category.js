@@ -7,6 +7,7 @@ window.addEventListener("load", (e) => {
     const categoryFirst = document.getElementById("select_category_first_id")
     const categorySeconds = document.querySelectorAll(".cs-index__category-second")
     const links = document.querySelectorAll(".cs-index__link")
+    const decideBtn = document.querySelector(".cs-index__submit-btn")
     categoryFirst.addEventListener("change", (e) => {
       // style属性を削除する関数式
       const removeStyle = (elements) => {
@@ -23,6 +24,7 @@ window.addEventListener("load", (e) => {
       // カテゴリー1のプルダウンで「選択してください」が選択された場合、次のif文を実行
       if (value === ""){
         pleaseSelect.removeAttribute("style")
+        decideBtn.removeAttribute("style")
       }
       // カテゴリー1のプルダウンで「選択してください」以外が選択された場合、次のif文内のコードを実行
       if (value > 0){
@@ -33,7 +35,7 @@ window.addEventListener("load", (e) => {
         // カテゴリー2で選択しているoption要素に対応したリンクを画面上に表示させる関数式
         const appearLink = () => {
           // カテゴリー2のプルダウンで「選択してください」以外が選択されている場合、次のif文内のコードを実行
-          if(categorySeconds[value - 1].value > 0){
+          if (categorySeconds[value - 1].value > 0){
             // カテゴリー2のoption要素を全て取得
             const categorySecondOptions = document.querySelectorAll(`.cs-index__category-second.num-${value - 1} option`)
             // カテゴリー2で選択されているoption要素を変数selectedOptionに代入
@@ -42,16 +44,26 @@ window.addEventListener("load", (e) => {
             const dataId = selectedOption.getAttribute("data-id")
             const link = document.querySelector(`.cs-index__link.num-${dataId}`)
             link.setAttribute("style", "display: block;")
+            decideBtn.setAttribute("style", "display: none;")
+          }
+          // カテゴリー2のプルダウンで「選択してください」が選択されている場合、decideBtnのdisplay: none;を削除する
+          if (categorySeconds[value - 1].value === ""){
+            decideBtn.removeAttribute("style")
           }
         }
         
         appearLink()
-        
+
         categorySeconds[value - 1].addEventListener("change", (e) => {
           removeStyle(links)
           appearLink()
         })
       }
+    })
+
+    // カテゴリーを選択せずに決定ボタンをクリックするとアラートダイアログを表示
+    decideBtn.addEventListener("click", (e) => {
+      window.alert("カテゴリーを選択してください。")
     })
   }
 })

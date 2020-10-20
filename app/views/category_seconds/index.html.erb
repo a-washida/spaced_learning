@@ -1,15 +1,21 @@
 <%= render 'shared/header' %>
 <div class="cs-index-main">
-  <div class="cs-index__category-first-text">カテゴリー1</div>
-  <%= collection_select(:select, :category_first_id, CategoryFirst.all, :id, :name, {include_blank: "選択してください"}, {class:"cs-index__category-first"}) %>
-  <div class="cs-index__category-second-text">カテゴリー2</div>
-  <div class="cs-index__please-select">カテゴリー1を選択してください</div>
-  <% CategoryFirst.all.each_with_index do |category_first, i| %>
-    <%# 以下2行はcollection_select(:select, :category_second_id, CategorySecond.where(category_first_id: category_first.id), :id, :name, {include_blank: "選択してください"}, {class:"cs-index__category-second num-#{i}"})と同様の役割。option要素にdata-id属性を追加するため以下のように記述 %>
-    <% category_second_array = CategorySecond.where(category_first_id: category_first.id).map.with_index(1) { |category_second, index| [category_second.name, index, {'data-id': category_second.id}] } %>
-    <%= select :select, :category_second_id, options_for_select(category_second_array), {include_blank: "選択してください"}, {class:"cs-index__category-second num-#{i}"} %>
-  <% end %>
-  <% @category_seconds.each do |category_second| %>
-    <%= link_to '実行', category_second_shares_path(category_second), class: "cs-index__link num-#{category_second.id}" %>
-  <% end %>
+  <div class="cs-index__category-wrap">
+    <div class="cs-index__category-header">カテゴリーを選択</div>
+    <div class="cs-index__category-select-area">
+      <div class="cs-index__category-first-text">カテゴリー1</div>
+      <%= collection_select(:select, :category_first_id, CategoryFirst.all, :id, :name, {include_blank: "選択してください"}, {class:"cs-index__category-first"}) %>
+      <div class="cs-index__category-second-text">カテゴリー2</div>
+      <div class="cs-index__please-select">カテゴリー1を選択してください</div>
+      <% CategoryFirst.all.each_with_index do |category_first, i| %>
+        <%# 以下2行はcollection_select(:select, :category_second_id, CategorySecond.where(category_first_id: category_first.id), :id, :name, {include_blank: "選択してください"}, {class:"cs-index__category-second num-#{i}"})と同様の役割。option要素にdata-id属性を追加するため以下のように記述 %>
+        <% category_second_array = CategorySecond.where(category_first_id: category_first.id).map.with_index(1) { |category_second, index| [category_second.name, index, {'data-id': category_second.id}] } %>
+        <%= select :select, :category_second_id, options_for_select(category_second_array), {include_blank: "選択してください"}, {class:"cs-index__category-second num-#{i}"} %>
+      <% end %>
+    </div>
+    <div class="cs-index__submit-btn">決定</div>
+    <% @category_seconds.each do |category_second| %>
+      <%= link_to '決定', category_second_shares_path(category_second), class: "cs-index__link num-#{category_second.id}" %>
+    <% end %>
+  <div>
 <div>
