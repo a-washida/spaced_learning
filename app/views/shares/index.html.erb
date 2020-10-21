@@ -1,6 +1,15 @@
 <%= render 'shared/header' %>
 <div class="qa-index-main">
 
+  <%# 異なるカテゴリー2に遷移するための、カテゴリー2の一覧 %>
+  <div class="group-links">
+    <ul class="group-links__ul">
+    <% @category_seconds.each do |category_second| %>
+      <%= render partial: 'question_answers/group-link', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
+    <% end %>
+    </ul>
+  </div>
+
   <%# 画像をクリックすると、この要素の子要素として挿入され、拡大表示される %>
   <div id="image-target"></div>
   

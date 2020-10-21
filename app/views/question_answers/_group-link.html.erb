@@ -1,7 +1,7 @@
 <%= link_to path do %>
   <li class="group-links__li">
     <%# 現在のページを示しているリンクだけ見た目を変える %>
-    <% if group.id == @group.id %>
+    <% if group.id == changeable_value_by_controller %>
       <div class="group-links__li-current"></div>
     <% end %>
     <div class="group-links__li-left"><%= group.name %></div>

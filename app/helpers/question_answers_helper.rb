@@ -37,4 +37,10 @@ module QuestionAnswersHelper
       ''
     end
   end
+
+  # question_answersコントローラーの場合は@group.id、sharesコントローラーの場合は@category_second.idを返すメソッド
+  def changeable_value_by_controller
+    return @group.id if params[:controller] == 'question_answers'
+    return @category_second.id if params[:controller] == 'shares' 
+  end
 end

@@ -1,9 +1,11 @@
 class SharesController < ApplicationController
+  before_action :set_category_second, only: :index
   before_action :set_question_answer, only: [:create, :destroy]
   before_action :set_session, only: [:create, :destroy]
 
   def index
     @shares = Share.where(category_second_id: params[:category_second_id]).page(params[:page]).per(10)
+    @category_seconds = CategorySecond.all
   end
 
   def create
@@ -27,6 +29,9 @@ class SharesController < ApplicationController
 
   private
 
+  def set_category_second
+    @category_second = CategorySecond.find(params[:category_second_id])
+  end
   def set_question_answer
     @question_answer = QuestionAnswer.find(params[:question_answer_id])
   end
