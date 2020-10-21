@@ -2,8 +2,8 @@ window.addEventListener("load", (e) => {
   const controller = document.querySelector("body").getAttribute("data-controller")
   const action = document.querySelector("body").getAttribute("data-action")
   // question_answersコントローラーの、index, reviewアクションによって遷移してきたページのみで以下のコードを実行
-  if (controller === "question_answers" && (action === "index" ||
-                                            action === "review")){
+  if (controller === "question_answers" && (action === "index" || action === "review") ||
+      controller === "shares" && action === "index"){
 
     // 画像をクリックすると画像を拡大表示し、再度画面をクリックすると拡大表示した画像を削除する関数式
     const zoom = (image) => {
