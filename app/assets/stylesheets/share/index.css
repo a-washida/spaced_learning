@@ -1,0 +1,11 @@
+.share-index-item__description {
+  display: flex;
+  position: relative;
+  width: 580px;
+  margin-top: 5px;
+  font-size: 0.68rem;
+}
+
+.share-index-item__description span {
+  color: #0000DD;
+}

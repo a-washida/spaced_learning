@@ -2,6 +2,10 @@ class SharesController < ApplicationController
   before_action :set_question_answer, only: [:create, :destroy]
   before_action :set_session, only: [:create, :destroy]
 
+  def index
+    @shares = Share.where(category_second_id: params[:category_second_id]).page(params[:page]).per(10)
+  end
+
   def create
     @share_category = ShareCategory.new(share_params)
     if @share_category.valid?
