@@ -260,17 +260,17 @@ RSpec.describe '問題編集機能', type: :system do
       src_question = find('.display-question-content__image')[:src]
       src_answer = find('.display-answer-content__image')[:src]
       # 画面上に問題編集ページへのリンクが存在しないことを確認する
-      expect(page).to have_no_link '問題編集', href: edit_group_question_answer_path(@group, qa_size_change)
+      expect(page).to have_no_link '問題編集', href: edit_question_answer_path(qa_size_change)
       # 画面上に縦三点リーダーのアイコンが存在することを確認する
       expect(page).to have_css('.qa-index-item__img-three-point')
       # 縦三点リーダーのアイコンをクリックする
       find('.qa-index-item__img-three-point').click
       # 画面上に問題編集ページへのリンクが存在することを確認する
-      expect(page).to have_link '問題編集', href: edit_group_question_answer_path(@group, qa_size_change)
+      expect(page).to have_link '問題編集', href: edit_question_answer_path(qa_size_change)
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, qa_size_change)
+      expect(current_path).to eq edit_question_answer_path(qa_size_change)
       # 問題と解答のテキストエリアに、DBに保存した値が入力されている状態になっていることを確認する
       expect(
         find('#question_answer_question').text
@@ -366,7 +366,7 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq edit_question_answer_path(qa_with_no_image)
       # フォームの問題エリアと解答エリアに、編集後の問題と解答を入力する
       fill_in 'question_answer_question', with: @question_answer.question
       fill_in 'question_answer_answer', with: @question_answer.answer
@@ -399,7 +399,7 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq edit_question_answer_path(qa_with_no_image)
       # フォームの問題エリアと解答エリアに、空のテキストを入力する
       fill_in 'question_answer_question', with: ''
       fill_in 'question_answer_answer', with: ''
@@ -443,7 +443,7 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, question_answer)
+      expect(current_path).to eq edit_question_answer_path(question_answer)
       # 問題と解答のプレビューエリアに「画像を削除」ボタンが存在することを確認する
       expect(page).to have_css('.question-preview__img-destroy')
       expect(page).to have_css('.answer-preview__img-destroy')
@@ -477,13 +477,13 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq edit_question_answer_path(qa_with_no_image)
       # フォームの問題エリアのテキストエリア に、空のテキストを入力する
       fill_in 'question_answer_question', with: ''
       # 編集ボタンをクリックしてフォームを送信する
       find('input[name="commit"]').click
       # editテンプレートがrenderされていることを確認する
-      expect(current_path).to eq group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq question_answer_path(qa_with_no_image)
       # フォームの問題エリアのテキストエリアに、テキストが存在しないことを確認する
       expect(
         find('#question_answer_question').text
@@ -519,13 +519,13 @@ RSpec.describe '問題編集機能', type: :system do
       # 問題編集のリンクをクリックする
       all('.qa-index-item__management-list a')[0].click
       # 問題編集ページへ遷移していることを確認する
-      expect(current_path).to eq edit_group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq edit_question_answer_path(qa_with_no_image)
       # フォームの解答エリアのテキストエリア に、空のテキストを入力する
       fill_in 'question_answer_answer', with: ''
       # 編集ボタンをクリックしてフォームを送信する
       find('input[name="commit"]').click
       # editテンプレートがrenderされていることを確認する
-      expect(current_path).to eq group_question_answer_path(@group, qa_with_no_image)
+      expect(current_path).to eq question_answer_path(qa_with_no_image)
       # フォームの問題エリアのテキストエリアに、テキストが存在することを確認する
       expect(
         find('#question_answer_question').text
@@ -576,11 +576,11 @@ RSpec.describe '問題削除機能', type: :system do
     expect(page).to have_css('.display-question-content__image')
     expect(page).to have_css('.display-answer-content__image')
     # 画面上に問題削除のリンクが存在しないことを確認する
-    expect(page).to have_no_link '問題削除', href: group_question_answer_path(@group, @question_answer)
+    expect(page).to have_no_link '問題削除', href: question_answer_path(@question_answer)
     # 縦三点リーダーのアイコンをクリックする
     find('.qa-index-item__img-three-point').click
     # 画面上に問題削除のリンクが存在することを確認する
-    expect(page).to have_link '問題削除', href: group_question_answer_path(@group, @question_answer)
+    expect(page).to have_link '問題削除', href: question_answer_path(@question_answer)
     # 問題削除のリンクをクリックすると、QuestionAnswerモデルとQuestionOptionモデルとAnswerOptionモデルとRepetitionAlgorithmモデルのカウントが1ずつ減少することを確認する
     expect do
       click_link('問題削除')
@@ -707,11 +707,11 @@ RSpec.describe '問題管理機能', type: :system do
       all('.qa-index-item__record span')[2].text
     ).to eq '1'
     # 画面上に「初期状態にリセット」のリンクが存在しないことを確認する
-    expect(page).to have_no_link '初期状態にリセット', href: reset_group_question_answer_path(@group, @question_answer)
+    expect(page).to have_no_link '初期状態にリセット', href: reset_question_answer_path(@question_answer)
     # 縦三点リーダーのアイコンをクリックする
     find('.qa-index-item__img-three-point').click
     # 画面上に「初期状態にリセット」のリンクが存在することを確認する
-    expect(page).to have_link '初期状態にリセット', href: reset_group_question_answer_path(@group, @question_answer)
+    expect(page).to have_link '初期状態にリセット', href: reset_question_answer_path(@question_answer)
     # 「初期状態にリセット」のリンクをクリックする
     click_link('初期状態にリセット')
     # 問題管理ページの、リセットを行った問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)
@@ -741,11 +741,11 @@ RSpec.describe '問題管理機能', type: :system do
     # 問題管理ページへ遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@group)
     # 画面上に「復習周期から外す」のリンクが存在しないことを確認する
-    expect(page).to have_no_link '復習周期から外す', href: remove_group_question_answer_path(@group, @question_answer)
+    expect(page).to have_no_link '復習周期から外す', href: remove_question_answer_path(@question_answer)
     # 縦三点リーダーのアイコンをクリックする
     find('.qa-index-item__img-three-point').click
     # 画面上に「復習周期から外す」のリンクが存在することを確認する
-    expect(page).to have_link '復習周期から外す', href: remove_group_question_answer_path(@group, @question_answer)
+    expect(page).to have_link '復習周期から外す', href: remove_question_answer_path(@question_answer)
     # 「復習周期から外す」のリンクをクリックする
     click_link('復習周期から外す')
     # 問題管理ページの、「復習周期から外す」を行った問題の位置に遷移していることを確認する(URIのpathとqueryとfragmentが一致しているか確認)

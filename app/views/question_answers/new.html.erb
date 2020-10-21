@@ -12,7 +12,7 @@
 
   <div class="create-question-main__right">
     <%# form_withはここから開始して、一番下から二行目の時点でend %>
-    <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
+    <%= form_with model: shallow_args(@group, @question_answer), class: 'qa-form', local: true do |f| %>
       <% if notice.present? %>
         <div class="qa-form__notice"><%= notice %></div>
       <% end %>
