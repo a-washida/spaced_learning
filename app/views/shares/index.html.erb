@@ -5,7 +5,9 @@
   <div class="group-links">
     <ul class="group-links__ul">
     <% @category_seconds.each do |category_second| %>
-      <%= render partial: 'question_answers/group-link', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
+      <% if @category_second.category_first_id == category_second.category_first_id %>
+        <%= render partial: 'question_answers/group-link', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
+      <% end %>
     <% end %>
     </ul>
   </div>
@@ -14,6 +16,7 @@
   <div id="image-target"></div>
   
   <div class="qa-index-question-and-answer-area">
+    <div class="share-index__category-info"><%= @category_second.category_first.name %>/<%= @category_second.name %>の問題一覧</div>
     <% @shares.each do |share| %>
       <div class="qa-index-item" >
         <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
