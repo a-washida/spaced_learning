@@ -36,6 +36,7 @@
         <%# 問題と解答の下に位置するコンテンツを表示 %>
         <div class="share-index-item__description">
           投稿ユーザー：<span><%= share.question_answer.user.nickname %></span>
+          <%= link_to 'import', import_question_answer_share_path(share.question_answer, share), method: :post %>
         </div>
         <%# //問題と解答の下に位置するコンテンツを表示 %>
       </div>

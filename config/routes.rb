@@ -13,19 +13,19 @@ Rails.application.routes.draw do
   end
 
   resources :question_answers, only: [:edit, :update, :destroy] do
-    resources :shares, only: [:create, :destroy]
+    resources :shares, only: [:create, :destroy] do
+      post 'import', on: :member
+    end
     member do
       patch 'reset', 'remove'
     end
   end
 
   resources :category_seconds, only: [:index] do
+    get 'search', on: :collection
     resources :shares, only: [:index]
-    collection do
-      get 'search'
-    end
   end
-  
+
   resources :options, only: [:edit, :update]
   patch '/repetition_algorithms', to: 'repetition_algorithms#update'
   # 挙動確認用。アプリリリース時には削除。
