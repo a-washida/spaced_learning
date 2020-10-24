@@ -35,7 +35,7 @@ class SharesController < ApplicationController
       attach_dup_image_to_answer_option if @question_answer.answer_option.image.attached?
       RepetitionAlgorithm.create!(interval: 0, easiness_factor: current_user.option.easiness_factor, question_answer_id: @question_answer_dup.id)
     end
-    redirect_to back_to_specific_question_position, notice: "問題をグループ[]にインポートしました"
+    redirect_to back_to_specific_question_position, notice: "問題を「#{Group.find(params[:group_id]).name}」にインポートしました"
   rescue StandardError => e
     redirect_to back_to_specific_question_position, alert: '問題のインポートに失敗しました'
   end
@@ -70,7 +70,7 @@ class SharesController < ApplicationController
       memory_level: 0, 
       repeat_count: 0, 
       user_id: current_user.id, 
-      group_id: 1,
+      group_id: params[:group_id],
       question_option_attributes: { font_size_id: @question_answer.question_option.font_size_id, 
                                     image_size_id: @question_answer.question_option.image_size_id },
       answer_option_attributes:   { font_size_id: @question_answer.answer_option.font_size_id, 

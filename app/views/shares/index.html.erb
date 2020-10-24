@@ -17,7 +17,7 @@
   
   <div class="qa-index-question-and-answer-area">
     <div class="share-index__category-info"><%= @category_second.category_first.name %>/<%= @category_second.name %>の問題一覧</div>
-    <% @shares.each do |share| %>
+    <% @shares.each_with_index do |share, i| %>
       <div class="qa-index-item" >
         <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
         <div class="qa-index-link-target" id=link-<%=share.question_answer.id%>></div>
@@ -36,7 +36,14 @@
         <%# 問題と解答の下に位置するコンテンツを表示 %>
         <div class="share-index-item__description">
           投稿ユーザー：<span><%= share.question_answer.user.nickname %></span>
-          <%= link_to 'import', import_question_answer_share_path(share.question_answer, share), method: :post %>
+          <label for="share-index-item__check-<%=i%>" class="share-index-item__import"><%=image_tag 'share_index_import.png'%></label>
+          <input type="checkbox" id="share-index-item__check-<%=i%>" class="share-index-item__checkbox">
+          <label for="share-index-item__check-<%=i%>" class="share-index-item__close"></label>
+          <%= form_with url: import_question_answer_share_path(share.question_answer, share), class: "share-index-item__import-form", local: true do |f| %>
+            <%= f.label :group_id, 'インポート先のグループ', class: "import-form__label" %>
+            <%= f.collection_select(:group_id, current_user.groups, :id, :name, {include_blank: "選択してください"}, {id: "group_id_#{i}", class:"import-form__pulldown"}) %>
+            <%= f.submit '決定', class: "import-form__submit-btn" %>
+          <% end %>
         </div>
         <%# //問題と解答の下に位置するコンテンツを表示 %>
       </div>

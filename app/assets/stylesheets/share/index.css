@@ -15,3 +15,60 @@
 .share-index-item__description span {
   color: #0000DD;
 }
+
+.share-index-item__import {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.share-index-item__import img {
+  width: 15px;
+}
+
+.share-index-item__checkbox {
+  position: absolute;
+  left: -100vw;
+}
+
+.share-index-item__close {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.3);
+  z-index: 1;
+}
+
+.share-index-item__import-form {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  left: 120px;
+  padding: 7px;
+  background-color: #fff;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  z-index: 2;
+}
+
+.import-form__pulldown {
+  width: 150px;
+  height: 22px;
+}
+
+.import-form__submit-btn {
+  margin-top: 10px;
+  padding: 0 5px;
+}
+
+.share-index-item__checkbox:checked ~ .share-index-item__close {
+  display: block;
+}
+
+.share-index-item__checkbox:checked ~ .share-index-item__import-form {
+  display: flex;
+}
