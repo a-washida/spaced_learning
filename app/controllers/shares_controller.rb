@@ -1,6 +1,8 @@
 class SharesController < ApplicationController
   before_action :set_category_second, only: :index
   before_action :set_question_answer, only: [:create, :destroy, :import]
+  before_action :move_to_root_if_different_user, only: [:create, :destroy]
+  before_action :move_to_root_if_same_user, only: :import
   before_action :set_session, only: [:create, :destroy, :import]
 
   def index
@@ -76,6 +78,14 @@ class SharesController < ApplicationController
       answer_option_attributes:   { font_size_id: @question_answer.answer_option.font_size_id, 
                                     image_size_id: @question_answer.answer_option.image_size_id }
     }
+  end
+
+  def move_to_root_if_different_user
+    redirect_to root_path unless current_user.id == @question_answer.user.id
+  end
+
+  def move_to_root_if_same_user
+    redirect_to root_path if current_user.id == @question_answer.user.id
   end
 
   def attach_dup_image_to_question_option
