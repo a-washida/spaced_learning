@@ -17,6 +17,12 @@
   
   <div class="qa-index-question-and-answer-area">
     <div class="share-index__category-info"><%= @category_second.category_first.name %>/<%= @category_second.name %>の問題一覧</div>
+
+    <%# 共有された問題が0個なら表示 %>
+    <% if @shares.empty? %>
+      <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
+    <% end %>
+
     <% @shares.each_with_index do |share, i| %>
       <div class="qa-index-item" >
         <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
