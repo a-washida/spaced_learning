@@ -24,15 +24,15 @@
     <% end %>
 
     <% @shares.each_with_index do |share, i| %>
+      <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
+      <div class="qa-index-link-target" id=link-<%=share.question_answer.id%>></div>
+      <% if share.question_answer.id == session[:qa_id] %>
+        <%# セッションの中身をリセット %>
+        <% session[:qa_id] = nil %>
+        <p class="qa-index-notice"><%= notice %></p>
+        <p class="qa-index-alert"><%= alert %></p>
+      <% end %>
       <div class="qa-index-item" >
-        <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
-        <div class="qa-index-link-target" id=link-<%=share.question_answer.id%>></div>
-        <% if share.question_answer.id == session[:qa_id] %>
-          <%# セッションの中身をリセット %>
-          <% session[:qa_id] = nil %>
-          <p class="qa-index-notice"><%= notice %></p>
-          <p class="qa-index-alert"><%= alert %></p>
-        <% end %>
         <%# 問題と解答を表示 %>
         <div class="qa-index-item__qa">
           <%= render partial: 'question_answers/display_question_content', locals: {question_answer: share.question_answer} %>

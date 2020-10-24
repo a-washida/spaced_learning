@@ -95,14 +95,14 @@
 }
 
 .qa-index-item {
-  position: relative;
   width: 580px;
-  height: 265px;
+  height: 250px;
   margin: 0 auto;
 }
 
 .qa-index-link-target {
-  position: absolute;
+  position: relative;
+  /* headerのheight50pxを考慮 */
   top: -50px;
 }
 
@@ -355,7 +355,7 @@
 
   .qa-index-item {
     width: 290px;
-    height: 465px;
+    min-height: 450px;
     margin: 0 auto;
   }
 
