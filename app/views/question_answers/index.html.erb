@@ -56,7 +56,7 @@
         <%# セッションの中身をリセット %>
         <% session[:qa_id] = nil %>
         <p class="qa-index-notice"><%= notice %></p>
-        <p class="qa-index-alert"><%= alert %></p>
+        <div class="qa-index-alert"><%= set_alert(alert) if alert.present? %></div>
       <% end %>
       <div class="qa-index-item" >
         <%# 問題と解答を表示 %>

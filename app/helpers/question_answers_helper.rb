@@ -43,4 +43,17 @@ module QuestionAnswersHelper
     return @group.id if params[:controller] == 'question_answers'
     return @category_second.id if params[:controller] == 'shares' 
   end
+
+  # alertの型が配列の場合は要素を一つずつ<p>タグで囲んで返し、文字列の場合はそのまま返すメソッド
+  def set_alert(alert)
+    html = ''
+    if alert.instance_of?(Array)
+      alert.each do |element|
+        html += simple_format(element)
+      end
+    else
+      html += alert
+    end
+    return raw(html)
+  end
 end

@@ -16,7 +16,7 @@ class SharesController < ApplicationController
       @share_category.save
       redirect_to back_to_specific_question_position, notice: '問題の共有に成功しました'
     else
-      redirect_to back_to_specific_question_position, alert: '問題の共有に失敗しました'
+      redirect_to back_to_specific_question_position, alert: @share_category.errors.full_messages
     end
   end
 
