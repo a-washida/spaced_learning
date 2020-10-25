@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 
   resources :category_seconds, only: [:index] do
     get 'search', on: :collection
-    resources :shares, only: [:index]
+    resources :shares, only: [:index], shallow: true do
+      resources :likes, only: [:create, :destroy]
+    end
   end
 
   resources :options, only: [:edit, :update]
