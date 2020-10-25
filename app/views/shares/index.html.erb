@@ -1,0 +1,62 @@
+<%= render 'shared/header' %>
+<div class="qa-index-main">
+
+  <%# 異なるカテゴリー2に遷移するための、カテゴリー2の一覧 %>
+  <div class="link-lists">
+    <ul class="link-lists__ul">
+    <% @category_seconds.each do |category_second| %>
+      <% if @category_second.category_first_id == category_second.category_first_id %>
+        <%= render partial: 'shared/link_lists', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+
+  <%# 画像をクリックすると、この要素の子要素として挿入され、拡大表示される %>
+  <div id="image-target"></div>
+  
+  <div class="qa-index-question-and-answer-area">
+    <div class="share-index__category-info"><%= @category_second.category_first.name %>/<%= @category_second.name %>の問題一覧</div>
+
+    <%# 共有された問題が0個なら表示 %>
+    <% if @shares.empty? %>
+      <p class="qa-index-message-empty">まだ問題が投稿されていません</p>
+    <% end %>
+
+    <% @shares.each_with_index do |share, i| %>
+      <%# ページ遷移してきた際に正常に位置を調整するためのターゲット。画面上に非表示。 %>
+      <div class="qa-index-link-target" id=link-<%=share.question_answer.id%>></div>
+      <% if share.question_answer.id == session[:qa_id] %>
+        <%# セッションの中身をリセット %>
+        <% session[:qa_id] = nil %>
+        <p class="qa-index-notice"><%= notice %></p>
+        <p class="qa-index-alert"><%= alert %></p>
+      <% end %>
+      <div class="qa-index-item" >
+        <%# 問題と解答を表示 %>
+        <div class="qa-index-item__qa">
+          <%= render partial: 'question_answers/display_question_content', locals: {question_answer: share.question_answer} %>
+          <%= render partial: 'question_answers/display_answer_content', locals: {question_answer: share.question_answer} %>
+        </div>
+        <%# //問題と解答を表示 %>
+        <%# 問題と解答の下に位置するコンテンツを表示 %>
+        <div class="share-index-item__description">
+          投稿ユーザー：<span><%= share.question_answer.user.nickname %></span>
+          <%# 問題を共有したユーザー本人の場合は以下のコードを実行しない %>
+          <% unless current_user.id == share.question_answer.user_id %>
+            <label for="share-index-item__check-<%=i%>" class="share-index-item__import"><%=image_tag 'share_index_import.png'%></label>
+          <% end %>
+          <input type="checkbox" id="share-index-item__check-<%=i%>" class="share-index-item__checkbox">
+          <label for="share-index-item__check-<%=i%>" class="share-index-item__close"></label>
+          <%= form_with url: import_question_answer_share_path(share.question_answer, share), class: "share-index-item__import-form", local: true do |f| %>
+            <%= f.label :group_id, 'インポート先のグループ', class: "import-form__label" %>
+            <%= f.collection_select(:group_id, current_user.groups, :id, :name, {include_blank: "選択してください"}, {id: "group_id_#{i}", class:"import-form__pulldown"}) %>
+            <%= f.submit '決定', class: "import-form__submit-btn" %>
+          <% end %>
+        </div>
+        <%# //問題と解答の下に位置するコンテンツを表示 %>
+      </div>
+    <% end %>
+    <%= paginate @shares %>
+  </div>
+</div>

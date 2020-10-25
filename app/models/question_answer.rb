@@ -14,6 +14,7 @@ class QuestionAnswer < ApplicationRecord
   has_one :question_option, dependent: :destroy
   has_one :answer_option, dependent: :destroy
   has_one :repetition_algorithm, dependent: :destroy
+  has_one :share
 
   accepts_nested_attributes_for :question_option
   accepts_nested_attributes_for :answer_option

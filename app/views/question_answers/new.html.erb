@@ -2,17 +2,17 @@
 <div class="create-question-main">
 
    <%# 異なるグループに遷移するための、グループリンクの一覧 %>
-  <div class="group-links">
-    <ul class="group-links__ul">
+  <div class="link-lists">
+    <ul class="link-lists__ul">
     <% @groups.each do |group| %>
-      <%= render partial: 'group-link', locals: { group: group, path: new_group_question_answer_path(group), count: "" } %>
+      <%= render partial: 'shared/link_lists', locals: { group: group, path: new_group_question_answer_path(group), count: "" } %>
     <% end %>
     </ul>
   </div>
 
   <div class="create-question-main__right">
     <%# form_withはここから開始して、一番下から二行目の時点でend %>
-    <%= form_with model: [@group, @question_answer], class: 'qa-form', local: true do |f| %>
+    <%= form_with model: shallow_args(@group, @question_answer), class: 'qa-form', local: true do |f| %>
       <% if notice.present? %>
         <div class="qa-form__notice"><%= notice %></div>
       <% end %>

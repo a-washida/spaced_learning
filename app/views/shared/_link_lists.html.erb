@@ -1,0 +1,10 @@
+<%= link_to path do %>
+  <li class="link-lists__li">
+    <%# 現在のページを示しているリンクだけ見た目を変える %>
+    <% if group.id == changeable_value_by_controller %>
+      <div class="link-lists__li-current"></div>
+    <% end %>
+    <div class="link-lists__li-left"><%= group.name %></div>
+    <div class="link-lists__li-right"><%= count %></div>
+  </li>
+<% end %>

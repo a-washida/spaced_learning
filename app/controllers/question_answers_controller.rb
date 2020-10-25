@@ -1,8 +1,8 @@
 class QuestionAnswersController < ApplicationController
-  before_action :set_group
+  before_action :set_group, except: [:edit, :update, :destroy, :reset, :remove]
   before_action :set_groups, only: [:index, :new, :create, :review, :change_date]
+  before_action :set_question_answer, only: [:edit, :update, :destroy, :reset, :remove]
   before_action :move_to_root_if_different_user
-  before_action :set_question_answer, only: [:show, :edit, :update, :destroy, :reset, :remove]
   before_action :set_session, only: [:destroy, :reset, :remove]
 
   def index
@@ -10,6 +10,7 @@ class QuestionAnswersController < ApplicationController
     @q = @group.question_answers.ransack(params[:q])
     @question_answers = @q.result.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
     set_question_answer_column
+    @share = ShareCategory.new
   end
 
   def new
@@ -40,7 +41,7 @@ class QuestionAnswersController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       detach_image
-      @question_answer.update!(nested_form_params.except(:display_date, :memory_level, :repeat_count))
+      @question_answer.update!(nested_form_params.except(:display_date, :memory_level, :repeat_count, :group_id))
     end
     # 画像の関連づけ解消の際に、active_storage_blobsなどは残り無駄なデータとなるので削除。(バッチ処理のやり方が分かったら、そちらに移す)
     ActiveStorage::Blob.unattached.find_each(&:purge)
@@ -106,6 +107,8 @@ class QuestionAnswersController < ApplicationController
 
   def set_question_answer
     @question_answer = QuestionAnswer.find(params[:id])
+    # edit, update, destroy, reset, removeアクションはset_groupが実行されないので、このタイミングで@groupを定義
+    @group = @question_answer.group if @group.nil?
   end
 
   def set_session
