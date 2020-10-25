@@ -1010,7 +1010,7 @@ RSpec.describe 'グループ遷移機能', type: :system do
     # @groups[1]の問題復習ページに遷移していることを確認する
     expect(current_path).to eq review_group_question_answers_path(@groups[1])
     # @groups[1]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
-    expect(page).to have_css('.group-links__ul a:nth-child(2) .group-links__li-current')
+    expect(page).to have_css('.link-lists__ul a:nth-child(2) .link-lists__li-current')
   end
 
   it '問題作成ページにグループのリンク一覧があり、クリックすると遷移できること' do
@@ -1027,7 +1027,7 @@ RSpec.describe 'グループ遷移機能', type: :system do
     # @groups[2]の問題作成ページに遷移していることを確認する
     expect(current_path).to eq new_group_question_answer_path(@groups[2])
     # @groups[2]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
-    expect(page).to have_css('.group-links__ul a:nth-child(3) .group-links__li-current')
+    expect(page).to have_css('.link-lists__ul a:nth-child(3) .link-lists__li-current')
   end
 
   it '問題管理ページにグループのリンク一覧があり、クリックすると遷移できること' do
@@ -1044,6 +1044,6 @@ RSpec.describe 'グループ遷移機能', type: :system do
     # @groups[3]の問題復習ページに遷移していることを確認する
     expect(current_path).to eq group_question_answers_path(@groups[3])
     # @groups[3]のリンクに、現在のページと一致していることを示す要素が存在することを確認する
-    expect(page).to have_css('.group-links__ul a:nth-child(4) .group-links__li-current')
+    expect(page).to have_css('.link-lists__ul a:nth-child(4) .link-lists__li-current')
   end
 end

@@ -2,10 +2,10 @@
 <div class="qa-index-main">
 
   <%# 異なるグループに遷移するための、グループリンクの一覧 %>
-  <div class="group-links">
-    <ul class="group-links__ul">
+  <div class="link-lists">
+    <ul class="link-lists__ul">
     <% @groups.each do |group| %>
-      <%= render partial: 'group-link', locals: { group: group, path: group_question_answers_path(group), count: group.question_answers.count } %>
+      <%= render partial: 'shared/link_lists', locals: { group: group, path: group_question_answers_path(group), count: group.question_answers.count } %>
     <% end %>
     </ul>
   </div>

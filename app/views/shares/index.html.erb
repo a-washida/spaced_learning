@@ -2,11 +2,11 @@
 <div class="qa-index-main">
 
   <%# 異なるカテゴリー2に遷移するための、カテゴリー2の一覧 %>
-  <div class="group-links">
-    <ul class="group-links__ul">
+  <div class="link-lists">
+    <ul class="link-lists__ul">
     <% @category_seconds.each do |category_second| %>
       <% if @category_second.category_first_id == category_second.category_first_id %>
-        <%= render partial: 'question_answers/group-link', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
+        <%= render partial: 'shared/link_lists', locals: { group: category_second, path: category_second_shares_path(category_second), count: category_second.shares.count } %>
       <% end %>
     <% end %>
     </ul>
