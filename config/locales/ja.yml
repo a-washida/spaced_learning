@@ -19,3 +19,9 @@ ja:
        upper_limit_of_ml1: 記憶度1の場合の上限インターバル
        upper_limit_of_ml2: 記憶度2の場合の上限インターバル
        easiness_factor: 問題の易しさ
+
+ activemodel:
+   attributes:
+     share_category:
+       category_first_id: カテゴリー1
+       category_second: カテゴリー2
