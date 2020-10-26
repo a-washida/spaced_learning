@@ -57,10 +57,14 @@
           <%# いいね機能に関するコード %>
           <div class="share-index__like">
             <% if current_user.already_liked?(share) %>
-              <%= image_tag 'share_index_heart.png', class: 'share-index__heart', "data-id": "#{share.id}" %>
-              <div class="share-index__like-count--colored"><%= Like.where(share_id: share.id).count %></div>
+              <%= image_tag 'share_index_heart.png', class: 'share-index__heart', "data-like-id": "#{Like.find_by(user_id: current_user.id, share_id: share.id).id}" %>
+              <%# 次の画像は非表示 %>
+              <%= image_tag 'share_index_hollow_heart.png', class: 'share-index__hollow-heart hidden', "data-share-id": "#{share.id}" %>
+              <div class="share-index__like-count colored"><%= Like.where(share_id: share.id).count %></div>
             <% else %>
-              <%= image_tag 'share_index_hollow_heart.png', class: 'share-index__hollow-heart', "data-id": "#{share.id}" %>
+              <%= image_tag 'share_index_hollow_heart.png', class: 'share-index__hollow-heart', "data-share-id": "#{share.id}" %>
+              <%# 次の画像は非表示 %>
+              <%= image_tag 'share_index_heart.png', class: 'share-index__heart hidden' %>
               <div class="share-index__like-count"><%= Like.where(share_id: share.id).count %></div>
             <% end %>
           </div>

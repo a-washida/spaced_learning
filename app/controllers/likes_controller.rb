@@ -1,9 +1,16 @@
 class LikesController < ApplicationController
-  # protect_from_forgery :except => [:create]
 
   def create
-    current_user.likes.create(share_id: params[:share_id])
+    like = current_user.likes.create(share_id: params[:share_id])
     count = Like.where(share_id: params[:share_id]).count
-    render json: { post: count }
+    render json: { count: count, like_id: like.id }
   end
+
+  def destroy
+    like = Like.find(params[:id])
+    like.destroy
+    count = Like.where(share_id: like.share_id).count
+    render json: { count: count }
+  end
+  
 end

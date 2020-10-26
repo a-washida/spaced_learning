@@ -86,7 +86,7 @@
   cursor: pointer;
 }
 
-.share-index__like-count--colored {
+.share-index__like-count.colored {
   color: rgba(255,0,198,.7);
   font-weight: bold;
 }
