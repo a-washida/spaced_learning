@@ -42,7 +42,7 @@
         <%# 問題と解答の下に位置するコンテンツを表示 %>
         <div class="share-index-item__description">
           投稿ユーザー：<span><%= share.question_answer.user.nickname %></span>
-          <%# 問題を共有したユーザー本人の場合は以下のコードを実行しない %>
+          <%# インポート機能に関するコード %>
           <% unless current_user.id == share.question_answer.user_id %>
             <label for="share-index-item__check-<%=i%>" class="share-index-item__import"><%=image_tag 'share_index_import.png'%></label>
           <% end %>
@@ -53,7 +53,18 @@
             <%= f.collection_select(:group_id, current_user.groups, :id, :name, {include_blank: "選択してください"}, {id: "group_id_#{i}", class:"import-form__pulldown"}) %>
             <%= f.submit '決定', class: "import-form__submit-btn" %>
           <% end %>
-          <%= button_to 'いいね', share_likes_path(share) %>
+          <%# //インポート機能に関するコード %>
+          <%# いいね機能に関するコード %>
+          <div class="share-index__like">
+            <% if current_user.already_liked?(share) %>
+              <%= image_tag 'share_index_heart.png', class: 'share-index__heart', "data-id": "#{share.id}" %>
+              <div class="share-index__like-count--colored"><%= Like.where(share_id: share.id).count %></div>
+            <% else %>
+              <%= image_tag 'share_index_hollow_heart.png', class: 'share-index__hollow-heart', "data-id": "#{share.id}" %>
+              <div class="share-index__like-count"><%= Like.where(share_id: share.id).count %></div>
+            <% end %>
+          </div>
+          <%# //いいね機能に関するコード %>
         </div>
         <%# //問題と解答の下に位置するコンテンツを表示 %>
       </div>

@@ -13,4 +13,9 @@ class User < ApplicationRecord
   has_one :option
   has_many :likes
   has_many :liked_shares, through: :likes, source: :share
+
+  # ユーザーが既にいいねをしているか判定するメソッド
+  def already_liked?(share)
+    self.likes.exists?(share_id: share.id)
+  end
 end
