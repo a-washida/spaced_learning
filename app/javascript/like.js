@@ -20,12 +20,18 @@ window.addEventListener("load", (e) => {
         XHR.setRequestHeader( 'X-CSRF-Token', token );
         XHR.send();
         XHR.onload = () => {
-          hollowHearts[i].setAttribute("class", "share-index__hollow-heart hidden")
-          hearts[i].setAttribute("class", "share-index__heart")
-          hearts[i].setAttribute("data-like-id", `${XHR.response.like_id}`)
+          const create = XHR.response.create
+          if (create == 'true'){
+            hollowHearts[i].setAttribute("class", "share-index__hollow-heart hidden")
+            hearts[i].setAttribute("class", "share-index__heart")
+            hearts[i].setAttribute("data-like-id", `${XHR.response.like_id}`)
 
-          counts[i].setAttribute("class", "share-index__like-count colored")
-          counts[i].textContent = XHR.response.count
+            counts[i].setAttribute("class", "share-index__like-count colored")
+            counts[i].textContent = XHR.response.count
+          } else {
+            // createに失敗した場合はエラーメッセージを表示
+            window.alert(XHR.response.message)
+          }
 
           if (XHR.status != 200) {
             alert(`Error ${XHR.status}: ${XHR.statusText}`);
