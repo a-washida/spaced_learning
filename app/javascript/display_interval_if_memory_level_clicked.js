@@ -18,11 +18,11 @@ if (window.location.pathname.includes("question_answers/review")){
             reviewCount = 0
           }
           const XHR = new XMLHttpRequest();
-          XHR.open("PATCH", `/repetition_algorithms`, true);
+          XHR.open("PATCH", `/repetition_algorithms/${questionAnswerId}`, true);
           XHR.responseType = "json";
           XHR.setRequestHeader( 'content-type', 'application/x-www-form-urlencoded;charset=UTF-8' );
-          // 6つのデータをparamsに格納してサーバーへ送る
-          XHR.send(`interval=${interval}&easiness_factor=${easinessFactor}&question_answer_id=${questionAnswerId}&repeat_count=${repeatCount}&memory_level=${memoryLevel}&review_count=${reviewCount}`);
+          // 5つのデータをparamsに格納してサーバーへ送る
+          XHR.send(`interval=${interval}&easiness_factor=${easinessFactor}&repeat_count=${repeatCount}&memory_level=${memoryLevel}&review_count=${reviewCount}`);
           XHR.onload = () => {
             const item = XHR.response.post;
             noticeDisplayDates[j].innerHTML = item
