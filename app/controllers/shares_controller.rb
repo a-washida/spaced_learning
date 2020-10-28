@@ -32,7 +32,7 @@ class SharesController < ApplicationController
   def import
     @question_answer_dup = QuestionAnswer.new(dup_params)
     ActiveRecord::Base.transaction do
-      @question_answer_dup.save!
+      @question_answer_dup.save!(validate: false) # 画像のみの問題をimportする際にバリデーションエラーが出るためvalidate: false
       attach_dup_image_to_question_option if @question_answer.question_option.image.attached?
       attach_dup_image_to_answer_option if @question_answer.answer_option.image.attached?
       RepetitionAlgorithm.create!(interval: 0, easiness_factor: current_user.option.easiness_factor, question_answer_id: @question_answer_dup.id)
