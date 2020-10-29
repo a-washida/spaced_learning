@@ -60,9 +60,9 @@
               <% 4.times do |i| %>
                 <div class="rebiew-option__btn-outer-line">
                   <div class="review-option__btn js-<%=i%>"
+                      data-id=<%=question_answer.repetition_algorithm.id%> 
                       data-interval=<%=question_answer.repetition_algorithm.interval%> 
                       data-easiness-factor=<%=question_answer.repetition_algorithm.easiness_factor%> 
-                      data-qa-id=<%=question_answer.id%> 
                       data-repeat-count=<%=question_answer.repeat_count%>
                       data-review-count="1"
                       data-date=<%=@date%>><%= i + 1 %></div>
