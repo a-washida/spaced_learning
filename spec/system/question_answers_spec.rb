@@ -598,6 +598,8 @@ RSpec.describe '問題復習機能', type: :system do
     @user = FactoryBot.create(:user)
     @group = FactoryBot.create(:group, user_id: @user.id)
     @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+    # テスト環境ではCSRF対策がfalseになっており<%= csrf_meta_tags %>が存在しないため、以下の一行を記述。(これが無いとjavascriptでmeta name="csrf-token"の要素が取得できずエラーが発生)
+    allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true)
   end
 
   it '問題復習ページに遷移すると、問題は表示されているが解答は隠れており、解答欄をクリックすることで解答が表示されること' do
@@ -670,6 +672,8 @@ RSpec.describe '問題管理機能', type: :system do
     @user = FactoryBot.create(:user)
     @group = FactoryBot.create(:group, user_id: @user.id)
     @question_answer = FactoryBot.create(:question_answer, user_id: @user.id, group_id: @group.id)
+    # テスト環境ではCSRF対策がfalseになっており<%= csrf_meta_tags %>が存在しないため、以下の一行を記述。(これが無いとjavascriptでmeta name="csrf-token"の要素が取得できずエラーが発生)
+    allow_any_instance_of(ActionController::Base).to receive(:protect_against_forgery?).and_return(true)
   end
 
   it '「初期状態にリセット」を実行すると、各種パラメータが問題作成した瞬間の状態と等しくなること' do
