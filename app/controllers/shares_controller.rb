@@ -6,7 +6,10 @@ class SharesController < ApplicationController
   before_action :set_session, only: [:create, :destroy, :import]
 
   def index
-    @shares = Share.where(category_second_id: params[:category_second_id]).page(params[:page]).per(10)
+    @shares = Share.includes(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }}).includes(question_answer: :user)
+                   .where(category_second_id: params[:category_second_id])
+                   .references(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }}).references(question_answer: :user)
+                   .page(params[:page]).per(10)
     @category_seconds = CategorySecond.all
   end
 

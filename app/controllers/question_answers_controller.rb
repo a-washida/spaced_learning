@@ -8,7 +8,7 @@ class QuestionAnswersController < ApplicationController
   def index
     # ransackで利用する検索オブジェクトを生成。
     @q = @group.question_answers.ransack(params[:q])
-    @question_answers = @q.result.includes(question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
+    @question_answers = @q.result.includes(:share, question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }).page(params[:page]).per(10)
     set_question_answer_column
     @share = ShareCategory.new
   end
