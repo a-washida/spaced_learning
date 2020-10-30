@@ -90,3 +90,9 @@
   color: rgba(255,0,198,.7);
   font-weight: bold;
 }
+
+@media (max-width: 599px) {
+  .share-index-item__description {
+    width: 290px;
+  }
+}

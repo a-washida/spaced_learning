@@ -6,9 +6,9 @@ class SharesController < ApplicationController
   before_action :set_session, only: [:create, :destroy, :import]
 
   def index
-    @shares = Share.includes(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }}).includes(question_answer: :user)
+    @shares = Share.includes(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob } }).includes(question_answer: :user)
                    .where(category_second_id: params[:category_second_id])
-                   .references(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob }}).references(question_answer: :user)
+                   .references(question_answer: { question_option: { image_attachment: :blob }, answer_option: { image_attachment: :blob } }).references(question_answer: :user)
                    .page(params[:page]).per(10)
     @category_seconds = CategorySecond.all
   end
@@ -69,18 +69,17 @@ class SharesController < ApplicationController
   end
 
   def dup_params
-    { question: @question_answer.question, 
-      answer: @question_answer.answer, 
-      display_date: Date.today, 
-      memory_level: 0, 
-      repeat_count: 0, 
-      user_id: current_user.id, 
+    { question: @question_answer.question,
+      answer: @question_answer.answer,
+      display_date: Date.today,
+      memory_level: 0,
+      repeat_count: 0,
+      user_id: current_user.id,
       group_id: params[:group_id],
-      question_option_attributes: { font_size_id: @question_answer.question_option.font_size_id, 
+      question_option_attributes: { font_size_id: @question_answer.question_option.font_size_id,
                                     image_size_id: @question_answer.question_option.image_size_id },
-      answer_option_attributes:   { font_size_id: @question_answer.answer_option.font_size_id, 
-                                    image_size_id: @question_answer.answer_option.image_size_id }
-    }
+      answer_option_attributes: { font_size_id: @question_answer.answer_option.font_size_id,
+                                  image_size_id: @question_answer.answer_option.image_size_id } }
   end
 
   def move_to_root_if_different_user
@@ -94,12 +93,12 @@ class SharesController < ApplicationController
   def attach_dup_image_to_question_option
     @question_answer_dup.question_option.image.attach io: StringIO.new(@question_answer.question_option.image.download),
                                                       filename: @question_answer.question_option.image.filename,
-                                                      content_type: @question_answer.question_option.image.content_type 
+                                                      content_type: @question_answer.question_option.image.content_type
   end
 
   def attach_dup_image_to_answer_option
     @question_answer_dup.answer_option.image.attach io: StringIO.new(@question_answer.answer_option.image.download),
-                                                      filename: @question_answer.answer_option.image.filename,
-                                                      content_type: @question_answer.answer_option.image.content_type 
+                                                    filename: @question_answer.answer_option.image.filename,
+                                                    content_type: @question_answer.answer_option.image.content_type
   end
 end

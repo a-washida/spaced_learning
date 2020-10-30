@@ -16,6 +16,6 @@ class User < ApplicationRecord
 
   # ユーザーが既にいいねをしているか判定するメソッド
   def already_liked?(share)
-    self.likes.exists?(share_id: share.id)
+    likes.exists?(share_id: share.id)
   end
 end

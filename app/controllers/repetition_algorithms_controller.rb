@@ -1,5 +1,4 @@
 class RepetitionAlgorithmsController < ApplicationController
-
   def update
     repetition_algorithm = RepetitionAlgorithm.find(params[:id])
     question_answer = repetition_algorithm.question_answer

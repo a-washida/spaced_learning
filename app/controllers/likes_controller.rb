@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-
   def create
     like = current_user.likes.new(share_id: params[:share_id])
     if like.valid?
@@ -17,5 +16,4 @@ class LikesController < ApplicationController
     count = Like.where(share_id: like.share_id).count
     render json: { count: count }
   end
-
 end
