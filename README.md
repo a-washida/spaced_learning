@@ -85,6 +85,8 @@ URL: 54.95.50.27<br>
 - has_many :question_answers
 - has_many :records
 - has_one :option
+- has_many :likes
+- has_many :liked_shares, through: :likes, source: :share
 
 ## groups テーブル
 
@@ -115,6 +117,7 @@ URL: 54.95.50.27<br>
 - has_one :question_option
 - has_one :answer_option
 - has_one :repetition_algorithm
+- has_one :share
 
 ## question_options テーブル
 
@@ -184,3 +187,38 @@ URL: 54.95.50.27<br>
 
 ### Association
 - belongs_to :user
+
+## category_seconds テーブル
+
+| Column            | Type       | Options           |
+| ----------------- | ---------- | ----------------- |
+| name              | string     | null: false       |
+| category_first_id | integer    | null: false       |
+
+### Association
+- has_many :shares
+- belongs_to_active_hash :category_first
+
+## shares テーブル
+
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| question_answer | references | foreign_key: true |
+| category_second | references | foreign_key: true |
+
+### Association
+- belongs_to :question_answer
+- belongs_to :category_second
+- has_many :likes
+- has_many :liked_users, through: :likes, source: :user
+
+## likes テーブル
+
+| Column | Type       | Options           |
+| ------ | ---------- | ----------------- |
+| user   | references | foreign_key: true |
+| share  | references | foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :share
