@@ -23,11 +23,13 @@ Rails.application.routes.draw do
 
   resources :category_seconds, only: [:index] do
     get 'search', on: :collection
-    resources :shares, only: [:index]
+    resources :shares, only: [:index], shallow: true do
+      resources :likes, only: [:create, :destroy]
+    end
   end
 
   resources :options, only: [:edit, :update]
-  patch '/repetition_algorithms', to: 'repetition_algorithms#update'
+  patch '/repetition_algorithms/:id', to: 'repetition_algorithms#update'
   # 挙動確認用。アプリリリース時には削除。
-  patch '/repetition_algorithms/change_date', to: 'repetition_algorithms#change_date'
+  patch '/change_date/repetition_algorithms/:id', to: 'repetition_algorithms#change_date'
 end

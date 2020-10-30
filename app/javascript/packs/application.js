@@ -18,6 +18,7 @@ require("../display_interval_if_memory_level_clicked.js")
 require("../zoom_image.js")
 require("../share.js")
 require("../select_category.js")
+require("../like.js")
 // 挙動確認用。アプリリリース時には削除
 require("../change_date")
 

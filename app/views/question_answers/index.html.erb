@@ -71,6 +71,7 @@
             復習までの日数：<span><%= display_date_until_review((question_answer.display_date - Date.today).to_i) %></span>
             記憶度：<span><%= question_answer.memory_level %></span>
             復習回数：<span><%= question_answer.repeat_count %></span>
+            <%# 問題の共有機能に関するコード %>
             <% if question_answer.share.nil? %>
               <label for="qa-index-item__check-share-<%=i%>" class="qa-index-item__share">共有する</label>
               <input type="checkbox" id="qa-index-item__check-share-<%=i%>" class="qa-index-item__share-checkbox">
@@ -87,6 +88,7 @@
             <% else %>
               <%= link_to '共有済み', question_answer_share_path(question_answer, question_answer.share), class: "qa-index-item__share-complete", method: :delete, data: { confirm: '問題の共有を解除しますか?' } %>
             <% end %>
+            <%# //問題の共有機能に関するコード %>
           </div>
           <%# このチェックボックスは画面上には表示されない。下のlabel要素2つと紐づいている。 %>
           <input type="checkbox" id="qa-index-item__check-<%=i%>" class="qa-index-item__checkbox">

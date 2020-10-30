@@ -19,6 +19,8 @@ ja:
        upper_limit_of_ml1: 記憶度1の場合の上限インターバル
        upper_limit_of_ml2: 記憶度2の場合の上限インターバル
        easiness_factor: 問題の易しさ
+     like:
+       share_id: いいね
 
  activemodel:
    attributes:

@@ -1,5 +1,4 @@
 class ShareCategory
-
   include ActiveModel::Model
   attr_accessor :category_first_id, :category_second, :question_answer_id
 
@@ -11,5 +10,4 @@ class ShareCategory
     category.save
     Share.create(question_answer_id: question_answer_id, category_second_id: category.id)
   end
-
 end

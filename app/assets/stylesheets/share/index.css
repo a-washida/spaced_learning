@@ -72,3 +72,27 @@
 .share-index-item__checkbox:checked ~ .share-index-item__import-form {
   display: flex;
 }
+
+.share-index__like {
+  display: flex;
+  margin-left: 15px;
+}
+
+.share-index__hollow-heart,
+.share-index__heart {
+  margin: 2px 3px 0 0;
+  width: 13px;
+  height: 12px;
+  cursor: pointer;
+}
+
+.share-index__like-count.colored {
+  color: rgba(255,0,198,.7);
+  font-weight: bold;
+}
+
+@media (max-width: 599px) {
+  .share-index-item__description {
+    width: 290px;
+  }
+}
